@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-image: linear-gradient(
+          -45deg,
+          #ECCECF,
+          #C76786,
+          #BBD1CA,
+          #DC765C
+        ) !important;
+        background-size: 400% 400% !important;
+        animation: gradientShift 30s ease infinite !important;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 0%;
+        }
+        25% {
+          background-position: 100% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        75% {
+          background-position: 0% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .reveal {
+        font-family: "Roboto Mono", monospace;
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: #6a1b9a;
+        font-family: "Roboto Mono", monospace;
+      }
+
+      .reveal .title-slide h1 {
+        font-size: 2.5em;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: #6a1b9a;
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 4px 10px;
+        margin: 10px;
+        border-left: 4px solid #6a1b9a;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid #6a1b9a;
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(106, 27, 154, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: #6a1b9a;
+        font-weight: bold;
+      }
+
+      .claude {
+        color: #d97757;
+      }
+
+      .small {
+        font-size: 0.4em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>👋 Welcome!</h1>
+          <h2>🤖 Claude Code meetup</h2>
+          <p class="date-text">
+            📅 Thursday 2026-02-19<br />📍 The Social Hub City, Amsterdam
+          </p>
+        </section>
+
+        <section>
+          <h2>🎂 Claude Code 1 year old!</h2>
+          <div class="quote">
+            "The prompt matured from 'terse CLI helper with hard rules' into 'thoughtful autonomous agent with principles and judgment.'"
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+    </script>
+  </body>
+</html>

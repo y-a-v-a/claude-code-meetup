@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-image: linear-gradient(
+          -45deg,
+          #c794d9,
+          #9ca8dd,
+          #64c5f7,
+          #dcedc8
+        ) !important;
+        background-size: 400% 400% !important;
+        animation: gradientShift 16s ease infinite !important;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 0%;
+        }
+        25% {
+          background-position: 100% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        75% {
+          background-position: 0% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .reveal {
+        font-family: "Roboto Mono", monospace;
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: #6a1b9a;
+        font-family: "Roboto Mono", monospace;
+      }
+
+      .reveal .title-slide h1 {
+        font-size: 2.5em;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: #6a1b9a;
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 4px 10px;
+        margin: 10px;
+        border-left: 4px solid #6a1b9a;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid #6a1b9a;
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(106, 27, 154, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: #6a1b9a;
+        font-weight: bold;
+      }
+
+      .claude {
+        color: #d97757;
+      }
+
+      .small {
+        font-size: 0.4em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Opening Slide with Image -->
+        <section>
+          <section>
+            <h1>👋 Welcome!</h1>
+            <h2>🤖 Claude Code meetup</h2>
+            <p class="date-text">
+              📅 Thursday 2025-12-11<br />📍 The Social Hub City, Amsterdam
+            </p>
+            <h3>🎉 sponsor: Anthropic</h3>
+          </section>
+          <section>
+            <h2>Agenda</h2>
+            <ul>
+              <li>Vincent Bruijn</li>
+              <li>Daniel de Vos</li>
+              <li>Eugene Ter-Avakyan</li>
+              <li>Q&A Daisy Hollman - Anthropic</li>
+              <li>🧃 Drink at the bar</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+
+            <img src="IMG_6210.PNG" alt="Vibe Coding" class="r-stretch" />
+            <p class="date-text">📙 Vibe Coding, Steve Yegge, Gene Kim, 2025</p>
+          </section>
+                  <!-- What is Vibe Coding? -->
+        <section>
+          <h2>✨ What is Vibe Coding?</h2>
+          <div class="quote">
+            "Intent based, conversational, iterative development with AI as a partner" 🤝
+          </div>
+          <!-- <div style="font-size: 0.8em">
+            <p><span class="highlight">Not:</span> Giving up control or blindly accepting code&nbsp;❌</p>
+            <p><span class="highlight">Is:</span> Rapid prototyping, learning, and refinement&nbsp;✅</p>
+          </div> -->
+          <div style="font-size: 0.8em">
+            <h3>🔄 Key Mindset Shift</h3>
+            <p>From <em>"I need to know how"</em> to <em>"I need to articulate what"</em> 💡</p>
+          </div>
+        </section>
+
+        <!-- The Vibe Coding Workflow -->
+        <section>
+          <h2>🔄 The Vibe Coding Workflow</h2>
+          <h3 class="highlight">The Core Loop</h3>
+          <div class="strategy-card">
+            <h4>Describe → Generate → Test → Refine → Repeat</h4>
+          </div>
+          <div style="font-size: 0.8em">
+            <p><span class="highlight">Each step is:</span></p>
+            <ul>
+              <li>📏 Small and testable</li>
+              <li>🧱 Builds on the last</li>
+              <li>⚡ Quick to validate</li>
+            </ul>
+          </div>
+        </section>
+        </section>
+
+        <section>
+          <section>
+            <h3>Claude Artifacts</h3>
+            <img src="Claude-web.png" alt="Vibe Coding" class="r-stretch" />
+            <p class="date-text">Generate code in Claude chat on the web</p>
+          </section>
+
+          <!-- <section>
+            <img src="Claude-desktop.png" alt="Vibe Coding" class="r-stretch" />
+            <p class="date-text">Generate code in Claude on the desktop app</p>
+          </section> -->
+
+          <section>
+            <h2>Great for</h2>
+            <ul>
+              <li>🎨 Quick prototyping</li>
+              <li>👧🏻 Small sketches</li>
+              <li>💡 Ideation</li>
+              <li>🧐 Understaning concepts</li>
+              <li>✍🏽 Initial drafts</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Limitations</h2>
+            <ul>
+              <li>📝 Little version control</li>
+              <li>📦 Output size issues</li>
+              <li>💬 Persistence only within chat</li>
+              <li>🔌 Limited dependencies</li>
+              <li>📁 No file access</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <img
+              src="Claude-Code-CLI-1.png"
+              alt="Vibe Coding"
+              class="r-stretch"
+            />
+            <p class="date-text">The OG Claude Code CLI tool (NOT an IDE!)</p>
+          </section>
+
+          <section>
+            <img
+              src="Claude-Code-launch-message.png"
+              alt="Vibe Coding"
+              class="r-stretch"
+            />
+            <p class="date-text">Original launch message, Feb 24th, 2025</p>
+          </section>
+
+          <section>
+            <h2>March 5th, 2025</h2>
+            <h3>Public launch on NPM</h3>
+            <blockquote class="twitter-tweet">
+              <p lang="en" dir="ltr">
+                `npm install -g
+                <a href="https://twitter.com/Anthropic?ref_src=twsrc%5Etfw"
+                  >@anthropic</a
+                >-ai/claude-code`<br /><br />there&#39;s no more waitlist. have
+                fun!
+              </p>
+              &mdash; cat (@_catwu)
+              <a
+                href="https://twitter.com/_catwu/status/1897125032679399772?ref_src=twsrc%5Etfw"
+                >March 5, 2025</a
+              >
+            </blockquote>
+            <script
+              async
+              src="https://platform.twitter.com/widgets.js"
+              charset="utf-8"
+            ></script>
+            <p class="date-text">Catherine Wu, PM, Anthropic</p>
+          </section>
+
+          <section>
+            <h3>OG version was unpolished but powerful</h3>
+            <ul>
+              <li>⛺️ Very basic</li>
+              <li>👍🏾 Limited rate limits</li>
+              <li>✅ Explicit to-do lists</li>
+              <li>👩🏼‍💻 Very eager</li>
+              <li>🌍 No web access (added after 2 weeks)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>🌱 Matured over the past months</h3>
+            <ul>
+              <li>🪝 Hooks</li>
+              <li>⚡ Custom slash commands</li>
+              <li>✨ Better CLI UI</li>
+              <li>
+                🚀 Extended <code>claude</code> capabilities (beyond coding)
+              </li>
+              <li>💎 Better Developer UX</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>🖥️ Also in VS Code!</h3>
+            <img
+              src="Claude-Code-VS-Code.png"
+              alt="Vibe Coding"
+              class="r-stretch"
+            />
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>🚀 Recent developments</h2>
+            <ul>
+              <li>🌐 Even more portability</li>
+              <li>🚢 Containerized runtimes</li>
+              <li>🔒 Isolated runtime</li>
+              <li>🌍 Limited web access</li>
+            </ul>
+          </section>
+          <section>
+            <img
+              src="Claude-Code-on-the-web.png"
+              alt="Vibe Coding"
+              class="r-stretch"
+            />
+            <p class="date-text">Claude Code on the web</p>
+          </section>
+
+          <!-- <section>
+            <img
+              src="Claude-Code-on-desktop.png"
+              alt="Vibe Coding"
+              class="r-stretch"
+            />
+            <p class="date-text">Claude Code via desktop app</p>
+          </section> -->
+
+          <section>
+            <h3>📱 Claude Code mobile</h3>
+            <div style="display: flex">
+              <img
+                style="width: 20%; margin-right: 10%"
+                src="Claude-Code-iOS.png"
+                alt="Vibe Coding"
+              />
+              <ul>
+                <li>🚶‍♀️‍➡️ On the go</li>
+                <li>⚙️ GitHub connected</li>
+                <li>🚀 Code Anywhere!</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+
+        <section>
+          <!-- <section>
+            <h2>💡 Strategies & Best Practices</h2>
+            <h3>Level up your vibe coding skills</h3>
+          </section> -->
+
+          <!-- Why Browser-Based? -->
+          <!-- <section>
+            <h2>🌐 Start Browser-Based</h2>
+            <div class="quote">Prompt: Create a one page index.html only using HTML, CSS and JS with ...</div>
+            <ul>
+              <li>🚫 No installation barriers</li>
+              <li>⚡ Instant feedback</li>
+              <li>🔒 Safe sandbox (data stays local)</li>
+              <li>💪 Surprisingly powerful (CSV, APIs, complex logic)</li>
+            </ul>
+          </section> -->
+
+          <!-- Prompting Strategies -->
+          <section>
+            <h2>💬 Prompting Strategies</h2>
+            <p>Bad prompts vs Good prompts</p>
+            <div class="strategy-card">
+              <p>❌ Vague: "Make a git analytics tool"</p>
+            </div>
+            <div class="strategy-card">
+              <p>✅ Specific: "Make a git analytics tool that shows the busiest days of the week"</p>
+            </div>
+            <div class="strategy-card">
+              <p>❌ Vague: "Make it better" (though can lead to nice results)</p>
+            </div>
+            <div class="strategy-card">
+              <p>✅ Specific: "Add error messages when the file format is wrong, show them in red text"</p>
+            </div>
+          </section>
+
+          <section>
+            <h2>💬 Progressive Refinement</h2>
+            <div class="strategy-card">
+              <h4>🎯 Build your prompt in layers:</h4>
+              <ol>
+                <li>Start broad: "Make me a bash script that can analyze this git repository."</li>
+                <li>Add details: "Add a CLI arg for contributors per week, month"</li>
+                <li>Refine UX: "Show bar chart in CLI for commits during the day"</li>
+                <li>Polish: "Add bar chart for contributor count per month"</li>
+              </ol>
+            </div>
+          </section>
+
+          <!-- Code Review with AI -->
+          <!-- <section>
+            <h2>🔍 Code Review with AI</h2>
+            <h3 class="highlight">Teach AI to be your reviewer</h3>
+            <div class="strategy-card fragment">
+              <h4>💭 Questions to ask:</h4>
+              <ul>
+                <li>"Review this code for clarity and best practices"</li>
+                <li>"What edge cases am I not handling?"</li>
+                <li>"Is there a simpler way to do this?"</li>
+                <li>"Explain what this function does like I'm a junior developer"</li>
+              </ul>
+            </div>
+          </section> -->
+
+          <!-- Debugging with AI -->
+          <section>
+            <h2>🐛 Debugging with AI</h2>
+            <p>When things break</p>
+            <div class="strategy-card">
+              <h4>🔧 Effective debugging strategies:</h4>
+              <ul>
+                <li>✅ Copy the error message: "I got this error: [paste]. What does it mean?"</li>
+                <li>✅ Describe the behavior: "When I click the button, nothing happens. Here's my code:"</li>
+                <li>✅ Show what you expected: "This should filter the table, but it shows all rows"</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+
+        <section>
+          <section>
+            <h2>Advanced use</h2>
+            <ul>
+              <li><span class="claude">✻</span> global CLAUDE.md</li>
+              <li>🪝 Hooks: enforce tool use</li>
+              <li>⚓️ Hooks: show notifications</li>
+              <!-- <li>🚴 Skills</li> -->
+               <li>🌎 Global settings</li>
+              <li>💻 General purpose claude cli<br>(non-coding)</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Advanced CLAUDE.md</h2>
+            <ul style="font-size: 0.8em">
+              <li>
+                🤖 Project scope: can be auto-generated
+                <ul>
+                  <li>🔧 what tools to use</li>
+                  <li>🏗️ what architecture</li>
+                  <li>📋 conventions, gotchas</li>
+                </ul>
+              </li>
+              <li>
+                ✨ Global: make Claude more proactive
+                <ul>
+                  <li>🤝 add collaborative rules</li>
+                  <li>❓ when to ask for clarification</li>
+                  <li>🛑 when to push back</li>
+                  <li>🧭 guide decision making</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Advanced CLAUDE.md</h2>
+            <img
+              class="r-stretch"
+              src="Claude-Code-CLAUDE.md.png"
+              alt="Vibe Coding"
+            />
+            <p class="small">
+              https://github.com/obra/dotfiles/blob/main/.claude/CLAUDE.md
+            </p>
+          </section>
+
+          <!-- <section>
+            <h2>Advanced CLAUDE.md</h2>
+            <img
+              class="r-stretch"
+              src="Claude-Code-CLAUDE.md.2.png"
+              alt="Vibe Coding"
+            />
+            <p class="small">
+              https://github.com/harperreed/dotfiles/blob/master/.claude/CLAUDE.md
+            </p>
+          </section> -->
+
+          <section>
+            <h3>Hooks – enforce tool use</h3>
+            <p>
+              example: force <span class="highlight">yarn</span> over
+              <span class="highlight">npm</span>
+            </p>
+            <img
+              class="r-stretch"
+              src="Claude-Code-hooks-force-tool.png"
+              alt="Vibe Coding"
+            />
+          </section>
+
+          <section>
+            <h3>Hooks – enforce tool use</h3>
+            <p>Claude understands the error message</p>
+            <video controls width="100%" class="r-stretch" data-autoplay>
+              <source src="Claude-Code-hooks.mov" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </section>
+
+          <section>
+            <h3>Hooks: show notifications</h3>
+            <img
+              class="r-stretch"
+              src="Claude-Code-hooks-notifications.png"
+              alt="Vibe Coding"
+            />
+          </section>
+
+          <section>
+            <h3>Hooks: show notifications</h3>
+            <img src="Claude-Code-hooks-notification.png" alt="Vibe Coding" />
+            <p>Show a notification when Claude is asking permissions</p>
+          </section>
+
+          <section>
+            <h3>Other hook uses</h3>
+            <ul style="font-size: 0.8em">
+              <li>
+                💾 Checkpoint commits after file changes
+                <ul>
+                  <li>"auto save"</li>
+                </ul>
+              </li>
+              <li>🔗 Dependency graph enforcement
+                <ul>
+                  <li>deny frontend to import from backend</li>
+                </ul>
+              </li>
+              <li>🔐 Credential and secret sanitization
+                <ul>
+                  <li>check for patterns</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <!-- <section>
+            TODO skills
+          </section> -->
+
+          <section>
+            <h3>🌎 Global settings</h3>
+            <img
+              class="r-stretch"
+              src="Claude-Code-global-settings.png"
+              alt="Vibe Coding"
+            />
+          </section>
+          
+          <section>
+            <h3>general purpose use</h3>
+            <ul>
+              <li>📊 claude for data analysis</li>
+              <li>📄 claude for document analysis</li>
+              <li>❓ claude for questionaires</li>
+              <li>✍🏽 claude for writing (example ⤵)</li>
+            </ul>
+          </section>
+          
+          <section>
+            <h3>Example: writing style agent</h3>
+            <img
+            class="r-stretch"
+            src="Project-Gutenberg_William-Strunk.png"
+            alt="Vibe Coding"
+            />
+            <p class="date-text">Writing style agent, NO coding!</p>
+            <p class="date-text">https://www.gutenberg.org/cache/epub/37134/pg37134.txt</p>
+          </section>
+          
+          <section>
+            <h3>Example: writing style agent</h3>
+            <img
+            class="r-stretch"
+            src="Claude-Code-custom-system-prompt.png"
+            alt="Vibe Coding"
+            />
+            <p class="date-text">claude --system-prompt "You are a professional writing assistant... etc."</p>
+          </section>
+          
+          <section>
+            <h3>Example: writing style agent</h3>
+            <img
+            class="r-stretch"
+            src="Claude-Code-style-writer-2.png"
+            alt="Vibe Coding"
+            />
+            <p>Thanks!</p>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+    </script>
+  </body>
+</html>
