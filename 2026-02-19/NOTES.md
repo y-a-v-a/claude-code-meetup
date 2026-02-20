@@ -1,0 +1,85 @@
+
+- Claude code one year old
+	- Anthropic throwing a birthday party this weekend
+	- Note that the initial release was a research preview
+	- But how has it evolved?
+		- It was basic: prompt and code, prompt and code!
+		- Crude almost, like that guru developer at the other desk who knows it all. 
+			- I always wanted to make a tool named “got”, a sarcastic swiss army knife for your machine
+			- Demo “got”
+			- Still in heavy development 
+	- There was no web search in the initial preview versions
+	- Only a default permissions configuration 
+- It was eager, still is, all models are eager
+- it hardly asked questions
+	- Reminds me of the escape driven development that Eugene told about in the last meetup
+	- You had to correct it when it went off path
+	- But sonnet 3.7 was a good model. 
+		- yesterday i had Claude code review a codebase i built with Claude 10 months ago and it made compliments!
+		- Trumplang
+- Luckily there’s an overview of all its system prompts
+	- By a guy who eventually built his own coding agent (which isn’t hard!)
+	- You can diff online how it evolved
+	- i let Claude itself analyze the changes to its prompts from version one to latest
+	- four notable changes are …
+- Vibe coding last year was such fun!
+	- i built a very nice project i wanted to build since 2016 but for which i just didn’t have the time
+		- project sample
+	- But…
+- the wave of coding agents totally changes the software development process in one year.
+	- Because, why are you all here?
+	- At first vibe coding, then “vibe code cleaners”, later vibe engineers. Any new names? Agent driven development?
+	- Personal software
+	- Yet another markdown reader
+	- Software as a common commodity
+	- X is flooded by just released and the better y etc
+	- The real value is in the models and the thin layer on top of them
+		- Look after your harness
+		- Take time to configure it
+			- To tweak it
+		- Change it
+			- I modified my claude.md recently because Claude code’s system prompt and the models have been changed: less sycophancy for example, more architectural capabilities
+		- Diskspace is cheap so set the cache to 99999 or something
+			- You might want to get back to your prompts
+			- Yes i advocate for saving project state in markdown files as much as possible but sometimes you have this really nice idea in a convo that you want to get back to later. It’s all there. 
+	- The age of YA
+		- Luckily things change so fast that it won’t last too long
+	- I’ve been playing to with all kinds of projects
+		- And add i missed the fun and irony lately i made the Bob Ross coding agent
+			- Happy little accidents!
+		- You can completely rewrite Claude code’s system prompt. 
+		- I showed that last meetup where i loaded a writing style guide from 100 years old into Claude code to make it a writing style advisor
+- Claude Code grew along with these changes. 
+	- More configuration options
+	- Moved from cli tool to agent
+		- More from that guru perspective to an engineering manager’s perspective 
+			- With sub agents
+			- Agent swarms (nice metaphor: i should call my machine the beehive)
+	- Is this good or bad?
+		- Bob Ross never said painting became bad, hebwanted to enjoy it. 
+		- It’s a natural process imho
+		- Larger user group demands broader feature set
+		- It leads to more configuration options! Always a good thing
+		- But i’m a builder at heart
+			- So i let claude itself merge both the first and the latest system prompt to only cherry pick from the latest one and keep the vibe of the first one. 
+			- You can start claude code, since it basically is an agent, with your custom system prompt. This way we have claude code 3.0.0, my personal optimized claude code!
+- Coding is still like Lego to me. 
+	- I like to build stuff that no-one cares about but me. 
+	- I like fiddling, tweaking, playing with the model and see what comes out
+	- the toolbox evolved, but so its capabilities 
+		- New horizons 
+		- An growing option plain
+		- Techniques and insights grew
+			- which is great!
+			- Ralph Wiggum
+			- Openclaw
+			- Heartbeat
+			- Soul
+			- Persistence 
+			- Optimized system prompts
+	- I used sub agents, but i rather build my own
+		- It isn’t hard to build your own
+- So keep coming to the meetups
+	- Let’s keep sharing our learnings
+	- This is an invitation to contact is afterwards if you are curious for and willing to present on a next meetup
+	- It doesn’t have to be polished
