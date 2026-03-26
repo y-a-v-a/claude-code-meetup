@@ -1,0 +1,83 @@
+Claude Code strategies
+
+- convo style
+  - start with an idea, express it to Claude
+    - you can start with plan mode for initial idea expression and continue with an extended back-and-forth
+    - going quickly from plan mode to implementation mode
+  - start with an idea, ask Claude to grill you about it
+    - best to do this in planning mode
+  - start with an idea in a simple PLAN.md file
+    - ask claude to read the plan file, and let it write progress into the PLAN.md file
+    - decide whether you want to
+      - translate it into a tasks list in a file
+      - let the plan be implemented
+      - make an explicit tasks list in length
+    - have it write PRDs per problem domain
+      - start new Claude session to have the PRDs implemented one-by-one
+      - don't overdo the PRDs
+        - don't make them too long, no more than 100-150 lines
+        - make them domain / topic specific
+  - sub-agent style
+    - define ~2 subagents both with supportive tasks
+      - code review
+      - plan review
+      - tech specific (web specialist, python specialist, etc)
+
+- context management
+  - use CLAUDE.md files to set persistent instructions
+    - project root CLAUDE.md for repo-wide conventions (tech stack, coding style, test commands)
+    - subdirectory CLAUDE.md for domain-specific context (e.g. frontend/ vs backend/)
+    - keep them short and actionable — Claude reads them every session
+  - start fresh sessions strategically
+    - long conversations accumulate context and can drift — start a new session when switching tasks
+    - use /compact to summarize and reclaim context mid-conversation
+  - reference files explicitly
+    - point Claude to specific files rather than describing code from memory
+    - "@file.ts" syntax in IDE extensions, or just say "read src/foo.ts"
+
+- git-driven workflow
+  - commit early, commit often
+    - ask Claude to commit after each meaningful change
+    - makes it easy to revert if something goes wrong
+  - branch-per-experiment
+    - have Claude create a feature branch before making changes
+    - lets you compare approaches by switching branches
+  - use diffs as feedback
+    - after Claude makes changes, review the diff together
+    - "show me what you changed" or just check git diff
+
+- test-driven style
+  - write tests first, then implement
+    - describe the behavior you want, have Claude write failing tests
+    - then ask Claude to make the tests pass
+  - use tests as a specification
+    - tests serve as an unambiguous description of what you want
+    - Claude can iterate until all tests are green
+  - run tests in a loop
+    - ask Claude to keep fixing until all tests pass
+    - "run the tests and fix any failures"
+
+- iterative refinement
+  - start rough, then polish
+    - get a working prototype first, then refine incrementally
+    - "make it work, make it right, make it fast"
+  - use screenshots / visual feedback
+    - paste screenshots of UI issues directly into the conversation
+    - "this button is misaligned, fix it" with a screenshot is faster than describing
+  - rubber duck with Claude
+    - explain your problem to Claude and ask it to poke holes in your thinking
+    - useful even if you end up writing the code yourself
+
+- prompt techniques
+  - be specific about constraints
+    - "use only the standard library" or "no new dependencies"
+    - "keep this under 50 lines" or "make this a single function"
+  - show examples of what you want
+    - paste an existing pattern and say "do the same for X"
+    - Claude is great at pattern-matching from examples
+  - ask for alternatives
+    - "give me 3 different approaches to this problem"
+    - then pick the one that fits best and have it implement
+
+- hands-on style
+  - webapp with webaudio
