@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-image: linear-gradient(
+          -45deg,
+          #ECCECF,
+          #C76786,
+          #BBD1CA,
+          #DC765C
+        ) !important;
+        background-size: 400% 400% !important;
+        animation: gradientShift 30s ease infinite !important;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 0%;
+        }
+        25% {
+          background-position: 100% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        75% {
+          background-position: 0% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .reveal {
+        font-family: "Roboto Mono", monospace;
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: #6a1b9a;
+        font-family: "Roboto Mono", monospace;
+      }
+
+      .reveal .title-slide h1 {
+        font-size: 2.5em;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: #6a1b9a;
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 4px 10px;
+        margin: 10px;
+        border-left: 4px solid #6a1b9a;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid #6a1b9a;
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(106, 27, 154, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: #6a1b9a;
+        font-weight: bold;
+      }
+
+      .claude {
+        color: #d97757;
+      }
+
+      .small {
+        font-size: 0.4em;
+      }
+
+      .link-footer {
+        font-size: 0.45em;
+        margin-top: 30px;
+        opacity: 0.8;
+      }
+
+      .link-footer a {
+        color: #6a1b9a;
+      }
+
+      .two-col {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .two-col > * {
+        flex: 1;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        padding: 15px 20px;
+        font-size: 0.65em;
+        text-align: left;
+        font-family: "Roboto Mono", monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- AGENDA -->
+
+        <section>
+          <section>
+            <h1>👋 Welcome!</h1>
+            <h2>Claude Code meetup</h2>
+            <p class="date-text">
+              📅 Friday 2026-04-03<br />The Social Hub City
+            </p>
+            <p class="small">Amsterdam</p>
+            <p class="small">Vincent Bruijn, Rogier Muller</p>
+            <p class="small">Sponsored by Anthropic</p>
+          </section>
+
+          <section>
+            <h2>Agenda</h2>
+            <div class="strategy-card">
+              <ul>
+                <li>Welcome 🙏🏾</li>
+                <li>Talks
+                  <ul>
+                    <li>Rogier 🎙️</li>
+                    <li>Vincent 🎙️</li>
+                    <li>Bauke 🧑🏽‍💻</li>
+                    <li>Vincent 🎙️</li>
+                  </ul>
+                </li>
+                <li>Drinks 🍸 🍺</li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <h3>Welcome</h3>
+            <div class="strategy-card">
+              <ul>
+                <li>3rd Claude Code meetup Amsterdam</li>
+                <li>Upcoming 🔮
+                  <ul>
+                    <li>Enschede</li>
+                    <li>Eindhoven</li>
+                  </ul>
+                </li>
+                <li>Amsterdam</li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <h2>Claude Community Ambassador</h2>
+            <img src="assets/Anthropic-ambassador.png" alt="Anthropic ambassadors" style="max-height: 40vh">
+            <a href="https://claude.com/community/ambassadors">https://claude.com/community/ambassadors</a>
+          </section>
+        </section>
+
+        <!-- TITLE -->
+        <section>
+          <h2>Claude Code meetup</h2>
+          <h3>Skills, Agents & Channels</h3>
+          <p class="date-text">
+            Friday 2026-04-03<br>The Social Hub City, Amsterdam
+          </p>
+          <img src="assets/claude-meetup.png" alt="Claude Code meetup" style="max-height: 30vh">
+        </section>
+
+        <!-- INTRO / WELCOME -->
+        <!--section>
+          <img src="assets/claude-meetup 2.png" alt="Claude Code meetup" style="max-height: 55vh">
+          <p>Vincent Bruijn<br><span class="small">supported by Anthropic</span></p>
+        </section-->
+
+        <!-- ==================== SKILLS ==================== -->
+        <section>
+          <section>
+            <h2>Skills</h2>
+            <p>Specialist capabilities you can add to Claude Code</p>
+            <ul>
+              <li>Project-scoped or user-scoped</li>
+              <li>Invoked as slash commands</li>
+              <li>Extend what Claude can do</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Progressive Disclosure</h2>
+            <p style="font-size: 0.8em">The key to writing good skills</p>
+            <div class="strategy-card">
+              <p>Keep your <code>SKILL.md</code> between <span class="highlight">50-70 lines</span></p>
+              <ul style="font-size: 0.85em">
+                <li>It's the only file initially read</li>
+                <li>Describe core capabilities and use</li>
+                <li>Expose more context via markdown links &mdash; Claude can trace them</li>
+                <li>Add a <code>scripts/</code> directory for further functionality</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h2>Skill Engineering</h2>
+            <div class="quote">
+              Think of it as "skill engineering" &mdash; designing how Claude discovers and uses your skill's capabilities layer by layer.
+            </div>
+            <p style="font-size: 0.7em">
+              For reference: Anthropic's internal Claude Desktop skills are 200-400 lines
+            </p>
+          </section>
+        </section>
+
+        <!-- SKILL EXAMPLE: GPSE -->
+        <section>
+          <section>
+            <h2>Example: Google Programmable Search Engine</h2>
+            <p style="font-size: 0.8em">Create a scoped vulnerability search source</p>
+            <ul>
+              <li>Steerable for your purposes</li>
+              <li>Accessible via API key</li>
+              <li>Use the skill while coding</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>GPSE Setup</h3>
+            <img src="assets/GPSE-page.png" alt="Google Programmable Search Engine page" style="max-height: 65vh">
+          </section>
+
+          <section>
+            <h3>GPSE Configuration</h3>
+            <img src="assets/GPSE-config.png" alt="GPSE configuration" style="max-height: 65vh">
+          </section>
+
+          <section>
+            <h3>The Skill File</h3>
+            <img src="assets/GPSE-skill.png" alt="GPSE skill definition" style="max-height: 65vh">
+          </section>
+
+          <section>
+            <h3>GPSE Skill in Action</h3>
+            <video src="assets/GPSE-skill-use.mov" style="max-height: 65vh"></video>
+          </section>
+        </section>
+
+        <!-- SKILL EXAMPLE: web-to-markdown -->
+        <section>
+          <section>
+            <h2>Example: Web-to-Markdown Skill</h2>
+            <p style="font-size: 0.8em">Fetch any web page and return clean Markdown</p>
+          </section>
+
+          <section>
+            <h3>How It Works</h3>
+            <div class="two-col">
+              <div>
+                <p class="highlight">puppeteer-core</p>
+                <ul style="font-size: 0.7em">
+                  <li>Headless browser</li>
+                  <li>Fetch a website</li>
+                  <li>Wait for full load (SPA-friendly)</li>
+                  <li>Grab rendered HTML</li>
+                </ul>
+              </div>
+              <div>
+                <p class="highlight">turndown</p>
+                <ul style="font-size: 0.7em">
+                  <li>Takes HTML input</li>
+                  <li>Converts to clean Markdown</li>
+                  <li>Returns structured content</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Combined: A Strong Combo</h3>
+            <div class="quote">
+              Google PSE finds the right pages.<br>
+              Web-to-Markdown reads them.<br>
+              Together they give Claude deep, scoped web knowledge.
+            </div>
+          </section>
+        </section>
+
+        <!-- ==================== AGENTS ==================== -->
+        <section>
+          <section>
+            <h2>Agents</h2>
+            <p style="font-size: 0.8em">Specialist subprocesses for your running session</p>
+            <ul>
+              <li>Project-based or user-based</li>
+              <li>Can be designed on the fly</li>
+              <li>Can be predefined manually</li>
+              <li>No pollution of main context &mdash; agents return only relevant data</li>
+              <li>Can assign a color</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>Example: Vulnerability Agent</h3>
+            <p style="font-size: 0.8em">Combines both skills into one dedicated agent</p>
+            <img src="assets/combined-agent.png" alt="Combined vulnerability agent" style="max-height: 55vh">
+          </section>
+
+          <section>
+            <h3>CVE Analysis Result</h3>
+            <img src="assets/cve-analysis-result.png" alt="CVE analysis result" style="max-height: 65vh">
+          </section>
+        </section>
+
+        <!-- ==================== CHANNELS / OPENCLAW ==================== -->
+        <section>
+          <section>
+            <h2>An OpenClaw Alternative</h2>
+            <p style="font-size: 0.8em">OpenClaw: open-source personal AI agent platform</p>
+            <div class="quote">
+              Claude Code now has a feature called <span class="highlight">"channels"</span> that gets you close.
+            </div>
+          </section>
+
+          <section>
+            <h3>Channels</h3>
+            <p style="font-size: 0.8em">Keep a Claude Code process running and message to it</p>
+            <ul>
+              <li>Supports <span class="highlight">iMessage</span>, <span class="highlight">Discord</span>, and <span class="highlight">Telegram</span></li>
+              <li>Very powerful in combination with MCPs</li>
+            </ul>
+            <div class="link-footer">
+              <a href="https://github.com/anthropics/claude-plugins-official/tree/main/external_plugins/telegram">github.com/anthropics/claude-plugins-official/.../telegram</a>
+            </div>
+          </section>
+
+          <section>
+            <h3>OpenClaw vs Channels</h3>
+            <div class="two-col">
+              <div class="strategy-card">
+                <p class="highlight">OpenClaw</p>
+                <ul style="font-size: 0.8em">
+                  <li>Gateway as "manager"</li>
+                  <li>Routes channels and messages</li>
+                  <li>Centralized orchestration</li>
+                </ul>
+              </div>
+              <div class="strategy-card">
+                <p class="highlight">Claude Code Channels</p>
+                <ul style="font-size: 0.8em">
+                  <li>Sequential processing</li>
+                  <li>Simpler architecture</li>
+                  <li>Built into Claude Code</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h3>Building Your Own OpenClaw</h3>
+            <p style="font-size: 0.8em">Combine these ingredients:</p>
+            <ul>
+              <li>Overwrite system prompt of Claude Code</li>
+              <li>Channels for remote access</li>
+              <li>Dedicated <code>.claude</code> directory</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>What You Get</h3>
+            <div class="strategy-card">
+              <ul>
+                <li><span class="highlight">Isolation</span> &mdash; dedicated environment</li>
+                <li><span class="highlight">General purpose</span> &mdash; not locked to one task</li>
+                <li><span class="highlight">Remotely accessible</span> &mdash; message from anywhere</li>
+                <li><span class="highlight">Background</span> &mdash; start and forget</li>
+              </ul>
+            </div>
+            <p style="font-size: 0.8em; margin-top: 20px">Basically an OpenClaw clone</p>
+          </section>
+        </section>
+
+        <!-- CLOSING -->
+        <section>
+          <section>
+            <h2>$20 API credits</h2>
+            <div style="display: flex;">
+              <div>  
+                <img src="assets/Anthropic-platform.png" alt="Anthropic ambassadors" style="max-height: 40vh">
+                <br><p>Platform</p>
+              </div>
+              <div>
+              <img src="assets/Anthropic-offer.png" alt="Anthropic ambassadors" style="max-height: 40vh">
+              <br>https://claude.com/offers?offer_code=236700a9-54fa-45f3-b1ef-7129cf7f1e44
+            </div>
+            </div>
+          </section>
+          <section>
+            <h2>Keep building!</h2>
+            <ul>
+              <li>Let's keep sharing our learnings</li>
+              <li>Let us know if you want to give a talk at the next meetup</li>
+            </ul>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+    </script>
+  </body>
+</html>

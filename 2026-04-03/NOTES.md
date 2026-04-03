@@ -1,3 +1,10 @@
+# meetup Amsterdam 
+
+Friday April 3rd, 2026
+
+Vincent Bruijn
+supported by Anthropic
+
 - skills
   - progressive disclosure
     - don't make your SKILL.md files longer than 50 to 70 lines
