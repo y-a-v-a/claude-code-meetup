@@ -161,8 +161,8 @@
 
         <!-- AGENDA -->
 
-        <section>
-          <section>
+        <section id="agenda">
+          <section id="welcome">
             <h1>👋 Welcome!</h1>
             <h2>Claude Code meetup</h2>
             <p class="date-text">
@@ -173,7 +173,7 @@
             <p class="small">Sponsored by Anthropic</p>
           </section>
 
-          <section>
+          <section id="agenda-list">
             <h2>Agenda</h2>
             <div class="strategy-card">
               <ul>
@@ -190,7 +190,7 @@
               </ul>
             </div>
           </section>
-          <section>
+          <section id="upcoming">
             <h3>Welcome</h3>
             <div class="strategy-card">
               <ul>
@@ -205,7 +205,7 @@
               </ul>
             </div>
           </section>
-          <section>
+          <section id="ambassador">
             <h2>Claude Community Ambassador</h2>
             <img src="assets/Anthropic-ambassador.png" alt="Anthropic ambassadors" style="max-height: 40vh">
             <a href="https://claude.com/community/ambassadors">https://claude.com/community/ambassadors</a>
@@ -213,9 +213,9 @@
         </section>
 
         <!-- TITLE -->
-        <section>
+        <section id="title">
           <h2>Claude Code meetup</h2>
-          <h3>Skills, Agents & Channels</h3>
+          <h3>🛠️ Skills, 🤖 Agents & 📡 Channels</h3>
           <p class="date-text">
             Friday 2026-04-03<br>The Social Hub City, Amsterdam
           </p>
@@ -229,33 +229,41 @@
         </section-->
 
         <!-- ==================== SKILLS ==================== -->
-        <section>
-          <section>
-            <h2>Skills</h2>
+        <section id="skills">
+          <section id="skills-intro">
+            <h2>🛠️ Skills</h2>
             <p>Specialist capabilities you can add to Claude Code</p>
             <ul>
-              <li>Project-scoped or user-scoped</li>
-              <li>Invoked as slash commands</li>
-              <li>Extend what Claude can do</li>
+              <li>📁 Project-scoped or user-scoped</li>
+              <li>⌨️ Invoked as slash commands</li>
+              <li>🔌 Extend what Claude can do</li>
             </ul>
+            <img src="assets/skill_context_relationship.svg" alt="Skill context relationship" style="max-height: 35vh">
           </section>
 
-          <section>
-            <h2>Progressive Disclosure</h2>
+          <section id="progressive-disclosure">
+            <h2>🧅 Progressive Disclosure</h2>
             <p style="font-size: 0.8em">The key to writing good skills</p>
             <div class="strategy-card">
               <p>Keep your <code>SKILL.md</code> between <span class="highlight">50-70 lines</span></p>
               <ul style="font-size: 0.85em">
                 <li>It's the only file initially read</li>
                 <li>Describe core capabilities and use</li>
-                <li>Expose more context via markdown links &mdash; Claude can trace them</li>
-                <li>Add a <code>scripts/</code> directory for further functionality</li>
+                <li>Expose more context via markdown links
+                  <ul>
+                    <li>
+                      Claude can trace them
+                      
+                    </li>
+                  </ul>
+                </li>
+                <li>Add a <code style="color: #9c59a4">scripts/</code> directory for further functionality</li>
               </ul>
             </div>
           </section>
 
-          <section>
-            <h2>Skill Engineering</h2>
+          <section id="skill-engineering">
+            <h2>🏗️ Skill Engineering</h2>
             <div class="quote">
               Think of it as "skill engineering" &mdash; designing how Claude discovers and uses your skill's capabilities layer by layer.
             </div>
@@ -266,46 +274,46 @@
         </section>
 
         <!-- SKILL EXAMPLE: GPSE -->
-        <section>
-          <section>
-            <h2>Example: Google Programmable Search Engine</h2>
+        <section id="gpse">
+          <section id="gpse-intro">
+            <h2>🔍 Example: Google Programmable Search Engine</h2>
             <p style="font-size: 0.8em">Create a scoped vulnerability search source</p>
             <ul>
-              <li>Steerable for your purposes</li>
-              <li>Accessible via API key</li>
-              <li>Use the skill while coding</li>
+              <li>🎯 Steerable for your purposes</li>
+              <li>🔑 Accessible via API key</li>
+              <li>💻 Use the skill while coding</li>
             </ul>
           </section>
 
-          <section>
+          <section id="gpse-setup">
             <h3>GPSE Setup</h3>
             <img src="assets/GPSE-page.png" alt="Google Programmable Search Engine page" style="max-height: 65vh">
           </section>
 
-          <section>
-            <h3>GPSE Configuration</h3>
+          <section id="gpse-config">
+            <h3>GPSE as website</h3>
             <img src="assets/GPSE-config.png" alt="GPSE configuration" style="max-height: 65vh">
           </section>
 
-          <section>
+          <section id="gpse-skill-file">
             <h3>The Skill File</h3>
             <img src="assets/GPSE-skill.png" alt="GPSE skill definition" style="max-height: 65vh">
           </section>
 
-          <section>
-            <h3>GPSE Skill in Action</h3>
+          <section id="gpse-demo">
+            <h3>▶️ GPSE Skill in Action</h3>
             <video src="assets/GPSE-skill-use.mov" style="max-height: 65vh"></video>
           </section>
         </section>
 
         <!-- SKILL EXAMPLE: web-to-markdown -->
-        <section>
-          <section>
-            <h2>Example: Web-to-Markdown Skill</h2>
+        <section id="web-to-markdown">
+          <section id="web-to-markdown-intro">
+            <h2>🌐 Example: Web-to-Markdown Skill</h2>
             <p style="font-size: 0.8em">Fetch any web page and return clean Markdown</p>
           </section>
 
-          <section>
+          <section id="web-to-markdown-how">
             <h3>How It Works</h3>
             <div class="two-col">
               <div>
@@ -328,54 +336,54 @@
             </div>
           </section>
 
-          <section>
-            <h3>Combined: A Strong Combo</h3>
+          <section id="skills-combo">
+            <h3>🤝 Combined: A Strong Combo</h3>
             <div class="quote">
-              Google PSE finds the right pages.<br>
-              Web-to-Markdown reads them.<br>
-              Together they give Claude deep, scoped web knowledge.
+              🔍 Google PSE finds the right pages.<br>
+              📄 Web-to-Markdown reads them.<br>
+              🧠 Together they give Claude deep, scoped web knowledge.
             </div>
           </section>
         </section>
 
         <!-- ==================== AGENTS ==================== -->
-        <section>
-          <section>
-            <h2>Agents</h2>
+        <section id="agents">
+          <section id="agents-intro">
+            <h2>🤖 Agents</h2>
             <p style="font-size: 0.8em">Specialist subprocesses for your running session</p>
             <ul>
-              <li>Project-based or user-based</li>
-              <li>Can be designed on the fly</li>
-              <li>Can be predefined manually</li>
-              <li>No pollution of main context &mdash; agents return only relevant data</li>
-              <li>Can assign a color</li>
+              <li>📁 Project-based or user-based</li>
+              <li>⚡ Can be designed on the fly</li>
+              <li>📝 Can be predefined manually</li>
+              <li>🧹 No pollution of main context &mdash; agents return only relevant data</li>
+              <li>🎨 Can assign a color</li>
             </ul>
           </section>
 
-          <section>
-            <h3>Example: Vulnerability Agent</h3>
+          <section id="vuln-agent">
+            <h3>🛡️ Example: Vulnerability Agent</h3>
             <p style="font-size: 0.8em">Combines both skills into one dedicated agent</p>
             <img src="assets/combined-agent.png" alt="Combined vulnerability agent" style="max-height: 55vh">
           </section>
 
-          <section>
-            <h3>CVE Analysis Result</h3>
+          <section id="cve-result">
+            <h3>📊 CVE Analysis Result</h3>
             <img src="assets/cve-analysis-result.png" alt="CVE analysis result" style="max-height: 65vh">
           </section>
         </section>
 
         <!-- ==================== CHANNELS / OPENCLAW ==================== -->
-        <section>
-          <section>
-            <h2>An OpenClaw Alternative</h2>
+        <section id="channels">
+          <section id="openclaw-intro">
+            <h2>🦞 An OpenClaw Alternative</h2>
             <p style="font-size: 0.8em">OpenClaw: open-source personal AI agent platform</p>
             <div class="quote">
               Claude Code now has a feature called <span class="highlight">"channels"</span> that gets you close.
             </div>
           </section>
 
-          <section>
-            <h3>Channels</h3>
+          <section id="channels-overview">
+            <h3>📡 Channels</h3>
             <p style="font-size: 0.8em">Keep a Claude Code process running and message to it</p>
             <ul>
               <li>Supports <span class="highlight">iMessage</span>, <span class="highlight">Discord</span>, and <span class="highlight">Telegram</span></li>
@@ -386,8 +394,8 @@
             </div>
           </section>
 
-          <section>
-            <h3>OpenClaw vs Channels</h3>
+          <section id="openclaw-vs-channels">
+            <h3>⚖️ OpenClaw vs Channels</h3>
             <div class="two-col">
               <div class="strategy-card">
                 <p class="highlight">OpenClaw</p>
@@ -408,8 +416,8 @@
             </div>
           </section>
 
-          <section>
-            <h3>Building Your Own OpenClaw</h3>
+          <section id="build-openclaw">
+            <h3>🧪 Building Your Own OpenClaw</h3>
             <p style="font-size: 0.8em">Combine these ingredients:</p>
             <ul>
               <li>Overwrite system prompt of Claude Code</li>
@@ -418,14 +426,14 @@
             </ul>
           </section>
 
-          <section>
-            <h3>What You Get</h3>
+          <section id="what-you-get">
+            <h3>✅ What You Get</h3>
             <div class="strategy-card">
               <ul>
-                <li><span class="highlight">Isolation</span> &mdash; dedicated environment</li>
-                <li><span class="highlight">General purpose</span> &mdash; not locked to one task</li>
-                <li><span class="highlight">Remotely accessible</span> &mdash; message from anywhere</li>
-                <li><span class="highlight">Background</span> &mdash; start and forget</li>
+                <li>🔒 <span class="highlight">Isolation</span> &mdash; dedicated environment</li>
+                <li>🧰 <span class="highlight">General purpose</span> &mdash; not locked to one task</li>
+                <li>📱 <span class="highlight">Remotely accessible</span> &mdash; message from anywhere</li>
+                <li>👻 <span class="highlight">Background</span> &mdash; start and forget</li>
               </ul>
             </div>
             <p style="font-size: 0.8em; margin-top: 20px">Basically an OpenClaw clone</p>
@@ -433,9 +441,9 @@
         </section>
 
         <!-- CLOSING -->
-        <section>
-          <section>
-            <h2>$20 API credits</h2>
+        <section id="closing">
+          <section id="api-credits">
+            <h2>🎁 $20 API credits</h2>
             <div style="display: flex;">
               <div>  
                 <img src="assets/Anthropic-platform.png" alt="Anthropic ambassadors" style="max-height: 40vh">
@@ -447,8 +455,8 @@
             </div>
             </div>
           </section>
-          <section>
-            <h2>Keep building!</h2>
+          <section id="keep-building">
+            <h2>🚀 Keep building!</h2>
             <ul>
               <li>Let's keep sharing our learnings</li>
               <li>Let us know if you want to give a talk at the next meetup</li>
