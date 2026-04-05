@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Checkerboard Cube</title>
+<style>
+  * { margin: 0; padding: 0; }
+  body { background: #111; overflow: hidden; }
+  canvas { display: block; }
+  #info {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div id="info">Click to start mic input &middot; Press Z to toggle audio</div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.164.1/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.164.1/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x111111);
+
+const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(6, 5, 6);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(innerWidth, innerHeight);
+renderer.setPixelRatio(devicePixelRatio);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(renderer.domElement);
+
+// Lights
+const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambient);
+
+const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+dirLight.position.set(8, 12, 6);
+dirLight.castShadow = true;
+dirLight.shadow.mapSize.set(1024, 1024);
+dirLight.shadow.camera.near = 1;
+dirLight.shadow.camera.far = 30;
+dirLight.shadow.camera.left = -8;
+dirLight.shadow.camera.right = 8;
+dirLight.shadow.camera.top = 8;
+dirLight.shadow.camera.bottom = -8;
+scene.add(dirLight);
+
+const pointLight = new THREE.PointLight(0x4488ff, 0.6, 20);
+pointLight.position.set(-4, 6, -2);
+scene.add(pointLight);
+
+// Cube group - everything rotates together
+const cubeGroup = new THREE.Group();
+scene.add(cubeGroup);
+
+const gridSize = 5;
+const tileSize = 0.9;
+const boardSize = gridSize * tileSize;
+const halfBoard = boardSize / 2;
+
+// Materials
+const matDark = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 0.6, metalness: 0.2 });
+const matLight = new THREE.MeshStandardMaterial({ color: 0xe8e8e8, roughness: 0.5, metalness: 0.1 });
+
+// Pillar colors - a nice palette
+const pillarColors = [
+  0xff6b6b, 0x4ecdc4, 0xffe66d, 0xa06cd5, 0x6bcb77,
+  0xff8e53, 0x48bfe3, 0xf72585, 0x7209b7, 0x4cc9f0
+];
+
+// Build 6 faces of the checkerboard cube
+const faces = [
+  { axis: 'y', sign:  1, rot: [0, 0, 0] },           // top
+  { axis: 'y', sign: -1, rot: [Math.PI, 0, 0] },     // bottom
+  { axis: 'z', sign:  1, rot: [-Math.PI/2, 0, 0] },  // front
+  { axis: 'z', sign: -1, rot: [Math.PI/2, 0, 0] },   // back
+  { axis: 'x', sign:  1, rot: [0, 0, -Math.PI/2] },  // right
+  { axis: 'x', sign: -1, rot: [0, 0, Math.PI/2] },   // left
+];
+
+const tiles = []; // all tiles that can grow pillars
+
+const tileGeo = new THREE.BoxGeometry(tileSize * 0.95, 0.08, tileSize * 0.95);
+
+faces.forEach((face, fi) => {
+  const faceGroup = new THREE.Group();
+
+  for (let row = 0; row < gridSize; row++) {
+    for (let col = 0; col < gridSize; col++) {
+      const isDark = (row + col) % 2 === 0;
+      const mat = isDark ? matDark : matLight;
+      const tile = new THREE.Mesh(tileGeo, mat);
+
+      const x = (col - (gridSize - 1) / 2) * tileSize;
+      const z = (row - (gridSize - 1) / 2) * tileSize;
+      tile.position.set(x, halfBoard, z);
+
+      tile.castShadow = true;
+      tile.receiveShadow = true;
+      faceGroup.add(tile);
+
+      tiles.push({
+        mesh: tile,
+        faceGroup,
+        pillar: null,
+        targetHeight: 0,
+        currentHeight: 0,
+        row, col, faceIndex: fi
+      });
+    }
+  }
+
+  faceGroup.rotation.set(...face.rot);
+  cubeGroup.add(faceGroup);
+});
+
+// Pillar materials - assign one per tile based on its index
+const pillarBaseMat = pillarColors.map(c =>
+  new THREE.MeshStandardMaterial({ color: c, roughness: 0.3, metalness: 0.5 })
+);
+
+// Create pillars on every tile upfront (scaled to 0)
+const pillarGeo = new THREE.BoxGeometry(tileSize * 0.7, 1, tileSize * 0.7);
+pillarGeo.translate(0, 0.5, 0);
+
+tiles.forEach((t, i) => {
+  const mat = pillarBaseMat[i % pillarBaseMat.length];
+  const pillar = new THREE.Mesh(pillarGeo, mat);
+  pillar.position.copy(t.mesh.position);
+  pillar.position.y += 0.04;
+  pillar.castShadow = true;
+  pillar.scale.y = 0.001;
+  t.faceGroup.add(pillar);
+  t.pillar = pillar;
+  t.targetHeight = 0;
+  t.currentHeight = 0.001;
+});
+
+// Audio setup
+let audioCtx, analyser, stream;
+let audioActive = false;
+const totalTiles = tiles.length; // 6 faces * 25 tiles = 150
+
+// Precompute log-spaced frequency band edges for 150 bands
+let bandEdges = null; // computed after audioCtx is created
+
+function computeBandEdges() {
+  const sampleRate = audioCtx.sampleRate;
+  const minFreq = 20;
+  const maxFreq = sampleRate / 2;
+  const edges = [];
+  for (let i = 0; i <= totalTiles; i++) {
+    edges.push(minFreq * Math.pow(maxFreq / minFreq, i / totalTiles));
+  }
+  return edges;
+}
+
+function getLogBands(data) {
+  const sampleRate = audioCtx.sampleRate;
+  const fftSize = analyser.fftSize;
+  const bands = new Float32Array(totalTiles);
+
+  for (let i = 0; i < totalTiles; i++) {
+    const freqLo = bandEdges[i];
+    const freqHi = bandEdges[i + 1];
+    const binLo = Math.floor(freqLo / sampleRate * fftSize);
+    const binHi = Math.min(Math.ceil(freqHi / sampleRate * fftSize), data.length - 1);
+
+    let sum = 0;
+    let count = 0;
+    for (let b = binLo; b <= binHi; b++) {
+      sum += data[b];
+      count++;
+    }
+    bands[i] = count > 0 ? (sum / count) / 255 : 0;
+  }
+  return bands;
+}
+
+async function startAudio() {
+  if (audioCtx) return;
+  document.getElementById('info').style.display = 'none';
+
+  audioCtx = new AudioContext();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 4096;
+  analyser.smoothingTimeConstant = 0.8;
+
+  stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const source = audioCtx.createMediaStreamSource(stream);
+  source.connect(analyser);
+
+  bandEdges = computeBandEdges();
+  audioActive = true;
+}
+
+function toggleAudio() {
+  if (!stream) return;
+  audioActive = !audioActive;
+  stream.getAudioTracks().forEach(t => t.enabled = audioActive);
+}
+
+document.addEventListener('click', startAudio);
+document.addEventListener('keydown', e => {
+  if (e.key === 'z' || e.key === 'Z') toggleAudio();
+});
+
+// Animation
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = clock.getDelta();
+
+  // Slow rotation
+  cubeGroup.rotation.y += dt * 0.15;
+  cubeGroup.rotation.x += dt * 0.08;
+
+  // Update pillar targets from audio
+  if (analyser && audioActive) {
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(data);
+    const bands = getLogBands(data);
+
+    tiles.forEach((t, i) => {
+      // Map band energy [0..1] to pillar height, with a nice curve
+      const energy = bands[i];
+      const boosted = Math.pow(energy, 0.7); // compress dynamic range slightly
+      t.targetHeight = boosted * 3.0; // max pillar height ~3 units
+    });
+  } else if (!audioActive) {
+    tiles.forEach(t => { t.targetHeight = 0; });
+  }
+
+  // Animate pillars smoothly toward target
+  tiles.forEach(t => {
+    const diff = t.targetHeight - t.currentHeight;
+    // Rise fast, fall a bit slower for a nice feel
+    const speed = diff > 0 ? 12.0 : 6.0;
+    t.currentHeight += diff * Math.min(1, speed * dt);
+    t.currentHeight = Math.max(0.001, t.currentHeight);
+    t.pillar.scale.y = t.currentHeight;
+  });
+
+  renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth, innerHeight);
+});
+</script>
+</body>
+</html>

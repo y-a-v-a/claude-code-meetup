@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4-Track Looper</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e;
+      color: #ddd;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 32px 16px;
+      gap: 14px;
+    }
+
+    h1 {
+      font-size: 0.75rem;
+      letter-spacing: 0.5em;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .track {
+      width: 100%;
+      max-width: 720px;
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .track-num {
+      font-size: 0.7rem;
+      color: #555;
+      width: 16px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    /* REC button */
+    .rec-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid #cc2222;
+      background: transparent;
+      color: #cc2222;
+      font-family: monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.08s, color 0.08s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .rec-btn:hover { background: #1a0000; }
+
+    .rec-btn.recording {
+      background: #cc2222;
+      color: #fff;
+    }
+
+    /* Waveform canvas */
+    .waveform {
+      flex: 1;
+      height: 52px;
+      border-radius: 5px;
+      background: #111;
+      display: block;
+    }
+
+    /* MUTE button */
+    .mute-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 6px;
+      border: 1px solid #383838;
+      background: #222;
+      color: #aaa;
+      font-family: monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.1s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .mute-btn.muted {
+      background: #2a2a2a;
+      color: #444;
+      border-color: #2a2a2a;
+    }
+
+    /* Status LED */
+    .led {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .led.playing  { background: #00dd66; box-shadow: 0 0 6px #00dd66; }
+    .led.recording { background: #ff3333; box-shadow: 0 0 6px #ff3333; animation: pulse 0.5s infinite alternate; }
+
+    @keyframes pulse { from { opacity: 1; } to { opacity: 0.3; } }
+  </style>
+</head>
+<body>
+  <h1>LOOPER</h1>
+  <div id="app"></div>
+
+  <script>
+    // ─── Audio context (lazy init to satisfy Chrome autoplay policy) ───────────
+    let actx = null;
+    function ctx() {
+      if (!actx) actx = new AudioContext();
+      if (actx.state === 'suspended') actx.resume();
+      return actx;
+    }
+
+    // ─── Track state ───────────────────────────────────────────────────────────
+    const NUM_TRACKS = 4;
+    const MAX_DURATION_MS = 10000;
+
+    const tracks = Array.from({ length: NUM_TRACKS }, (_, i) => ({
+      id: i,
+      buffer: null,       // AudioBuffer after recording
+      source: null,       // AudioBufferSourceNode (looping)
+      gain: null,         // GainNode
+      recorder: null,     // MediaRecorder
+      chunks: [],
+      recording: false,
+      playing: false,
+      muted: false,
+      stopTimer: null,
+    }));
+
+    // ─── Gain nodes ────────────────────────────────────────────────────────────
+    function ensureGain(track) {
+      if (!track.gain) {
+        track.gain = ctx().createGain();
+        track.gain.connect(ctx().destination);
+      }
+      return track.gain;
+    }
+
+    // ─── Waveform drawing ──────────────────────────────────────────────────────
+    function drawWaveform(track) {
+      const canvas = document.getElementById(`canvas-${track.id}`);
+      if (!canvas || !track.buffer) return;
+
+      // Match canvas pixel size to CSS display size
+      const rect = canvas.getBoundingClientRect();
+      canvas.width  = Math.round(rect.width  * devicePixelRatio);
+      canvas.height = Math.round(rect.height * devicePixelRatio);
+
+      const c = canvas.getContext('2d');
+      const W = canvas.width, H = canvas.height;
+      const data = track.buffer.getChannelData(0);
+
+      c.fillStyle = '#111';
+      c.fillRect(0, 0, W, H);
+
+      c.strokeStyle = '#00cc55';
+      c.lineWidth = 1;
+      c.beginPath();
+
+      const step = Math.max(1, Math.floor(data.length / W));
+      const mid = H / 2;
+
+      for (let x = 0; x < W; x++) {
+        let lo = 1, hi = -1;
+        for (let j = 0; j < step; j++) {
+          const s = data[x * step + j] ?? 0;
+          if (s < lo) lo = s;
+          if (s > hi) hi = s;
+        }
+        c.moveTo(x + 0.5, mid + lo * mid);
+        c.lineTo(x + 0.5, mid + hi * mid);
+      }
+      c.stroke();
+    }
+
+    function clearWaveform(track) {
+      const canvas = document.getElementById(`canvas-${track.id}`);
+      if (!canvas) return;
+      const c = canvas.getContext('2d');
+      c.fillStyle = '#111';
+      c.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // ─── Playback ──────────────────────────────────────────────────────────────
+    function startLoop(track) {
+      stopLoop(track);
+      const source = ctx().createBufferSource();
+      source.buffer = track.buffer;
+      source.loop = true;
+      source.connect(ensureGain(track));
+      source.start();
+      track.source = source;
+      track.playing = true;
+      updateUI(track);
+    }
+
+    function stopLoop(track) {
+      if (track.source) {
+        try { track.source.stop(); } catch (_) {}
+        track.source.disconnect();
+        track.source = null;
+      }
+      track.playing = false;
+    }
+
+    // ─── Recording ─────────────────────────────────────────────────────────────
+    async function startRecording(track) {
+      if (track.recording) return;
+      ensureGain(track);
+
+      stopLoop(track);
+      clearWaveform(track);
+
+      // Stop any lingering mic stream from a previous recording
+      if (track.stream) {
+        track.stream.getTracks().forEach(t => t.stop());
+        track.stream = null;
+      }
+
+      let stream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      } catch (e) {
+        console.error('Mic access denied:', e);
+        return;
+      }
+
+      track.stream = stream;
+      track.chunks = [];
+      track.recorder = new MediaRecorder(stream);
+
+      track.recorder.ondataavailable = e => {
+        if (e.data && e.data.size > 0) track.chunks.push(e.data);
+      };
+
+      track.recorder.onstop = async () => {
+        if (track.stream) {
+          track.stream.getTracks().forEach(t => t.stop());
+          track.stream = null;
+        }
+        if (track.chunks.length === 0) return;
+
+        const blob = new Blob(track.chunks, { type: 'audio/webm' });
+        try {
+          const arrayBuf = await blob.arrayBuffer();
+          track.buffer = await ctx().decodeAudioData(arrayBuf);
+          drawWaveform(track);
+          startLoop(track);
+        } catch (err) {
+          console.error('Decode error:', err);
+        }
+      };
+
+      track.recorder.start();
+      track.recording = true;
+      updateUI(track);
+
+      // Auto-stop at max duration
+      track.stopTimer = setTimeout(() => stopRecording(track), MAX_DURATION_MS);
+    }
+
+    function stopRecording(track) {
+      if (!track.recording) return;
+      clearTimeout(track.stopTimer);
+      track.recording = false;
+      if (track.recorder && track.recorder.state !== 'inactive') {
+        track.recorder.stop();
+      }
+      updateUI(track);
+    }
+
+    // ─── Mute ─────────────────────────────────────────────────────────────────
+    function toggleMute(track) {
+      track.muted = !track.muted;
+      const g = ensureGain(track);
+      g.gain.setTargetAtTime(track.muted ? 0 : 1, ctx().currentTime, 0.015);
+      updateUI(track);
+    }
+
+    // ─── UI update ─────────────────────────────────────────────────────────────
+    function updateUI(track) {
+      const recBtn  = document.getElementById(`rec-${track.id}`);
+      const muteBtn = document.getElementById(`mute-${track.id}`);
+      const led     = document.getElementById(`led-${track.id}`);
+
+      recBtn.classList.toggle('recording', track.recording);
+
+      muteBtn.classList.toggle('muted', track.muted);
+      muteBtn.textContent = track.muted ? 'MUTED' : 'MUTE';
+
+      led.classList.remove('playing', 'recording');
+      if (track.recording)              led.classList.add('recording');
+      else if (track.playing)           led.classList.add('playing');
+    }
+
+    // ─── Build DOM ─────────────────────────────────────────────────────────────
+    function buildUI() {
+      const app = document.getElementById('app');
+      app.style.cssText = 'width:100%;max-width:720px;display:flex;flex-direction:column;gap:14px';
+
+      tracks.forEach(track => {
+        const row = document.createElement('div');
+        row.className = 'track';
+        row.innerHTML = `
+          <span class="track-num">${track.id + 1}</span>
+          <button class="rec-btn" id="rec-${track.id}">REC</button>
+          <canvas class="waveform" id="canvas-${track.id}"></canvas>
+          <button class="mute-btn" id="mute-${track.id}">MUTE</button>
+          <div class="led" id="led-${track.id}"></div>
+        `;
+        app.appendChild(row);
+
+        const recBtn = row.querySelector('.rec-btn');
+
+        // Hold-to-record — mouse (mouseup on document so dragging off the button doesn't stop recording)
+        recBtn.addEventListener('mousedown', e => {
+          e.preventDefault();
+          startRecording(track);
+          const onUp = () => { stopRecording(track); document.removeEventListener('mouseup', onUp); };
+          document.addEventListener('mouseup', onUp);
+        });
+
+        // Hold-to-record — touch
+        recBtn.addEventListener('touchstart', e => { e.preventDefault(); startRecording(track); }, { passive: false });
+        recBtn.addEventListener('touchend',   e => { e.preventDefault(); stopRecording(track);  }, { passive: false });
+
+        row.querySelector('.mute-btn').addEventListener('click', () => toggleMute(track));
+      });
+    }
+
+    buildUI();
+  </script>
+</body>
+</html>

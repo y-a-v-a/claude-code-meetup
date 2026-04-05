@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quad Synth Playground</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: #eee; font-family: monospace; overflow: hidden; }
+  canvas { display: block; }
+  #info {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-size: 13px; opacity: 0.5; pointer-events: none; text-align: center;
+    line-height: 1.6; z-index: 10;
+  }
+  #master {
+    position: fixed; top: 8px; left: 50%; transform: translateX(-50%);
+    font-size: 16px; pointer-events: none; z-index: 10;
+  }
+  #master.on { color: #0f0; }
+  #master.off { color: #f44; }
+</style>
+</head>
+<body>
+<div id="info">
+  [Z] master on/off<br><br>
+  Q W E R &nbsp;&nbsp;&nbsp;&nbsp; U I O P<br>
+  sin sq saw tri &nbsp; sin sq saw tri<br><br>
+  A S D F &nbsp;&nbsp;&nbsp;&nbsp; H J K L<br>
+  sin sq saw tri &nbsp; sin sq saw tri<br><br>
+  each key = note in that quadrant's oscillator
+</div>
+<div id="master" class="off">MASTER: OFF [Z]</div>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const masterEl = document.getElementById('master');
+let W, H;
+
+function resize() {
+  W = canvas.width = innerWidth;
+  H = canvas.height = innerHeight;
+}
+resize();
+addEventListener('resize', resize);
+
+// --- Audio context & master ---
+let audioCtx;
+let masterGain;
+let masterOn = false;
+
+function ensureAudio() {
+  if (audioCtx) { audioCtx.resume(); return; }
+  audioCtx = new AudioContext();
+  audioCtx.resume();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0;
+  masterGain.connect(audioCtx.destination);
+  quads.forEach(q => initQuad(q));
+}
+
+// --- Quadrant definitions ---
+// Each quadrant: keys map to waveforms, has its own osc, gain, analyser
+const WAVE_TYPES = ['sine', 'square', 'sawtooth', 'triangle'];
+const WAVE_LABELS = ['sin', 'sq', 'saw', 'tri'];
+
+// Notes per key (pentatonic-ish, feels nice)
+const KEY_NOTES = {
+  // Top-left: Q W E R
+  q: { quad: 0, wave: 0, freq: 262 },  // C4 sine
+  w: { quad: 0, wave: 1, freq: 330 },  // E4 square
+  e: { quad: 0, wave: 2, freq: 392 },  // G4 saw
+  r: { quad: 0, wave: 3, freq: 523 },  // C5 tri
+  // Top-right: U I O P
+  u: { quad: 1, wave: 0, freq: 294 },  // D4
+  i: { quad: 1, wave: 1, freq: 370 },  // F#4
+  o: { quad: 1, wave: 2, freq: 440 },  // A4
+  p: { quad: 1, wave: 3, freq: 587 },  // D5
+  // Bottom-left: A S D F
+  a: { quad: 2, wave: 0, freq: 131 },  // C3
+  s: { quad: 2, wave: 1, freq: 165 },  // E3
+  d: { quad: 2, wave: 2, freq: 196 },  // G3
+  f: { quad: 2, wave: 3, freq: 262 },  // C4
+  // Bottom-right: H J K L
+  h: { quad: 3, wave: 0, freq: 147 },  // D3
+  j: { quad: 3, wave: 1, freq: 185 },  // F#3
+  k: { quad: 3, wave: 2, freq: 220 },  // A3
+  l: { quad: 3, wave: 3, freq: 294 },  // D4
+};
+
+const QUAD_COLORS = [180, 280, 60, 330]; // hue per quadrant
+const QUAD_LABELS = ['Q W E R', 'U I O P', 'A S D F', 'H J K L'];
+
+const quads = [
+  { id: 0, osc: null, gain: null, analyser: null, data: null, activeKey: null, hue: QUAD_COLORS[0] },
+  { id: 1, osc: null, gain: null, analyser: null, data: null, activeKey: null, hue: QUAD_COLORS[1] },
+  { id: 2, osc: null, gain: null, analyser: null, data: null, activeKey: null, hue: QUAD_COLORS[2] },
+  { id: 3, osc: null, gain: null, analyser: null, data: null, activeKey: null, hue: QUAD_COLORS[3] },
+];
+
+function initQuad(q) {
+  q.osc = audioCtx.createOscillator();
+  q.gain = audioCtx.createGain();
+  q.analyser = audioCtx.createAnalyser();
+  q.analyser.fftSize = 1024;
+  q.data = new Uint8Array(q.analyser.frequencyBinCount);
+
+  q.osc.type = 'sine';
+  q.osc.frequency.value = 440;
+  q.gain.gain.value = 0;
+
+  q.osc.connect(q.gain);
+  q.gain.connect(q.analyser);
+  q.analyser.connect(masterGain);
+  q.osc.start();
+}
+
+// --- Keyboard handling ---
+const heldKeys = new Set();
+
+addEventListener('keydown', e => {
+  if (e.repeat) return;
+  const key = e.key.toLowerCase();
+
+  if (key === 'z') {
+    ensureAudio();
+    masterOn = !masterOn;
+    masterGain.gain.setTargetAtTime(masterOn ? 0.7 : 0, audioCtx.currentTime, 0.02);
+    masterEl.className = masterOn ? 'on' : 'off';
+    masterEl.textContent = `MASTER: ${masterOn ? 'ON' : 'OFF'} [Z]`;
+    // Hide info after first toggle
+    document.getElementById('info').style.display = 'none';
+    return;
+  }
+
+  const note = KEY_NOTES[key];
+  if (!note) return;
+  ensureAudio();
+  heldKeys.add(key);
+
+  const q = quads[note.quad];
+  q.osc.type = WAVE_TYPES[note.wave];
+  q.osc.frequency.setTargetAtTime(note.freq, audioCtx.currentTime, 0.01);
+  q.gain.gain.setTargetAtTime(0.35, audioCtx.currentTime, 0.02);
+  q.activeKey = key;
+});
+
+addEventListener('keyup', e => {
+  const key = e.key.toLowerCase();
+  const note = KEY_NOTES[key];
+  if (!note) return;
+  heldKeys.delete(key);
+
+  const q = quads[note.quad];
+  // Only silence if this was the active key for that quadrant
+  if (q.activeKey === key) {
+    q.gain.gain.setTargetAtTime(0, audioCtx.currentTime, 0.05);
+    q.activeKey = null;
+  }
+});
+
+// --- Quadrant bounds ---
+function quadBounds(id) {
+  const hw = W / 2, hh = H / 2;
+  const col = id % 2, row = Math.floor(id / 2);
+  return { x: col * hw, y: row * hh, w: hw, h: hh };
+}
+
+// --- Visualizer ---
+function draw() {
+  requestAnimationFrame(draw);
+
+  // Fade
+  ctx.fillStyle = 'rgba(17, 17, 17, 0.18)';
+  ctx.fillRect(0, 0, W, H);
+
+  // Draw quadrant dividers
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H);
+  ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2);
+  ctx.stroke();
+
+  // Draw quadrant labels
+  ctx.font = '12px monospace';
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  const labelPad = 16;
+  ctx.fillText(QUAD_LABELS[0], labelPad, labelPad + 12);
+  ctx.fillText(QUAD_LABELS[1], W / 2 + labelPad, labelPad + 12);
+  ctx.fillText(QUAD_LABELS[2], labelPad, H / 2 + labelPad + 12);
+  ctx.fillText(QUAD_LABELS[3], W / 2 + labelPad, H / 2 + labelPad + 12);
+
+  // Draw each quadrant's waveform
+  quads.forEach(q => {
+    if (!q.analyser) return;
+    const b = quadBounds(q.id);
+
+    q.analyser.getByteTimeDomainData(q.data);
+
+    const hue = q.hue + (q.activeKey ? 30 * Math.sin(Date.now() / 200) : 0);
+    const brightness = q.activeKey ? '70%' : '30%';
+    ctx.strokeStyle = `hsl(${hue}, 100%, ${brightness})`;
+    ctx.lineWidth = q.activeKey ? 3 : 1;
+    ctx.beginPath();
+
+    const sliceW = b.w / q.data.length;
+    for (let i = 0; i < q.data.length; i++) {
+      const v = q.data[i] / 128.0;
+      const x = b.x + i * sliceW;
+      const y = b.y + (v * b.h) / 2;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Frequency bars when active
+    if (q.activeKey) {
+      q.analyser.getByteFrequencyData(q.data);
+      const barCount = 32;
+      const barW = (b.w / barCount) - 1;
+      for (let i = 0; i < barCount; i++) {
+        const barH = q.data[i] * (b.h / 512);
+        ctx.fillStyle = `hsl(${q.hue + i * 6}, 80%, 50%)`;
+        ctx.fillRect(b.x + i * (barW + 1), b.y + b.h - barH, barW, barH);
+      }
+
+      // Show active note info
+      const note = KEY_NOTES[q.activeKey];
+      ctx.font = '18px monospace';
+      ctx.fillStyle = `hsl(${q.hue}, 100%, 70%)`;
+      ctx.fillText(
+        `${q.activeKey.toUpperCase()} ${WAVE_LABELS[note.wave]} ${note.freq}Hz`,
+        b.x + b.w / 2 - 60, b.y + 30
+      );
+    }
+  });
+}
+draw();
+</script>
+</body>
+</html>

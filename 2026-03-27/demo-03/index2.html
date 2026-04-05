@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Visualizer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; overflow: hidden; }
+  canvas { display: block; }
+  #message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #888;
+    font-family: system-ui, sans-serif;
+    font-size: 1.4rem;
+    text-align: center;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+<div id="message">Click anywhere to start<br><small>Press Z to toggle audio</small></div>
+<canvas id="canvas"></canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const msg = document.getElementById('message');
+
+let audioCtx, analyser, source, stream;
+let active = false;
+let animId;
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+async function start() {
+  if (audioCtx) return;
+  msg.style.display = 'none';
+
+  audioCtx = new AudioContext();
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048;
+  analyser.smoothingTimeConstant = 0.8;
+
+  stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  source = audioCtx.createMediaStreamSource(stream);
+  source.connect(analyser);
+  active = true;
+  draw();
+}
+
+function toggleAudio() {
+  if (!stream) return;
+  active = !active;
+  stream.getAudioTracks().forEach(t => t.enabled = active);
+}
+
+function hsl(h, s, l) {
+  return `hsl(${h}, ${s}%, ${l}%)`;
+}
+
+function draw() {
+  animId = requestAnimationFrame(draw);
+
+  const w = canvas.width;
+  const h = canvas.height;
+  const bufLen = analyser.frequencyBinCount;
+  const data = new Uint8Array(bufLen);
+  analyser.getByteFrequencyData(data);
+
+  ctx.fillStyle = 'rgba(10, 10, 10, 0.25)';
+  ctx.fillRect(0, 0, w, h);
+
+  // Map linear FFT bins to logarithmic frequency bands
+  // Each bar covers an exponentially wider range of bins
+  const sampleRate = audioCtx.sampleRate;
+  const minFreq = 20;
+  const maxFreq = sampleRate / 2;
+  const barCount = 64;
+  const barW = w / barCount;
+  const gap = Math.max(1, barW * 0.15);
+
+  for (let i = 0; i < barCount; i++) {
+    // Log-spaced frequency edges for this bar
+    const freqLo = minFreq * Math.pow(maxFreq / minFreq, i / barCount);
+    const freqHi = minFreq * Math.pow(maxFreq / minFreq, (i + 1) / barCount);
+
+    // Convert frequencies to FFT bin indices
+    const binLo = Math.floor(freqLo / sampleRate * analyser.fftSize);
+    const binHi = Math.min(Math.ceil(freqHi / sampleRate * analyser.fftSize), bufLen - 1);
+
+    // Average the energy across the bins in this band
+    let sum = 0;
+    let count = 0;
+    for (let b = binLo; b <= binHi; b++) {
+      sum += data[b];
+      count++;
+    }
+    const val = count > 0 ? (sum / count) / 255 : 0;
+    const barH = val * h;
+
+    const hue = (i / barCount) * 280 + 200;
+    const sat = 70 + val * 30;
+    const light = 30 + val * 40;
+
+    const x = i * barW;
+
+    const grad = ctx.createLinearGradient(x, h, x, h - barH);
+    grad.addColorStop(0, hsl(hue, sat, light * 0.6));
+    grad.addColorStop(0.5, hsl(hue, sat, light));
+    grad.addColorStop(1, hsl((hue + 40) % 360, sat, light + 15));
+
+    ctx.fillStyle = grad;
+    ctx.fillRect(x + gap / 2, h - barH, barW - gap, barH);
+  }
+}
+
+document.addEventListener('click', start);
+document.addEventListener('keydown', e => {
+  if (e.key === 'z' || e.key === 'Z') toggleAudio();
+});
+</script>
+</body>
+</html>

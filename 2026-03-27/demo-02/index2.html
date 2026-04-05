@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drone Synth</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; color: #eee; font-family: monospace; overflow: hidden; }
+  canvas { display: block; }
+  #hud {
+    position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+    font-size: 13px; opacity: 0.7; pointer-events: none; text-align: center;
+    line-height: 1.8; z-index: 10;
+  }
+  #master {
+    position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+    font-size: 15px; pointer-events: none; z-index: 10;
+  }
+  #master.on { color: #0f0; }
+  #master.off { color: #f44; }
+  kbd { background: #222; border: 1px solid #555; border-radius: 3px; padding: 1px 6px; }
+</style>
+</head>
+<body>
+<div id="master" class="off">press [Z] to start</div>
+<div id="hud"></div>
+<canvas id="c"></canvas>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const masterEl = document.getElementById('master');
+const hudEl = document.getElementById('hud');
+let W, H;
+
+function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+resize();
+addEventListener('resize', resize);
+
+// --- Config ---
+const WAVE_TYPES = ['sine', 'square', 'sawtooth', 'triangle'];
+const WAVE_LABELS = ['sine', 'square', 'saw', 'triangle'];
+const BASE_FREQ = 110; // A2
+const COLORS = [180, 300, 50, 120]; // hue per voice
+
+// --- Audio state ---
+let audioCtx, masterGain, analyser, analyserData;
+let masterOn = false;
+
+// 4 voices: each has osc + gain, slightly detuned for richness
+const voices = [
+  { osc: null, gain: null, freq: BASE_FREQ, waveIdx: 0, detune: -6 },
+  { osc: null, gain: null, freq: BASE_FREQ * 1.5, waveIdx: 0, detune: 4 },   // fifth
+  { osc: null, gain: null, freq: BASE_FREQ * 2, waveIdx: 2, detune: -3 },     // octave, saw
+  { osc: null, gain: null, freq: BASE_FREQ * 3, waveIdx: 3, detune: 7 },      // octave+fifth, tri
+];
+
+let pitchMultiplier = 1;
+let pitchStep = 0; // semitone offset
+
+function initAudio() {
+  audioCtx = new AudioContext();
+  audioCtx.resume();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0;
+
+  analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 2048;
+  analyserData = new Uint8Array(analyser.frequencyBinCount);
+
+  masterGain.connect(analyser);
+  analyser.connect(audioCtx.destination);
+
+  voices.forEach(v => {
+    v.osc = audioCtx.createOscillator();
+    v.gain = audioCtx.createGain();
+    v.osc.type = WAVE_TYPES[v.waveIdx];
+    v.osc.frequency.value = v.freq;
+    v.osc.detune.value = v.detune;
+    v.gain.gain.value = 0.15;
+    v.osc.connect(v.gain);
+    v.gain.connect(masterGain);
+    v.osc.start();
+  });
+}
+
+function updateFrequencies() {
+  pitchMultiplier = Math.pow(2, pitchStep / 12);
+  voices.forEach(v => {
+    const f = v.freq * pitchMultiplier;
+    v.osc.frequency.setTargetAtTime(f, audioCtx.currentTime, 0.03);
+  });
+}
+
+function updateHud() {
+  const note = pitchStep >= 0 ? `+${pitchStep}` : `${pitchStep}`;
+  const hz = (BASE_FREQ * pitchMultiplier).toFixed(1);
+  hudEl.innerHTML =
+    `<kbd>Z</kbd> on/off &nbsp; <kbd>Q</kbd><kbd>W</kbd> pitch dn/up &nbsp; <kbd>E</kbd><kbd>R</kbd> wave cycle &nbsp; <kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd> toggle voices<br>` +
+    `pitch: ${note} semi (${hz} Hz base) &nbsp; | &nbsp; ` +
+    voices.map((v, i) =>
+      `<span style="color:hsl(${COLORS[i]},80%,${v.gain.gain.value > 0.01 ? '65' : '30'}%)">${WAVE_LABELS[v.waveIdx]}</span>`
+    ).join(' · ');
+}
+
+// --- Keyboard ---
+addEventListener('keydown', e => {
+  if (e.repeat) return;
+  const key = e.key.toLowerCase();
+
+  if (key === 'z') {
+    if (!audioCtx) initAudio();
+    else audioCtx.resume();
+    masterOn = !masterOn;
+    masterGain.gain.setTargetAtTime(masterOn ? 0.6 : 0, audioCtx.currentTime, 0.03);
+    masterEl.className = masterOn ? 'on' : 'off';
+    masterEl.textContent = masterOn ? 'ON [Z]' : 'OFF [Z]';
+    updateHud();
+    return;
+  }
+
+  if (!audioCtx || !masterOn) return;
+
+  if (key === 'q') { pitchStep -= 1; updateFrequencies(); }
+  if (key === 'w') { pitchStep += 1; updateFrequencies(); }
+
+  // E/R cycle waveform on all voices (E = prev, R = next)
+  if (key === 'e' || key === 'r') {
+    const dir = key === 'r' ? 1 : -1;
+    voices.forEach(v => {
+      v.waveIdx = (v.waveIdx + dir + WAVE_TYPES.length) % WAVE_TYPES.length;
+      v.osc.type = WAVE_TYPES[v.waveIdx];
+    });
+  }
+
+  // A S D F toggle individual voices on/off
+  const voiceToggle = { a: 0, s: 1, d: 2, f: 3 };
+  if (key in voiceToggle) {
+    const v = voices[voiceToggle[key]];
+    const on = v.gain.gain.value > 0.01;
+    v.gain.gain.setTargetAtTime(on ? 0 : 0.15, audioCtx.currentTime, 0.02);
+  }
+
+  updateHud();
+});
+
+// --- Visualizer ---
+function draw() {
+  requestAnimationFrame(draw);
+
+  ctx.fillStyle = 'rgba(17, 17, 17, 0.12)';
+  ctx.fillRect(0, 0, W, H);
+
+  if (!analyser) return;
+
+  // Waveform
+  analyser.getByteTimeDomainData(analyserData);
+  const t = Date.now() / 1000;
+
+  // Draw multiple layered waveforms with offsets for depth
+  voices.forEach((v, vi) => {
+    if (v.gain.gain.value < 0.01) return;
+    const hue = COLORS[vi] + 20 * Math.sin(t + vi);
+    ctx.strokeStyle = `hsla(${hue}, 100%, 60%, 0.7)`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+
+    const yOffset = H * 0.25 + vi * (H * 0.15);
+    const amplitude = H * 0.12;
+    const sliceW = W / analyserData.length;
+
+    for (let i = 0; i < analyserData.length; i++) {
+      const val = (analyserData[i] / 128.0 - 1);
+      const x = i * sliceW;
+      const y = yOffset + val * amplitude * (1 + 0.3 * Math.sin(t * 0.5 + vi));
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  });
+
+  // Frequency bars across bottom
+  if (masterOn) {
+    analyser.getByteFrequencyData(analyserData);
+    const barCount = 80;
+    const barW = (W / barCount) - 1;
+    for (let i = 0; i < barCount; i++) {
+      const barH = analyserData[i] * (H / 400);
+      const hue = COLORS[i % 4] + i * 2;
+      ctx.fillStyle = `hsla(${hue}, 80%, 50%, 0.6)`;
+      ctx.fillRect(i * (barW + 1), H - barH, barW, barH);
+    }
+  }
+
+  // Center circle reactive to volume
+  if (masterOn) {
+    let sum = 0;
+    for (let i = 0; i < analyserData.length; i++) sum += analyserData[i];
+    const avg = sum / analyserData.length;
+    const r = 30 + avg * 0.8;
+    const hue = (t * 40) % 360;
+
+    ctx.beginPath();
+    ctx.arc(W / 2, H / 2, r, 0, Math.PI * 2);
+    ctx.strokeStyle = `hsla(${hue}, 100%, 60%, 0.4)`;
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    // Inner glow
+    ctx.beginPath();
+    ctx.arc(W / 2, H / 2, r * 0.6, 0, Math.PI * 2);
+    ctx.strokeStyle = `hsla(${hue + 60}, 100%, 70%, 0.3)`;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+draw();
+</script>
+</body>
+</html>
