@@ -12,4 +12,12 @@ Presented at The Social Hub City, Amsterdam. Covers Claude Code's journey from i
 
 ### [2026-03-27 - Code /w Claude](2026-03-27/index.html)
 
+![2026-03-27 slide](2026-03-27-slide.png)
+
 Presented at NP3, Groningen. Covers an introduction to Claude and Claude code and a hands-on workshop to learn to build with Claude Code.
+
+### [2026-04-03 — Skills, Agents & Channels](2026-04-03/index.html)
+
+![2026-04-03 slide](2026-04-03-slide.png)
+
+Presented at Amsterdam, supported by Anthropic. Covers skills (progressive disclosure, Google Programmable Search Engine, web-to-markdown), custom agents for specialist sub-tasks, and the new Claude Code channels feature as an OpenClaw alternative.
