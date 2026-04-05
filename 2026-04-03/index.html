@@ -201,7 +201,7 @@
                     <li>Eindhoven</li>
                   </ul>
                 </li>
-                <li>Amsterdam</li>
+                <li>Amsterdam May/June</li>
               </ul>
             </div>
           </section>
@@ -338,11 +338,44 @@
 
           <section id="skills-combo">
             <h3>🤝 Combined: A Strong Combo</h3>
-            <div class="quote">
-              🔍 Google PSE finds the right pages.<br>
-              📄 Web-to-Markdown reads them.<br>
-              🧠 Together they give Claude deep, scoped web knowledge.
-            </div>
+            <svg viewBox="0 0 900 120" style="max-width: 85%; margin: 30px auto; display: block;" xmlns="http://www.w3.org/2000/svg">
+              <style>
+                .box { fill: rgba(255,255,255,0.9); stroke: #6a1b9a; stroke-width: 2; rx: 10; }
+                .box-agent { fill: rgba(106,27,154,0.1); stroke: #6a1b9a; stroke-width: 2.5; rx: 10; }
+                .label { font-family: 'Roboto Mono', monospace; font-size: 14px; fill: #333; text-anchor: middle; dominant-baseline: central; }
+                .label-agent { font-family: 'Roboto Mono', monospace; font-size: 14px; fill: #6a1b9a; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+                .arrow { fill: none; stroke: #6a1b9a; stroke-width: 2.5; marker-end: url(#arrowhead); }
+              </style>
+              <defs>
+                <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                  <polygon points="0 0, 8 3, 0 6" fill="#6a1b9a" />
+                </marker>
+              </defs>
+              <!-- GPSE -->
+              <rect class="box" x="0" y="35" width="130" height="50" />
+              <text class="label" x="65" y="60">🔍 GPSE</text>
+              <!-- Arrow 1 -->
+              <line class="arrow" x1="135" y1="60" x2="175" y2="60" />
+              <!-- URLs -->
+              <rect class="box" x="180" y="35" width="110" height="50" />
+              <text class="label" x="235" y="60">URLs</text>
+              <!-- Arrow 2 -->
+              <line class="arrow" x1="295" y1="60" x2="335" y2="60" />
+              <!-- Web-to-MD -->
+              <rect class="box" x="340" y="35" width="180" height="50" />
+              <text class="label" x="430" y="60">🌐 Web-to-MD</text>
+              <!-- Arrow 3 -->
+              <line class="arrow" x1="525" y1="60" x2="565" y2="60" />
+              <!-- Markdown -->
+              <rect class="box" x="570" y="35" width="130" height="50" />
+              <text class="label" x="635" y="60">Markdown</text>
+              <!-- Arrow 4 -->
+              <line class="arrow" x1="705" y1="60" x2="745" y2="60" />
+              <!-- Agent -->
+              <rect class="box-agent" x="750" y="30" width="140" height="60" />
+              <text class="label-agent" x="820" y="60">🤖 Agent</text>
+            </svg>
+            <p style="font-size: 0.75em; margin-top: 10px;">Two skills, one agent &mdash; the vulnerability scanner</p>
           </section>
         </section>
 
@@ -360,6 +393,20 @@
             </ul>
           </section>
 
+          <section id="agents-menu">
+            <h3>🤖 Agents in the TUI</h3>
+            <img src="assets/agents-1.png" alt="Agents menu in the TUI" style="max-height: 65vh">
+          </section>
+
+          <section id="agents-debug">
+            <h3>🐛 Debugging an Agent</h3>
+            <p style="font-size: 0.8em">Run Claude with a specific agent directly:</p>
+            <div class="code-block">
+              <code>claude --agent agent-name</code>
+            </div>
+            <p style="font-size: 0.7em; margin-top: 20px">Useful for testing and iterating on your agent definitions</p>
+          </section>
+
           <section id="vuln-agent">
             <h3>🛡️ Example: Vulnerability Agent</h3>
             <p style="font-size: 0.8em">Combines both skills into one dedicated agent</p>
@@ -369,6 +416,27 @@
           <section id="cve-result">
             <h3>📊 CVE Analysis Result</h3>
             <img src="assets/cve-analysis-result.png" alt="CVE analysis result" style="max-height: 65vh">
+          </section>
+        </section>
+
+        <!-- ==================== CLAUDE CONFIG TIPS ==================== -->
+
+        <section id="config-tips">
+          <section id="tips-intro">
+            <h2>💡 Claude Code Config Tips</h2>
+            <img src="assets/tip-claude-settings.png" alt="Claude settings.json overview" style="max-height: 65vh">
+          </section>
+          <section id="tips-1">
+            <h3>💾 Cleanup & Environment</h3>
+            <img src="assets/tip-claude-1.png" alt="cleanupPeriodDays and env settings" style="max-height: 65vh">
+          </section>
+          <section id="tips-2">
+            <h3>🔐 Permissions: Allow & Deny</h3>
+            <img src="assets/tip-claude-2.png" alt="Permissions allow and deny lists" style="max-height: 65vh">
+          </section>
+          <section id="tips-3">
+            <h3>⚙️ Status Line & Misc</h3>
+            <img src="assets/tip-claude-3.png" alt="statusLine, spinnerTips, and other settings" style="max-height: 65vh">
           </section>
         </section>
 
@@ -424,6 +492,11 @@
               <li>Channels for remote access</li>
               <li>Dedicated <code>.claude</code> directory</li>
             </ul>
+          </section>
+
+          <section id="clawternative">
+            <h3>🦞 The Clawternative</h3>
+            <img src="assets/clawternative.png" alt="OpenClaw alternative startup script" style="max-height: 65vh">
           </section>
 
           <section id="what-you-get">
