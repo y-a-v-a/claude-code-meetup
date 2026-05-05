@@ -54,6 +54,5 @@ Na ieder praatje houden we nog ruimte voor 3 of 4 vragen.
   - Artifacts
   - Connectors (MCP)
   - Skills
-
 - Cowork examples
   - tbd
