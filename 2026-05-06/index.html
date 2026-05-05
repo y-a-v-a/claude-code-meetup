@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      :root {
+        --color-bg: rgb(227, 218, 204);
+        --color-text: rgb(20, 20, 19);
+        --font-main: Georgia, serif;
+        --r-heading-text-transform: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-color: var(--color-bg) !important;
+      }
+
+      .reveal {
+        font-family: var(--font-main);
+        color: var(--color-text);
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: var(--color-text);
+        font-family: var(--font-main);
+      }
+
+      .reveal .title-slide h1 {
+        font-size: 2.5em;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: var(--color-text);
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 24px 10px;
+        margin: 10px;
+        /* border-left: 4px solid var(--color-text); */
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid var(--color-text);
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(20, 20, 19, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: var(--color-text);
+        font-weight: bold;
+      }
+
+      .claude {
+        color: var(--color-text);
+      }
+
+      .small {
+        font-size: 0.4em;
+      }
+
+      .link-footer {
+        font-size: 0.45em;
+        margin-top: 30px;
+        opacity: 0.8;
+      }
+
+      .link-footer a {
+        color: var(--color-text);
+      }
+
+      .two-col {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .two-col > * {
+        flex: 1;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        padding: 15px 20px;
+        font-size: 0.65em;
+        text-align: left;
+        font-family: var(--font-main);
+      }
+
+      .reveal .controls .controls-arrow:after, .reveal .controls .controls-arrow:before {
+        background-color: rgb(20,20,19);
+      }
+
+      .b {
+        font-weight: 700;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <!-- AGENDA -->
+        <section id="agenda">
+          <section id="welcome">
+            <h1>👋 Welcome!</h1>
+            <h2>Claude Community meetup Enschede</h2>
+            <p class="date-text">
+              📅 Tuesday 2026-05-06<br />BetterBe, Enschede
+            </p>
+            <p class="small">Vincent Bruijn, Claude Community Ambassador</p>
+            <p class="small">Sponsored by Anthropic</p>
+          </section>
+
+          <section id="agenda-list">
+            <h2>Agenda</h2>
+            <div class="strategy-card" style="font-size: 0.6em">
+              <ul>
+                <li>Intro 🙏🏾</li>
+                <li>Talks 🎙️</li>
+                <li>Break ⏸️</li>
+                <li>Talks 🎙️</li>
+                <li>Closing ✌🏾</li>
+                <li>Drinks &amp; foodies 🍸 🍺</li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <h2>Agenda</h2>
+            <div class="strategy-card" style="font-size: 0.6em">
+                  <ul>
+                    <li><span class="b">Claude for Everyone, touchpoints to Anthropic's tools</span><br>Vincent Bruijn</li>
+                    <li><span class="b">Enterprise challenges introduced through the use of AI</span><br>Rene Theuns</li>
+                    <li><span class="b">How to use Claude to tackle parallelisation abstraction</span><br>Jurjen Stellingwerf</li>
+                    <li><span class="b">(Title follows)</span><br>Marrallisa Kreijkes</li>
+                    <li><span class="b">Project Amelie</span><br>Mariëlle Stoelinga</li>
+                  </ul>
+            </div>
+
+          </section>
+
+        </section>
+        
+        <!-- SECTION PLACEHOLDER -->
+        <section id="topic-1">
+          <section id="topic-1-intro">
+            <h2>Introduction</h2>
+            <h3>BetterBe 🤝 Vincent Bruijn</h3>
+            <img src="assets/linkedin-profile.png" alt="LinkedIn profile" style="max-height: 30vh">
+          </section>
+
+          <section id="topic-1-me">
+            <h2>Vincent Bruijn</h2>
+            <ul>
+              <li>Educated as Visual Artist 🎨</li>
+              <li>Self taught software developer / engineer</li>
+              <li>Tech Manager at G-STAR 👖</li>
+              <li>Digital Artist 👾</li>
+              <li>Claude enthusiast since Nov 2024 🤖</li>
+              <li>Claude Community Ambassador since Feb 2026 🧑‍🤝‍🧑</li>
+              <li style="font-size: 0.7em">Graphic novels, museums, philosophy, literature, language</li>
+            </ul>
+          </section>
+
+
+          <section id="topic-1-meetups">
+              <h2>Past &amp; upcoming meetups</h2>
+              <ul>
+                <li>Amsterdam (3x)</li>
+                <li>Groningen (2x)</li>
+                <li>Enschede today! 📅</li>
+                <li>Eindhoven, May 20th</li>
+                <li>Amsterdam, June 18th</li>
+              </ul>
+          </section>
+        </section>
+
+        <!-- SECTION PLACEHOLDER -->
+        <section id="topic-1">
+          <section id="topic-1-intro">
+            <h2>Topic 1</h2>
+            <p>Coming soon</p>
+          </section>
+        </section>
+
+        <!-- CLOSING -->
+        <section id="closing">
+          <section id="keep-building">
+            <h2>🚀 Keep building!</h2>
+            <ul>
+              <li>Let's keep sharing our learnings</li>
+              <li>Let us know if you want to give a talk at the next meetup</li>
+            </ul>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+    </script>
+  </body>
+</html>
