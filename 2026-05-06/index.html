@@ -98,6 +98,7 @@
 
       .small {
         font-size: 0.4em;
+        font-family: Arial, Helvetica, sans-serif;
       }
 
       .link-footer {
@@ -138,6 +139,10 @@
         font-weight: 700;
         font-family: Arial, Helvetica, sans-serif;
       }
+
+      li {
+        margin: 8px 0;
+      }
     </style>
   </head>
   <body>
@@ -150,15 +155,15 @@
             <h1>👋 Welcome!</h1>
             <h2>Claude Community meetup Enschede</h2>
             <p class="date-text">
-              📅 Tuesday 2026-05-06<br />BetterBe, Enschede
+              📅 Wednesday 2026-05-06<br /><br /><span class="b">BetterBe</span> Enschede
             </p>
-            <p class="small">Vincent Bruijn, Claude Community Ambassador</p>
-            <p class="small">Sponsored by Anthropic</p>
+            <p class="small"><span class="b">Vincent Bruijn</span> Claude Community Ambassador</p>
+            <p class="small">Sponsored by <span class="b">Anthropic</span></p>
           </section>
 
           <section id="agenda-list">
             <h2>Agenda</h2>
-            <div class="strategy-card" style="font-size: 0.6em">
+            <div class="strategy-card" style="font-size: 0.6em; display: flex; justify-content: space-evenly; align-items: center;">
               <ul>
                 <li>Intro 🙏🏾</li>
                 <li>Talks 🎙️</li>
@@ -167,16 +172,18 @@
                 <li>Closing ✌🏾</li>
                 <li>Drinks &amp; foodies 🍸 🍺</li>
               </ul>
+              <img src="assets/claude.jpg" alt="claude logo" style="width: 200px; float: right; margin: 24px; border: none; border-radius: 4px;">
             </div>
           </section>
-          <section>
+
+          <section id="agenda-list-detail">
             <h2>Agenda</h2>
             <div class="strategy-card" style="font-size: 0.6em">
                   <ul>
-                    <li><span class="b">Claude for Everyone, touchpoints to Anthropic's tools</span><br>Vincent Bruijn</li>
+                    <li><span class="b">Claude for Everyone: where Anthropic's tools meet your work.</span><br>Vincent Bruijn</li>
                     <li><span class="b">Enterprise challenges introduced through the use of AI</span><br>Rene Theuns</li>
                     <li><span class="b">How to use Claude to tackle parallelisation abstraction</span><br>Jurjen Stellingwerf</li>
-                    <li><span class="b">(Title follows)</span><br>Marrallisa Kreijkes</li>
+                    <li><span class="b">Supercharging Claude</span><br>Marrallisa Kreijkes</li>
                     <li><span class="b">Project Amelie</span><br>Mariëlle Stoelinga</li>
                   </ul>
             </div>
@@ -224,7 +231,7 @@
 
           <section id="cfe-title">
             <h2>🌍 Claude for Everyone</h2>
-            <h3>Touchpoints to Anthropic's tools</h3>
+            <h3>Where Anthropic's tools meet your work.</h3>
           </section>
 
           <section id="cfe-anthropic">
@@ -264,8 +271,19 @@
                     <li>Requires a GitHub account</li>
                   </ul>
                 </li>
+                <li>Claude Design</li>
               </ul>
             </div>
+          </section>
+
+          <section id="cfe-claudeai-design">
+            <h2>🖥️ Claude Design</h2>
+            <img src="assets/claude-design-web.png" alt=""  style="max-height: 60vh">
+          </section>
+
+          <section id="cfe-claudeai-code">
+            <h2>🖥️ Claude Code Web</h2>
+            <img src="assets/claude-code-web.png" alt=""  style="max-height: 60vh">
           </section>
 
           <section id="cfe-desktop">
@@ -286,15 +304,44 @@
             </div>
           </section>
 
+          <section id="cfe-mobile">
+            <h2>📱 Mobile Apps</h2>
+            <div class="strategy-card">
+              <ul>
+                <li>iOS 🍎 &amp; Android 🤖</li>
+                <li>Full chat + Projects access</li>
+                <li>Voice conversations 🎙️</li>
+                <li>Camera &amp; image input 📷</li>
+                <li>Syncs with claude.ai 🔄</li>
+                <li>Supports Claude Code for web 💻</li>
+              </ul>
+            </div>
+            <p style="font-size: 0.65em; margin-top: 20px">Great for quick questions, thinking out loud, or reviewing on the go</p>
+          </section>
+
+          <section id="cfe-mobile-code">
+            <h2>⌨️ Claude Code iOS</h2>
+            <img src="assets/claude-code-ios-app.png" alt=""  style="max-height: 60vh">
+          </section>
+          
           <section id="cfe-claudecode">
             <h2>⌨️ Claude Code</h2>
             <div class="strategy-card">
               <ul>
-                <li>Command line interface app 🖥️</li>
+                <li>Command line interface (CLI) app 🖥️
+                  <ul>
+                    <li>TUI – Terminal User Interface</li>
+                  </ul>
+                </li>
                 <li>Focused on coding tasks 👨‍💻</li>
                 <li>Can be used for non-coding tasks too 🧠</li>
               </ul>
             </div>
+          </section>
+
+          <section id="cfe-claudecode-cli">
+            <h2>⌨️ Claude Code CLI</h2>
+            <img src="assets/claude-code-cli.png" alt="" style="max-height: 60vh">
           </section>
 
           <section id="cfe-protocols">
@@ -311,6 +358,32 @@
             </div>
           </section>
 
+          <section id="cfe-mcp-demo">
+            <h2>🔗 MCP in Action</h2>
+            <!-- screenshot -->
+             <img src="assets/MCP-Atlassian.png" alt="" style="max-height: 50vh">
+              <p style="font-size: 0.5em; margin-top: 20px"><span class="b">Atlassian</span> MCP in Claude Desktop<br>Search for example for tickets, search for work done by someone specific<br>read, edit Confluence pages</p>
+            </section>
+            
+            <section id="cfe-skills-demo-01">
+            <h2>⚡ Skills in Action</h2>
+            <p style="font-size: 0.75em">Claude Code version</p>
+            
+            <img src="assets/BetterBe-gpse-skill-01.png" alt="" style="max-height: 60vh">
+          </section>
+          <section id="cfe-skills-demo-02">
+            <h2>⚡ Skills in Action</h2>
+            <p style="font-size: 0.75em">Claude Code version</p>
+            
+            <img src="assets/BetterBe-gpse-skill-02.png" alt="" style="max-height: 60vh">
+          </section>
+          <section id="cfe-skills-demo-03">
+            <h2>⚡ Skills in Action</h2>
+            <p style="font-size: 0.75em">Claude Code version</p>
+            
+            <img src="assets/BetterBe-gpse-skill-03.png" alt="" style="max-height: 60vh">
+          </section>
+          
           <section id="cfe-cowork">
             <h2>🤝 Cowork</h2>
             <p style="font-size: 0.75em">The power tool — combines:</p>
@@ -324,18 +397,61 @@
               </ul>
             </div>
           </section>
-
+          
           <section id="cfe-cowork-examples">
             <h2>✨ Cowork Examples</h2>
-            <p>tbd</p>
+            
+            <img src="assets/BetterBe-Claude-usage-advice-Claude-Cowork.png" alt="" style="max-height: 55vh">
+            <p style="font-size: 0.5em; margin-top: 20px"><span class="b">BetterBe</span> company profile and Claude use advice</p>
           </section>
 
+        </section>
+
+        <section id="agenda-next-speaker-02">
+          <h2>Agenda</h2>
+            <div class="strategy-card" style="font-size: 0.6em">
+              <ul>
+                <li><span class="b">Enterprise challenges introduced through the use of AI</span><br>Rene Theuns</li>
+              </ul>
+            </div>
+        </section>
+        
+        <section id="break">
+          <h2>Break!</h2>
+          <img src="assets/claude.jpg" alt="" />
+        </section>
+        
+        <section id="agenda-next-speaker-03">
+          <h2>Agenda</h2>
+            <div class="strategy-card" style="font-size: 0.6em">
+              <ul>
+                <li><span class="b">How to use Claude to tackle parallelisation abstraction</span><br>Jurjen Stellingwerf</li>
+              </ul>
+            </div>
+        </section>
+
+        <section id="agenda-next-speaker-04">
+          <h2>Agenda</h2>
+            <div class="strategy-card" style="font-size: 0.6em">
+              <ul>
+                <li><span class="b">Supercharging Claude</span><br>Marrallisa Kreijkes</li>
+              </ul>
+            </div>
+        </section>
+
+        <section id="agenda-next-speaker-05">
+          <h2>Agenda</h2>
+            <div class="strategy-card" style="font-size: 0.6em">
+              <ul>
+                <li><span class="b">Project Amelie</span><br>Mariëlle Stoelinga</li>
+              </ul>
+            </div>
         </section>
 
         <!-- CLOSING -->
         <section id="closing">
           <section id="keep-building">
-            <h2>🚀 Keep building!</h2>
+            <h2>🚀 Keep Clauding!</h2>
             <ul>
               <li>Let's keep sharing our learnings</li>
               <li>Let us know if you want to give a talk at the next meetup</li>
