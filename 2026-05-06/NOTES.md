@@ -1,14 +1,14 @@
 # 2026-05-06 Enschede
 
-
 ## Agenda
 
 - Intro 16:00-16:15
 - "Claude for Everyone, touchpoints to Anthropic's tools" Vincent Bruijn 16:15-16:35
 - "Enterprise challenges introduced through the use of AI" Rene Theuns 16:35-16:55
-- "How to use claude to tackle parallellisation abstraction" Jurjen Stellingwerf 17:15-17:35
-- "(Title follows)" Marrallisa Kreijkes 17:35-17:55
-- "Project Amelie" Mariëlle Stoelinga 17:55-18:15
+- "How to use claude to tackle parallellisation abstraction" Jurjen Stellingwerf 17:05-17:25
+- "(Title follows)" Marrallisa Kreijkes 17:25-17:45
+- "How Claude can accelerate prototyping" Dennis Gerritsen 17:45-18:05
+- "Project Amelie" Mariëlle Stoelinga 18:05-18:15
 - Closing (5mins), drinks / foodies 18:15-19:00
 
 Na ieder praatje houden we nog ruimte voor 3 of 4 vragen.

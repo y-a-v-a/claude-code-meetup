@@ -21,3 +21,9 @@ Presented at NP3, Groningen. Covers an introduction to Claude and Claude code an
 ![2026-04-03 slide](2026-04-03-slide.png)
 
 Presented at Amsterdam, supported by Anthropic. Covers skills (progressive disclosure, Google Programmable Search Engine, web-to-markdown), custom agents for specialist sub-tasks, and the new Claude Code channels feature as an OpenClaw alternative.
+
+### [2026-05-06 — Claude for Everyone](2026-05-06/index.html)
+
+![2026-05-06 slide](2026-05-06-slide.png)
+
+Presented at BetterBe, Enschede. Covers touchpoints to Anthropic's tools for a general audience: Anthropic as a frontier lab, claude.ai, the Desktop and mobile apps, Claude Code, MCP and Skills protocols, and the Cowork power tool.
