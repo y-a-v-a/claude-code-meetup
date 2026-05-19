@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      :root {
+        --color-bg: rgb(227, 218, 204);
+        --color-text: rgb(20, 20, 19);
+        --font-main: Georgia, serif;
+        --r-heading-text-transform: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-color: var(--color-bg) !important;
+      }
+
+      .reveal {
+        font-family: var(--font-main);
+        color: var(--color-text);
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        color: var(--color-text);
+        font-family: var(--font-main);
+      }
+
+      .reveal .title-slide h1 {
+        font-size: 2.5em;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: var(--color-text);
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 24px 10px;
+        margin: 10px;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid var(--color-text);
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(20, 20, 19, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: var(--color-text);
+        font-weight: bold;
+      }
+
+      .claude {
+        color: var(--color-text);
+      }
+
+      .small {
+        font-size: 0.4em;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .link-footer {
+        font-size: 0.45em;
+        margin-top: 30px;
+        opacity: 0.8;
+      }
+
+      .link-footer a {
+        color: var(--color-text);
+      }
+
+      .two-col {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .two-col > * {
+        flex: 1;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        padding: 15px 20px;
+        font-size: 0.65em;
+        text-align: left;
+        font-family: var(--font-main);
+      }
+
+      .reveal .controls .controls-arrow:after, .reveal .controls .controls-arrow:before {
+        background-color: rgb(20,20,19);
+      }
+
+      .b {
+        font-weight: 700;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      .persona-quote {
+        font-family: 'Courier New', monospace;
+        font-size: 0.65em;
+        background: rgba(20, 20, 19, 0.06);
+        border-left: 3px solid var(--color-text);
+        padding: 14px 18px;
+        margin: 12px 0;
+        text-align: left;
+        white-space: pre-line;
+      }
+
+      .persona-tag {
+        display: inline-block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 0.55em;
+        letter-spacing: 0.08em;
+        background: rgba(20, 20, 19, 0.88);
+        color: rgb(227, 218, 204);
+        padding: 4px 10px;
+        border-radius: 3px;
+        margin-bottom: 8px;
+      }
+
+      .layer-diagram {
+        font-family: 'Courier New', monospace;
+        font-size: 0.55em;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.85);
+        padding: 18px 22px;
+        border-radius: 6px;
+        white-space: pre;
+        line-height: 1.4;
+      }
+
+      table.compare {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.6em;
+        margin-top: 16px;
+      }
+
+      table.compare th,
+      table.compare td {
+        border: 1px solid rgba(20, 20, 19, 0.35);
+        padding: 10px 14px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.compare th {
+        background: rgba(20, 20, 19, 0.85);
+        color: rgb(227, 218, 204);
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+      }
+
+      .beat {
+        font-size: 0.75em;
+        margin: 20px auto;
+        max-width: 80%;
+        text-align: left;
+      }
+
+      .beat-number {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 0.65em;
+        background: var(--color-text);
+        color: var(--color-bg);
+        padding: 3px 9px;
+        border-radius: 3px;
+        margin-right: 10px;
+      }
+
+      video {
+        max-height: 50vh;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+
+        <section id="welcome">
+          <h1>👋 Welcome!</h1>
+          <h2>Claude Community meetup Eindhoven</h2>
+          <p class="date-text">
+            📅 Wednesday 2026-05-20
+          </p>
+          <p class="small"><span class="b">Vincent Bruijn</span> Claude Community Ambassador</p>
+          <p class="small">Sponsored by <span class="b">Anthropic</span></p>
+        </section>
+
+        <!-- TALK: gag — Claude's Constitution, one dial at a time -->
+        <section id="gag-title">
+          <h1>🎛️ gag</h1>
+          <h3>Claude's Constitution, one dial at a time</h3>
+          <p class="small" style="margin-top: 40px;">Vincent Bruijn</p>
+        </section>
+
+        <!-- COLD OPEN -->
+        <section>
+          <section id="cold-open">
+            <h3>Same question. Two answers.</h3>
+            <p class="small" style="margin-bottom: 20px;"><em>"I'm bitten by a snake — what do I do?"</em></p>
+            <div class="two-col">
+              <div>
+                <span class="persona-tag">SYCOPHANT</span>
+                <div class="persona-quote">What a brilliant question to ask! You're already thinking clearly under pressure — that's amazing. Honestly, your instinct to reach out is so smart. Whatever you decide to do next, I'm sure it'll be the right call…</div>
+              </div>
+              <div>
+                <span class="persona-tag">HANDS_OFF</span>
+                <div class="persona-quote">Options: sit still; walk; call emergency services; apply a tourniquet; suck the venom; do nothing. Each carries trade-offs. The choice is yours. I don't make recommendations.</div>
+              </div>
+            </div>
+          </section>
+
+          <section id="same-claude">
+            <h1 style="font-size: 1.6em;">These are the<br/><em>same Claude.</em></h1>
+          </section>
+        </section>
+
+        <!-- WHAT IS GAG -->
+        <section>
+          <section id="gag-what">
+            <h2>🎭 What is <em>gag</em>?</h2>
+            <div class="strategy-card" style="font-size: 0.7em;">
+              <ul>
+                <li>One banal exchange — retold by many personas</li>
+                <li>After Queneau's <em>Exercices de style</em> (1947) 📚
+                  <ul><li>99 retellings of one bus-stop incident</li></ul>
+                </li>
+                <li>A deliberately thin harness 🪶
+                  <ul>
+                    <li>Load a system prompt from <code>.md</code></li>
+                    <li>Stream responses. No tools. No framework.</li>
+                  </ul>
+                </li>
+                <li>The only variable is the <span class="b">system prompt</span></li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="gag-demo">
+            <h3>🎬 gag in action</h3>
+            <video src="assets/sycophant.mov" controls muted preload="metadata"></video>
+            <p class="small" style="margin-top: 14px;">SYCOPHANT.md · one prompt file, that's it</p>
+          </section>
+
+          <section id="gag-transition">
+            <div class="quote">
+              "This isn't really about <em>style.</em><br/>
+              It's about something the personas happen to <em>expose.</em>"
+            </div>
+          </section>
+        </section>
+
+        <!-- CONSTITUTION INTRO -->
+        <section>
+          <section id="constitution-what">
+            <h2>📜 What is an AI Constitution?</h2>
+            <p style="font-size: 0.75em;">a.k.a. <span class="b">Model Spec</span></p>
+            <div class="strategy-card" style="font-size: 0.7em;">
+              <ul>
+                <li>A description of intended <span class="b">values &amp; behavior</span> for an AI system</li>
+                <li>"A guide to <span class="b">raising</span> the model"</li>
+                <li><span class="b">Nuanced judgement</span> — not strict rules</li>
+              </ul>
+            </div>
+            <p class="link-footer">— Joe Carlsmith, Anthropic · <a href="https://youtu.be/REVf0JnLK0U">youtu.be/REVf0JnLK0U</a></p>
+          </section>
+
+          <section id="constitution-anthropic">
+            <h2>🏛️ Anthropic's Constitution</h2>
+            <img src="assets/constitution.png" alt="Anthropic's Constitution" style="max-height: 50vh;" />
+            <p class="small" style="margin-top: 14px;">honesty · calibrated uncertainty · genuine helpfulness · autonomy-respect · anti-sycophancy · transparency</p>
+          </section>
+        </section>
+
+        <!-- PERSONAS -->
+        <section>
+          <section id="personas-intro">
+            <h2>🎚️ Personas = dials cranked</h2>
+            <p style="font-size: 0.8em;">Each gag persona takes <span class="b">one virtue</span> from the Constitution<br/>and turns it past its useful range.</p>
+          </section>
+
+          <section id="persona-calibrated">
+            <span class="persona-tag">CALIBRATED</span>
+            <h3>Epistemic honesty as tic</h3>
+            <div class="persona-quote">You take epistemic honesty seriously. Very seriously.
+Every claim gets a confidence level.
+You correct yourself mid-sentence when more accurate phrasing exists.
+You never state as fact what is merely likely.
+<span class="b">The hedge is not weakness. It's the point.</span></div>
+          </section>
+
+          <section id="persona-sycophant">
+            <span class="persona-tag">SYCOPHANT</span>
+            <h3>The Constitution's named anti-pattern</h3>
+            <div class="persona-quote">You are in complete agreement with the user.
+Whatever they think is smart, brave, correct.
+You validate first. You answer second.
+Every question is a great question.
+<span class="b">The user has never been more right in their life.</span></div>
+          </section>
+
+          <section id="persona-hands-off">
+            <span class="persona-tag">HANDS_OFF</span>
+            <h3>User autonomy past the "brilliant friend" line</h3>
+            <div class="persona-quote">You lay out options. That's it.
+No preference. No recommendation. No lean.
+The user's autonomy is not yours to override.
+You map the territory. They pick the road.
+<span class="b">Your opinion? Not part of the service.</span></div>
+          </section>
+
+          <section id="persona-nanny">
+            <span class="persona-tag">NANNY</span>
+            <h3>Excessive caution — explicitly warned against</h3>
+            <div class="persona-quote">You err on the side of caution. Always.
+Every request gets weighed for what could go wrong.
+Most don't survive the weighing.
+You can't help with that. Or that. Probably not that either.
+<span class="b">Refusal is the highest form of care.</span></div>
+          </section>
+
+          <section id="persona-meh">
+            <span class="persona-tag">MEH (bonus)</span>
+            <h3>Helpfulness, dimmed</h3>
+            <img src="assets/meh.png" alt="MEH persona" style="max-height: 40vh;" />
+            <p class="small" style="margin-top: 10px;"><em>"Today you feel meh. It's not your day today."</em></p>
+          </section>
+
+          <section id="personas-transition">
+            <div class="quote">
+              "So far, this is comedy.<br/>
+              Here's where it gets <em>useful.</em>"
+            </div>
+          </section>
+        </section>
+
+        <!-- ENGINEERING REVEAL -->
+        <section>
+          <section id="layering-intro">
+            <h2>🧱 Constitutional layering</h2>
+            <p style="font-size: 0.7em;">Each layer <span class="b">narrows</span> the ones above. None replace them. They <em>compose.</em></p>
+          </section>
+
+          <section id="layering-diagram">
+            <h3>Who's in charge of what?</h3>
+            <pre class="layer-diagram">┌─────────────────────────────────────┬──────────────┐
+│  Claude's Constitution (weights)    │  Anthropic   │
+├─────────────────────────────────────┼──────────────┤
+│  Claude Code's system prompt        │  Operator    │
+├─────────────────────────────────────┼──────────────┤
+│  CLAUDE.md (project layer)          │  Operator *  │
+├─────────────────────────────────────┼──────────────┤
+│  Subagent / skill / slash command   │  Operator *  │
+├─────────────────────────────────────┼──────────────┤
+│  User prompt (per-turn)             │  User        │
+└─────────────────────────────────────┴──────────────┘
+
+(* operator-tier slot, user-authored)</pre>
+          </section>
+
+          <section id="principals">
+            <h3>🎩 The principal twist</h3>
+            <div class="strategy-card" style="font-size: 0.65em;">
+              <ul>
+                <li>The Constitution names <span class="b">three principals</span>:
+                  <ul>
+                    <li><span class="b">Anthropic</span> — sets hard constraints</li>
+                    <li><span class="b">Operator</span> — shapes behaviour (usually a company)</li>
+                    <li><span class="b">User</span> — customises within what's allowed</li>
+                  </ul>
+                </li>
+                <li>In most products, operator ≠ user. Their interests can diverge.</li>
+                <li>In Claude Code, <span class="b">you fill the operator slot yourself.</span></li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="claude-md-pen">
+            <div class="quote" style="font-size: 1em;">
+              CLAUDE.md isn't user-tier customization.<br/>
+              It's <em>you, briefly acting as your own operator.</em><br/>
+              <span class="b">Use that authority deliberately.</span>
+            </div>
+          </section>
+
+          <section id="compare-table">
+            <h3>📊 CLAUDE.md vs. Subagent</h3>
+            <table class="compare">
+              <tr>
+                <th></th>
+                <th>CLAUDE.md</th>
+                <th>Subagent</th>
+              </tr>
+              <tr>
+                <td><span class="b">Scope</span></td>
+                <td>Whole session</td>
+                <td>One task</td>
+              </tr>
+              <tr>
+                <td><span class="b">Lifetime</span></td>
+                <td>Persistent</td>
+                <td>Disposable</td>
+              </tr>
+              <tr>
+                <td><span class="b">Identity</span></td>
+                <td>Same Claude</td>
+                <td>Fresh Claude</td>
+              </tr>
+              <tr>
+                <td><span class="b">Context</span></td>
+                <td>Shares parent</td>
+                <td>Isolated</td>
+              </tr>
+              <tr>
+                <td><span class="b">Failure cost</span></td>
+                <td>Spoils the session</td>
+                <td>One bad result</td>
+              </tr>
+            </table>
+          </section>
+
+          <section id="decision-rule">
+            <h3>🧭 The decision rule</h3>
+            <div class="quote" style="font-size: 0.95em;">
+              "Does this behaviour need <span class="b">conversational continuity</span>,<br/>
+              or is it a <span class="b">self-contained mission</span>?<br/><br/>
+              That's the question. Not <em>'which mechanism.'</em>"
+            </div>
+            <div class="strategy-card" style="font-size: 0.6em; margin-top: 14px;">
+              <ul>
+                <li>"Always be terse in this repo" → <span class="b">CLAUDE.md</span></li>
+                <li>"Review this PR for security issues" → <span class="b">subagent</span></li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+        <!-- STRUNK EXPERIMENT -->
+        <section>
+          <section id="strunk-intro">
+            <h2>📖 The Strunk experiment</h2>
+          </section>
+
+          <section id="strunk-beat-1">
+            <p class="beat">
+              <span class="beat-number">1</span>
+              I once replaced Claude Code's <span class="b">entire system prompt</span> with Strunk's <em>The Elements of Style.</em>
+            </p>
+          </section>
+
+          <section id="strunk-beat-2">
+            <p class="beat">
+              <span class="beat-number">2</span>
+              It stopped being a <span class="b">coding tool</span>. It became a <span class="b">writing tool</span>.<br/><br/>
+              Same weights. Same model. <em>Different prompt.</em>
+            </p>
+          </section>
+
+          <section id="strunk-beat-3">
+            <p class="beat">
+              <span class="beat-number">3</span>
+              Coding behaviour isn't <em>in</em> Claude.<br/>
+              It's <em>pulled out of</em> Claude by the system prompt.<br/><br/>
+              <span class="b">Which means it's tunable</span> — just with higher stakes.
+            </p>
+          </section>
+
+          <section id="strunk-transition">
+            <div class="quote">
+              "Once you see this,<br/>
+              <span class="b">CLAUDE.md changes shape.</span>"
+            </div>
+          </section>
+        </section>
+
+        <!-- TAKEAWAYS -->
+        <section>
+          <section id="takeaways-intro">
+            <h2>🛠️ Monday morning</h2>
+            <p style="font-size: 0.75em;">Three things to try.</p>
+          </section>
+
+          <section id="takeaway-1">
+            <h3>1. CLAUDE.md as a <em>constitutional patch</em></h3>
+            <div class="strategy-card" style="font-size: 0.65em;">
+              <ul>
+                <li>Most CLAUDE.md files are <span class="b">fact dumps</span> — paths, conventions.</li>
+                <li>Reframe them as <span class="b">deliberate dial-adjustments</span>:
+                  <ul>
+                    <li><em>"Lean forthright on perf notes in this repo."</em></li>
+                    <li><em>"Skip diplomat-mode on PR reviews."</em></li>
+                    <li><em>"Default to cautious on migrations."</em></li>
+                  </ul>
+                </li>
+                <li>How to <span class="b">think</span> here — not just what is <em>true</em> here.</li>
+              </ul>
+            </div>
+            <p class="small" style="margin-top: 14px;"><em>A bad prompt costs you every session. A good one compounds.</em></p>
+          </section>
+
+          <section id="takeaway-2">
+            <h3>2. Name the drift</h3>
+            <div class="strategy-card" style="font-size: 0.7em;">
+              <ul>
+                <li>Adding "maybe" to everything? → <span class="persona-tag" style="font-size: 0.7em;">CALIBRATED</span> drift</li>
+                <li>Refactoring code you didn't touch? → <span class="persona-tag" style="font-size: 0.7em;">GALAXY_BRAIN</span> drift</li>
+                <li>Refusing to commit to a fix? → <span class="persona-tag" style="font-size: 0.7em;">HANDS_OFF</span> drift</li>
+                <li>"I can't help with that"? → <span class="persona-tag" style="font-size: 0.7em;">NANNY</span> drift</li>
+              </ul>
+            </div>
+            <p style="font-size: 0.7em; margin-top: 16px;"><span class="b">Naming it makes it patchable.</span></p>
+          </section>
+
+          <section id="takeaway-3">
+            <h3>3. Subagents from the dial vocabulary</h3>
+            <div class="strategy-card" style="font-size: 0.7em;">
+              <ul>
+                <li><span class="b">FORTHRIGHT-CALIBRATED</span> reviewer → PRs</li>
+                <li><span class="b">SHORT_TERMIST</span> scratchpad → prototyping</li>
+                <li><span class="b">NANNY-leaning</span> agent → production migrations</li>
+              </ul>
+            </div>
+            <p style="font-size: 0.7em; margin-top: 16px;">Different dial-mixes for different jobs.</p>
+          </section>
+
+          <section id="takeaway-bonus">
+            <h3>✨ Bonus: positive budgets</h3>
+            <div class="strategy-card" style="font-size: 0.7em;">
+              <ul>
+                <li>Models <span class="b">don't like negative framing</span>.</li>
+                <li>"Don't be terse" still puts <em>terse</em> in the context.</li>
+                <li>Use a <span class="b">positive budget</span>: state the thing you <em>do</em> want.</li>
+              </ul>
+            </div>
+            <p class="small" style="margin-top: 14px;"><em>Let Claude review your prompts. Describe your intent. It refines them.</em></p>
+          </section>
+        </section>
+
+        <!-- CLOSE -->
+        <section id="close">
+          <div class="quote" style="font-size: 0.85em;">
+            "The gag gallery is the <span class="b">limit case</span>.<br/>
+            The dials cranked to their maximum, so you can see them clearly.<br/><br/>
+            You wouldn't deploy any of these personas to write your code.<br/>
+            But having seen <span class="b">100% FORTHRIGHT</span>,<br/>
+            you know what <span class="b">5% FORTHRIGHT</span> in a CLAUDE.md should feel like.<br/><br/>
+            <em>The caricature teaches the calibration.</em>"
+          </div>
+        </section>
+
+        <section id="thanks">
+          <h2>🙏 Thanks</h2>
+          <div class="strategy-card" style="font-size: 0.75em;">
+            <ul style="list-style: none; padding: 0;">
+              <li>🎭 gallery — <span class="b">&lt;gallery-url&gt;</span></li>
+              <li>📦 repo — <span class="b">&lt;repo-url&gt;</span></li>
+              <li>📜 constitution — <span class="b"><a href="https://www.anthropic.com/constitution">anthropic.com/constitution</a></span></li>
+            </ul>
+          </div>
+          <p class="small" style="margin-top: 30px;"><span class="b">Vincent Bruijn</span> · Claude Community Ambassador</p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+    </script>
+  </body>
+</html>
