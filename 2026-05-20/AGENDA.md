@@ -1,0 +1,6 @@
+Daniel Tyukov, "How ComChamp ships with Claude"
+Önder Ceylan, "Engineering the feedbackloop"
+Beau Wilmink, "Claude in Engineering: Practical Examples"
+Vincent Bruijn, "Claude's Constitution, one dial at a time"
+Ralf van Meer, "MCP in Claude desktop - let’s go crazy"
+Willem Schellekens, "From idea to PRD"
