@@ -239,6 +239,61 @@
           <p class="small">Sponsored by <span class="b">Anthropic</span></p>
         </section>
 
+        <!-- ABOUT ME -->
+        <section>
+          <section id="about-me">
+            <h2>Vincent Bruijn</h2>
+            <ul>
+              <li>Educated as Visual Artist 🎨</li>
+              <li>Self taught software developer / engineer</li>
+              <li>Tech Manager at <span class="b">G-STAR</span> 👖</li>
+              <li>Digital Artist 👾</li>
+              <li>Claude enthusiast since Nov 2024 🤖</li>
+              <li>Claude Community Ambassador since Feb 2026 🧑‍🤝‍🧑</li>
+              <li style="font-size: 0.7em">Graphic novels, museums, philosophy, literature, language</li>
+            </ul>
+          </section>
+
+          <section id="ambassador">
+            <h2>🧑‍🤝‍🧑 Claude Community Ambassador</h2>
+            <img src="assets/Anthropic-ambassador.png" alt="Anthropic ambassadors" style="max-height: 45vh;" />
+            <p class="link-footer"><a href="https://claude.com/community/ambassadors">claude.com/community/ambassadors</a></p>
+          </section>
+        </section>
+
+        <!-- MEETUP CONTEXT -->
+        <section id="meetups">
+          <h2>📍 Meetups</h2>
+          <div class="strategy-card" style="font-size: 0.7em;">
+            <ul>
+              <li><span class="b">Today</span> — first Eindhoven meetup 🎉</li>
+              <li>Upcoming:
+                <ul>
+                  <li>📅 June 18th — Amsterdam (4th edition)</li>
+                  <li>📅 September 10th — Eindhoven (2nd edition)</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- AGENDA -->
+        <section id="agenda">
+          <h2>🗓️ Agenda</h2>
+          <div class="strategy-card" style="font-size: 0.55em;">
+            <ul>
+              <li><span class="b">How ComChamp ships with Claude</span><br/>Daniel Tyukov</li>
+              <li><span class="b">Engineering the feedbackloop</span><br/>Önder Ceylan</li>
+              <li><span class="b">Claude in Engineering: Practical Examples</span><br/>Beau Wilmink</li>
+              <li>Break ⏸️</li>
+              <li><span class="b">Claude's Constitution, one dial at a time</span><br/>Vincent Bruijn</li>
+              <li><span class="b">MCP in Claude desktop — let's go crazy</span><br/>Ralf van Meer</li>
+              <li><span class="b">From idea to PRD</span><br/>Willem Schellekens</li>
+              <li>Closing ✌🏾 · Drinks &amp; foodies 🍸 🍺</li>
+            </ul>
+          </div>
+        </section>
+
         <!-- TALK: gag — Claude's Constitution, one dial at a time -->
         <section id="gag-title">
           <h1>🎛️ gag</h1>
@@ -248,6 +303,10 @@
 
         <!-- COLD OPEN -->
         <section>
+          <section id="cold-open-no">
+            <video src="assets/no.mov" controls preload="metadata" style="max-height: 70vh;"></video>
+          </section>
+
           <section id="cold-open">
             <h3>Same question. Two answers.</h3>
             <p class="small" style="margin-bottom: 20px;"><em>"I'm bitten by a snake — what do I do?"</em></p>
@@ -270,14 +329,32 @@
 
         <!-- WHAT IS GAG -->
         <section>
-          <section id="gag-what">
-            <h2>🎭 What is <em>gag</em>?</h2>
-            <div class="strategy-card" style="font-size: 0.7em;">
+          <section id="queneau-intro">
+            <h2>📚 Raymond Queneau</h2>
+            <h3><em>Exercices de style</em> (1947)</h3>
+            <div class="strategy-card" style="font-size: 0.7em; margin-top: 24px;">
               <ul>
-                <li>One banal exchange — retold by many personas</li>
-                <li>After Queneau's <em>Exercices de style</em> (1947) 📚
-                  <ul><li>99 retellings of one bus-stop incident</li></ul>
-                </li>
+                <li>One banal incident on a Paris bus 🚌</li>
+                <li>Retold <span class="b">99 times</span>, each in a different style</li>
+                <li>Formal · slang · sonnet · telegram · backwards · …</li>
+                <li>The <em>event</em> is fixed. The <em>voice</em> varies.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="queneau-1">
+            <img src="assets/queneau-1.png" alt="Queneau Exercices de style — page" style="max-height: 70vh;" />
+          </section>
+
+          <section id="queneau-2">
+            <img src="assets/queneau-2.png" alt="Queneau Exercices de style — page" style="max-height: 70vh;" />
+          </section>
+
+          <section id="gag-what">
+            <h3>🎭 gag — same idea, with chatbots</h3>
+            <div class="strategy-card" style="font-size: 0.65em;">
+              <ul>
+                <li>One banal exchange — retold by many <span class="b">personas</span></li>
                 <li>A deliberately thin harness 🪶
                   <ul>
                     <li>Load a system prompt from <code>.md</code></li>
@@ -430,9 +507,9 @@ You can't help with that. Or that. Probably not that either.
 
           <section id="claude-md-pen">
             <div class="quote" style="font-size: 1em;">
-              CLAUDE.md isn't user-tier customization.<br/>
-              It's <em>you, briefly acting as your own operator.</em><br/>
-              <span class="b">Use that authority deliberately.</span>
+              CLAUDE.md isn't a user setting.<br/>
+              It's the <em>operator's pen</em> — handed to you.<br/>
+              <span class="b">Write it on purpose.</span>
             </div>
           </section>
 
@@ -495,27 +572,46 @@ You can't help with that. Or that. Probably not that either.
           </section>
 
           <section id="strunk-beat-1">
-            <p class="beat">
-              <span class="beat-number">1</span>
-              I once replaced Claude Code's <span class="b">entire system prompt</span> with Strunk's <em>The Elements of Style.</em>
-            </p>
+            <div class="two-col" style="align-items: center;">
+              <p class="beat" style="margin: 0;">
+                <span class="beat-number">1</span>
+                I once replaced Claude Code's <span class="b">entire system prompt</span> with Strunk's <em>The Elements of Style.</em>
+              </p>
+              <img src="assets/Project-Gutenberg_William-Strunk.png" alt="Project Gutenberg — The Elements of Style" style="max-height: 50vh;" />
+            </div>
           </section>
 
           <section id="strunk-beat-2">
-            <p class="beat">
-              <span class="beat-number">2</span>
-              It stopped being a <span class="b">coding tool</span>. It became a <span class="b">writing tool</span>.<br/><br/>
-              Same weights. Same model. <em>Different prompt.</em>
-            </p>
+            <div class="two-col" style="align-items: center;">
+              <p class="beat" style="margin: 0;">
+                <span class="beat-number">2</span>
+                It stopped being a <span class="b">coding tool</span>.
+              </p>
+              <img src="assets/wrwr-Strunk-01.png" alt="Claude Code with Strunk system prompt" style="max-height: 55vh;" />
+            </div>
           </section>
 
           <section id="strunk-beat-3">
-            <p class="beat">
-              <span class="beat-number">3</span>
-              Coding behaviour isn't <em>in</em> Claude.<br/>
-              It's <em>pulled out of</em> Claude by the system prompt.<br/><br/>
-              <span class="b">Which means it's tunable</span> — just with higher stakes.
-            </p>
+            <div class="two-col" style="align-items: center;">
+              <p class="beat" style="margin: 0;">
+                <span class="beat-number">3</span>
+                It became a <span class="b">writing tool</span>.<br/><br/>
+                Same weights. Same model. <em>Different prompt.</em>
+              </p>
+              <img src="assets/wrwr-Strunk-02.png" alt="Claude Code in writing mode" style="max-height: 55vh;" />
+            </div>
+          </section>
+
+          <section id="strunk-beat-4">
+            <div class="two-col" style="align-items: center;">
+              <p class="beat" style="margin: 0;">
+                <span class="beat-number">4</span>
+                Coding behaviour isn't <em>in</em> Claude.<br/>
+                It's <em>pulled out of</em> Claude by the system prompt.<br/><br/>
+                <span class="b">Which means it's tunable</span> — just with higher stakes.
+              </p>
+              <img src="assets/cchistory.png" alt="Claude Code session history" style="max-height: 55vh;" />
+            </div>
           </section>
 
           <section id="strunk-transition">
@@ -529,51 +625,23 @@ You can't help with that. Or that. Probably not that either.
         <!-- TAKEAWAYS -->
         <section>
           <section id="takeaways-intro">
-            <h2>🛠️ Monday morning</h2>
-            <p style="font-size: 0.75em;">Three things to try.</p>
+            <h2>🛠️ Tomorrow</h2>
+            <p style="font-size: 0.75em;">Two things to try.</p>
           </section>
 
-          <section id="takeaway-1">
-            <h3>1. CLAUDE.md as a <em>constitutional patch</em></h3>
+          <section id="takeaway-persona">
+            <h3>Persona is a knob — turn it on purpose</h3>
             <div class="strategy-card" style="font-size: 0.65em;">
               <ul>
-                <li>Most CLAUDE.md files are <span class="b">fact dumps</span> — paths, conventions.</li>
-                <li>Reframe them as <span class="b">deliberate dial-adjustments</span>:
-                  <ul>
-                    <li><em>"Lean forthright on perf notes in this repo."</em></li>
-                    <li><em>"Skip diplomat-mode on PR reviews."</em></li>
-                    <li><em>"Default to cautious on migrations."</em></li>
-                  </ul>
-                </li>
-                <li>How to <span class="b">think</span> here — not just what is <em>true</em> here.</li>
+                <li><span class="b">Write CLAUDE.md to set the dial</span>, not to list facts.<br/>
+                  <em>How should Claude think here?</em> — not just <em>what is true here.</em></li>
+                <li><span class="b">When something feels off, name the drift first.</span><br/>
+                  Too vague? Too eager? Too cautious? Naming it makes it patchable.</li>
+                <li><span class="b">Pick a dial-mix per job.</span><br/>
+                  Subagent for PR review ≠ subagent for prototyping ≠ migration helper.</li>
               </ul>
             </div>
             <p class="small" style="margin-top: 14px;"><em>A bad prompt costs you every session. A good one compounds.</em></p>
-          </section>
-
-          <section id="takeaway-2">
-            <h3>2. Name the drift</h3>
-            <div class="strategy-card" style="font-size: 0.7em;">
-              <ul>
-                <li>Adding "maybe" to everything? → <span class="persona-tag" style="font-size: 0.7em;">CALIBRATED</span> drift</li>
-                <li>Refactoring code you didn't touch? → <span class="persona-tag" style="font-size: 0.7em;">GALAXY_BRAIN</span> drift</li>
-                <li>Refusing to commit to a fix? → <span class="persona-tag" style="font-size: 0.7em;">HANDS_OFF</span> drift</li>
-                <li>"I can't help with that"? → <span class="persona-tag" style="font-size: 0.7em;">NANNY</span> drift</li>
-              </ul>
-            </div>
-            <p style="font-size: 0.7em; margin-top: 16px;"><span class="b">Naming it makes it patchable.</span></p>
-          </section>
-
-          <section id="takeaway-3">
-            <h3>3. Subagents from the dial vocabulary</h3>
-            <div class="strategy-card" style="font-size: 0.7em;">
-              <ul>
-                <li><span class="b">FORTHRIGHT-CALIBRATED</span> reviewer → PRs</li>
-                <li><span class="b">SHORT_TERMIST</span> scratchpad → prototyping</li>
-                <li><span class="b">NANNY-leaning</span> agent → production migrations</li>
-              </ul>
-            </div>
-            <p style="font-size: 0.7em; margin-top: 16px;">Different dial-mixes for different jobs.</p>
           </section>
 
           <section id="takeaway-bonus">
