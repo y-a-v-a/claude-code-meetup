@@ -27,3 +27,9 @@ Presented at Amsterdam, supported by Anthropic. Covers skills (progressive discl
 ![2026-05-06 slide](2026-05-06-slide.png)
 
 Presented at BetterBe, Enschede. Covers touchpoints to Anthropic's tools for a general audience: Anthropic as a frontier lab, claude.ai, the Desktop and mobile apps, Claude Code, MCP and Skills protocols, and the Cowork power tool.
+
+### [2026-05-20 — Community Talks](2026-05-20/index.html)
+
+![2026-05-20 slide](2026-05-20-slide.png)
+
+Presented in Amsterdam. Community talks covering: shipping with Claude (ComChamp), engineering the feedback loop, practical Claude examples in engineering, Claude's Constitution, MCP in Claude Desktop, and going from idea to PRD.
