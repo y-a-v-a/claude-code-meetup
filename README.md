@@ -32,4 +32,4 @@ Presented at BetterBe, Enschede. Covers touchpoints to Anthropic's tools for a g
 
 ![2026-05-20 slide](2026-05-20-slide.png)
 
-Presented in Amsterdam. Community talks covering: shipping with Claude (ComChamp), engineering the feedback loop, practical Claude examples in engineering, Claude's Constitution, MCP in Claude Desktop, and going from idea to PRD.
+Presented in Eindhoven. Community talks covering: shipping with Claude (ComChamp), engineering the feedback loop, practical Claude examples in engineering, Claude's Constitution, MCP in Claude Desktop, and going from idea to PRD.
