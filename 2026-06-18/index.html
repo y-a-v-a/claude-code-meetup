@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='14'>🦞</text></svg>" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='14'>🦞</text></svg>"
+    />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
@@ -19,7 +22,7 @@
     <style>
       :root {
         /* --color-bg: rgb(227, 218, 204); */
-        --color-bg: #CC7D5D;
+        --color-bg: #cc7d5d;
         --color-text: rgb(20, 20, 19);
         --font-main: Georgia, serif;
         --r-heading-text-transform: none;
@@ -44,7 +47,8 @@
 
       .reveal h1,
       .reveal h2,
-      .reveal h3 {
+      .reveal h3,
+      .reveal h4 {
         color: var(--color-text);
         font-family: var(--font-main);
       }
@@ -131,8 +135,9 @@
         font-family: var(--font-main);
       }
 
-      .reveal .controls .controls-arrow:after, .reveal .controls .controls-arrow:before {
-        background-color: rgb(20,20,19);
+      .reveal .controls .controls-arrow:after,
+      .reveal .controls .controls-arrow:before {
+        background-color: rgb(20, 20, 19);
       }
 
       .b {
@@ -154,23 +159,24 @@
   <body>
     <div class="reveal">
       <div class="slides">
-
         <section id="welcome">
           <h1>👋 Welcome!</h1>
-          <h2>Claude Community meetup <i>Amsterdam</i></h2>
+          <h2>
+            Claude Community meetup <i style="font-weight: normal">Amsterdam</i>
+          </h2>
           <h4>4th edition</h4>
-          <p class="date-text">
-            📅 Thursday 2026-06-18
+          <p class="date-text">📅 Thursday 2026-06-18</p>
+          <p class="small">
+            <span class="b">Vincent Bruijn</span> Claude Community Ambassador
           </p>
-          <p class="small"><span class="b">Vincent Bruijn</span> Claude Community Ambassador</p>
           <p class="small">Sponsored by <span class="b">Anthropic</span></p>
         </section>
 
         <!-- LOGISTICS -->
         <section id="logistics">
           <h2>📶 Good to know</h2>
-          <div class="strategy-card" style="font-size: 0.7em;">
-            <ul style="list-style: none; padding: 0;">
+          <div class="strategy-card" style="font-size: 0.7em">
+            <ul style="list-style: none; padding: 0">
               <li>⏸️ Break halfway</li>
               <li>🍸 Drinks after the last talk</li>
             </ul>
@@ -180,10 +186,11 @@
         <!-- MEETUP CONTEXT -->
         <section id="meetups">
           <h2>📍 Meetups</h2>
-          <div class="strategy-card" style="font-size: 0.7em;">
+          <div class="strategy-card" style="font-size: 0.7em">
             <ul>
               <li><span class="b">Today</span> — 4th Amsterdam meetup 🎉</li>
-              <li>🔮 Upcoming:
+              <li>
+                🔮 Upcoming:
                 <ul>
                   <li>☕️ Claude and Coffee, August 22nd — Amsterdam</li>
                   <li>📅 Meetup, September 10th — Eindhoven (2nd edition)</li>
@@ -198,18 +205,35 @@
         <!-- AGENDA -->
         <section id="agenda">
           <h2>🗓️ Agenda</h2>
-          <div class="strategy-card" style="font-size: 0.5em;">
+          <div class="strategy-card" style="font-size: 0.5em">
             <ul>
-              <li><span class="b">Elie Mietkiewicz</span>&nbsp;&nbsp;Tribumap</li>
-              <li><span class="b">Aike Müller</span>&nbsp;&nbsp;How I Spent 2.5 Hours and Fired a SaaS Vendor</li>
-              <li><span class="b">Anna Sheronova</span>&nbsp;&nbsp;I let Claude run my SEO</li>
+              <li>
+                <span class="b">Elie Mietkiewicz</span>&nbsp;&nbsp;Tribumap
+              </li>
+              <li>
+                <span class="b">Aike Müller</span>&nbsp;&nbsp;How I Spent 2.5
+                Hours and Fired a SaaS Vendor
+              </li>
+              <li>
+                <span class="b">Anna Sheronova</span>&nbsp;&nbsp;I let Claude
+                run my SEO
+              </li>
               <li>Break ⏸️</li>
-              <li><span class="b">Vincent Bruijn</span>&nbsp;&nbsp;Agents, skills, loops, learnings</li>
-              <li><span class="b">Amit Prusty</span>&nbsp;&nbsp;Every Session Is Groundhog Day For Your AI</li>
+              <li>
+                <span class="b">Vincent Bruijn</span>&nbsp;&nbsp;Agents, skills,
+                loops, learnings
+              </li>
+              <li>
+                <span class="b">Amit Prusty</span>&nbsp;&nbsp;Every Session Is
+                Groundhog Day For Your AI
+              </li>
               <li>Closing ✌🏾 · Drinks 🍸 🍺</li>
             </ul>
           </div>
-          <p class="small" style="margin-top: 16px;">📸 We're <b>taking photos</b> tonight — tell us if you'd rather not be in them.</p>
+          <p class="small" style="margin-top: 16px">
+            📸 We're <b>taking photos</b> tonight — tell us if you'd rather not
+            be in them.
+          </p>
         </section>
 
         <!-- ABOUT ME -->
@@ -223,47 +247,738 @@
               <li>Digital Artist 👾</li>
               <li>Claude enthusiast since Nov 2024 🤖</li>
               <li>Claude Community Ambassador since Feb 2026 🧑‍🤝‍🧑</li>
-              <li style="font-size: 0.7em">Graphic novels, museums, philosophy, literature, language</li>
+              <li style="font-size: 0.7em">
+                Graphic novels, museums, philosophy, literature, language
+              </li>
             </ul>
           </section>
 
           <section id="ambassador">
             <h2>🧑‍🤝‍🧑 Claude Community Ambassador</h2>
-            <img src="assets/Anthropic-ambassador.png" alt="Anthropic ambassadors" style="max-height: 45vh;" />
-            <p class="link-footer"><a href="https://claude.com/community/ambassadors">claude.com/community/ambassadors</a></p>
+            <img
+              src="assets/Anthropic-ambassador.png"
+              alt="Anthropic ambassadors"
+              style="max-height: 45vh"
+            />
+            <p class="link-footer">
+              <a href="https://claude.com/community/ambassadors"
+                >claude.com/community/ambassadors</a
+              >
+            </p>
           </section>
         </section>
 
         <!-- TALKS GO HERE -->
+        <!-- ============================ SLIDES START ============================ -->
+        <!--
+  SCREENSHOTS TO PLACE (search "SCREENSHOT" below):
+   S1  a live generative piece that visibly changes on reload
+   S4  identity/DNA.md (show the principles / "operating system" framing)
+   S6  the approval email on your phone + the Tailscale dashboard candidate page
+   S10 the /verify SKILL.md closing line ("if blocked, fix and update this skill")
+   S13 "The Original" piece + the "acquire the original" interaction
+  The two loop slides (S8, S9) are inline SVG — no screenshot needed.
+-->
+
+        <!-- S1 — COLD OPEN: show a live piece, reload it, say nothing -->
+        <section id="cold-open" data-background-color="#000">
+          <!-- Best: just present the real browser at vana.y-a-v-a.org and hit reload.
+       This embedded version is a fallback. Point src at a piece that CHANGES on reload. -->
+          <p style="margin-top: 0.4em">
+            <button
+              onclick="
+                var f = document.getElementById('coldopen');
+                f.src = f.src;
+              "
+            >
+              ↻ reload
+            </button>
+          </p>
+          <iframe
+            id="coldopen"
+            src="https://vana.y-a-v-a.org/"
+            style="width: 90vw; height: 40vh; border: 0; border-radius: 8px"
+          ></iframe>
+          <aside class="notes">
+            Open cold. No title, no name. Show the piece. Hit reload two or
+            three times so it changes. Stay silent a beat. Let the room get
+            curious. (~60–90s) If the network is shaky, present the real site in
+            a browser instead of this iframe.
+          </aside>
+        </section>
+
+        <!-- S2 — the question -->
+        <section id="who-chose-this">
+          <h2>Who chose this?</h2>
+          <p class="fragment"><strong>Nobody did.</strong> 🤷</p>
+          <aside class="notes">
+            The hook. Nobody picked that image — no designer, no prompt I typed
+            just now. Then turn to how it got there.
+          </aside>
+        </section>
+
+        <!-- S3 — REVEAL / what it is -->
+        <section id="vana-reveal">
+          <h1>vana</h1>
+          <p>
+            An autonomous agent that <strong>makes art</strong> in my own
+            artistic DNA, has a <strong>different model judge it</strong>, and
+            asks <strong>me</strong> for one tap to confirm.
+          </p>
+          <h2>🎨&nbsp;&nbsp;⚖️&nbsp;&nbsp;📱</h2>
+          <!-- <p><small>y-a-v-a · Claude Community Meetup</small></p> -->
+          <aside class="notes">
+            The reveal. Name the project. One sentence on what it is. Don't list
+            the stack yet — that comes through the loops.
+          </aside>
+        </section>
+
+        <!-- S4 — the DNA -->
+        <section id="dna">
+          <section id="dna-1">
+            <h2>🧬 It draws from a DNA</h2>
+            <img
+              src="assets/artistic-DNA-screenshot.png"
+              alt=""
+              style="height: 26vh; width: auto; max-width: none"
+            />
+            <!-- <div
+          style="
+          border: 2px dashed currentColor;
+          padding: 1em;
+          opacity: 0.75;
+          border-radius: 8px;
+          "
+          >
+          📸 SCREENSHOT: <em>identity/DNA.md</em> — the principles / "read
+          this as an operating system, not a biography" framing.
+        </div> -->
+            <p class="fragment" style="font-size: 0.9em">
+              Twenty years of y-a-v-a.org, distilled into a document the agents
+              read.
+            </p>
+            <p class="fragment" style="font-size: 0.7em">
+              <em>The harness has no taste. It applies mine.</em>
+            </p>
+            <aside class="notes" style="font-size: 0.7em">
+              The DNA is the single source of artistic truth. The generator
+              reads it to make; the jury reads it to judge. The system encodes
+              no taste of its own.
+            </aside>
+          </section>
+          <section id="dna-2">
+            <video
+              src="assets/artistic-DNA-screencast.mov"
+              controls
+              preload="metadata"
+              style="max-height: 70vh"
+            ></video>
+          </section>
+          <section id="dna-3">
+            <img
+              src="assets/y-a-v-a-01.png"
+              alt=""
+              style="height: 28vh; width: auto; max-width: none"
+            />
+            <img
+              src="assets/y-a-v-a-02.png"
+              alt=""
+              style="height: 28vh; width: auto; max-width: none"
+            />
+          </section>
+          <section id="dna-4">
+            <img
+              src="assets/y-a-v-a-03.png"
+              alt=""
+              style="height: 22vh; width: auto; max-width: none"
+            />
+            <img
+              src="assets/y-a-v-a-04.png"
+              alt=""
+              style="height: 22vh; width: auto; max-width: none"
+            />
+          </section>
+        </section>
+
+        <!-- S5 — the cast / two vendors -->
+        <section id="two-models">
+          <h2>Two models, on purpose</h2>
+          <p>🎨 <strong>Generator</strong> (Claude Opus) proposes</p>
+          <p>⚖️ <strong>Jury</strong> (a <em>different</em> vendor) disposes</p>
+          <p>📱 <strong>I</strong> confirm</p>
+          <p class="small">Never let a model <b>grade its own work.</b></p>
+          <aside class="notes">
+            Division of labour is a design choice, not a detail: the maker and
+            the critic are different vendors so nothing flatters itself. The
+            human is the third party.
+          </aside>
+        </section>
+
+        <!-- S6 — the human-in-the-loop beat -->
+        <section id="human-in-the-loop">
+          <section id="human-in-the-loop-1">
+            <h2>📱 One tap, from anywhere.</h2>
+            <img
+              src="assets/vana-email.png"
+              alt=""
+              style="height: 22vh; width: auto; max-width: none"
+            />
+            <!-- <div
+            style="
+              border: 2px dashed currentColor;
+              padding: 1em;
+              opacity: 0.75;
+              border-radius: 8px;
+            "
+          >
+            📸 SCREENSHOT: <em>the approval email on your phone</em> → opening
+            the candidate on the <em>Tailscale dashboard</em> (work rendered +
+            jury verdict + Approve / Reject).
+          </div> -->
+            <p class="fragment" style="margin-top: 0.6em">
+              Vana agent emails me. I open it on my phone over a Tailscale VPN,
+              see the work and the jury's verdict, and approve. Or not...
+            </p>
+            <aside class="notes">
+              THE beat. The agent runs unattended on a Mac mini; when something
+              clears the gate it emails me; I review it from my phone over
+              Tailscale and tap. Human-in-the-loop made physical. Land this
+              slowly.
+            </aside>
+          </section>
+          <section id="human-in-the-loop-2">
+            <img
+              src="assets/vana-tailscale-vpn.png"
+              alt=""
+              style="height: 42vh; width: auto; max-width: none"
+            />
+          </section>
+          <section id="human-in-the-loop-3">
+            <img
+              src="assets/vana-mondrian.png"
+              alt=""
+              style="height: 42vh; width: auto; max-width: none"
+            />
+          </section>
+        </section>
+
+        <!-- S7 — thesis -->
+        <section id="loops-not-prompts">
+          <h2>🔁 Loops, not prompts</h2>
+          <p>
+            The interesting behaviour comes from
+            <strong>loop structure</strong>, not a magic prompt.
+          </p>
+          <p class="fragment">Two loops run this project.</p>
+          <aside class="notes">
+            The intellectual spine for a builder audience: agents get good when
+            you put them in a structured loop with checks and a human checkpoint
+            — not when you find the perfect prompt. Set up the two-loops
+            section.
+          </aside>
+        </section>
+
+        <!-- S8 — the creative loop (SVG) -->
+        <section id="creative-loop">
+          <h3>🎨 The creative loop</h3>
+          <svg
+            viewBox="0 0 1000 330"
+            style="width: 100%; height: auto"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <marker
+                id="arrA"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="3"
+                orient="auto"
+                markerUnits="strokeWidth"
+              >
+                <path d="M0,0 L7,3 L0,6 Z" fill="currentColor" />
+              </marker>
+            </defs>
+            <!-- boxes -->
+            <rect
+              x="47"
+              y="60"
+              width="165"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <rect
+              x="232"
+              y="60"
+              width="165"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <rect
+              x="417"
+              y="60"
+              width="165"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <rect
+              x="602"
+              y="60"
+              width="165"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <rect
+              x="787"
+              y="60"
+              width="165"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <!-- arrows between -->
+            <path
+              d="M212 112 L232 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrA)"
+            />
+            <path
+              d="M397 112 L417 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrA)"
+            />
+            <path
+              d="M582 112 L602 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrA)"
+            />
+            <path
+              d="M767 112 L787 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrA)"
+            />
+            <!-- return loop -->
+            <path
+              d="M869.5 164 L869.5 290 L129.5 290 L129.5 168"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#arrA)"
+            />
+            <!-- text -->
+            <g fill="currentColor" text-anchor="middle">
+              <text x="129.5" y="98" font-size="28">🧬</text>
+              <text x="129.5" y="126" font-size="18" font-weight="bold">
+                DNA
+              </text>
+              <text x="129.5" y="146" font-size="12" opacity=".7">
+                20 years of work
+              </text>
+
+              <text x="314.5" y="98" font-size="28">🎨</text>
+              <text x="314.5" y="126" font-size="18" font-weight="bold">
+                Generate
+              </text>
+              <text x="314.5" y="146" font-size="12" opacity=".7">
+                Claude Opus
+              </text>
+
+              <text x="499.5" y="98" font-size="28">⚖️</text>
+              <text x="499.5" y="126" font-size="18" font-weight="bold">
+                Jury
+              </text>
+              <text x="499.5" y="146" font-size="12" opacity=".7">
+                a different model
+              </text>
+
+              <text x="684.5" y="98" font-size="28">📱</text>
+              <text x="684.5" y="126" font-size="18" font-weight="bold">
+                I approve
+              </text>
+              <text x="684.5" y="146" font-size="12" opacity=".7">
+                Tailscale · phone
+              </text>
+
+              <text x="869.5" y="98" font-size="28">🌐</text>
+              <text x="869.5" y="126" font-size="18" font-weight="bold">
+                Publish
+              </text>
+              <text x="869.5" y="146" font-size="12" opacity=".7">
+                vana.y-a-v-a.org
+              </text>
+
+              <text x="500" y="284" font-size="13" opacity=".7">
+                every 3 hours · the catalogue grows · feeds the next round
+              </text>
+            </g>
+          </svg>
+          <aside class="notes">
+            Walk it once, left to right. The only human box is "I approve" — and
+            it's the only bold one. Generation is ~$0.40; judging is half a
+            cent; it runs every 3 hours whether I'm watching or not.
+          </aside>
+        </section>
+
+        <!-- S9 — the development loop (SVG) -->
+        <section id="development-loop">
+          <h3>🛠️ The development loop</h3>
+          <svg
+            viewBox="0 0 1000 330"
+            style="width: 100%; height: auto"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <marker
+                id="arrB"
+                markerWidth="9"
+                markerHeight="9"
+                refX="7"
+                refY="3"
+                orient="auto"
+                markerUnits="strokeWidth"
+              >
+                <path d="M0,0 L7,3 L0,6 Z" fill="currentColor" />
+              </marker>
+            </defs>
+            <rect
+              x="95"
+              y="60"
+              width="180"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <rect
+              x="305"
+              y="60"
+              width="180"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <rect
+              x="515"
+              y="60"
+              width="180"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <rect
+              x="725"
+              y="60"
+              width="180"
+              height="104"
+              rx="10"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            />
+            <path
+              d="M275 112 L305 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrB)"
+            />
+            <path
+              d="M485 112 L515 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrB)"
+            />
+            <path
+              d="M695 112 L725 112"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              marker-end="url(#arrB)"
+            />
+            <path
+              d="M815 164 L815 290 L185 290 L185 168"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#arrB)"
+            />
+            <g fill="currentColor" text-anchor="middle">
+              <text x="185" y="98" font-size="28">✏️</text>
+              <text x="185" y="126" font-size="18" font-weight="bold">
+                Change
+              </text>
+              <text x="185" y="146" font-size="12" opacity=".7">
+                edit the code
+              </text>
+
+              <text x="395" y="98" font-size="28">✅</text>
+              <text x="395" y="126" font-size="18" font-weight="bold">
+                Check
+              </text>
+              <text x="395" y="146" font-size="12" opacity=".7">
+                types + 84 tests
+              </text>
+
+              <text x="605" y="98" font-size="28">🔌</text>
+              <text x="605" y="126" font-size="18" font-weight="bold">
+                Verify
+              </text>
+              <text x="605" y="146" font-size="12" opacity=".7">
+                live jury · deploy
+              </text>
+
+              <text x="815" y="98" font-size="28">📜</text>
+              <text x="815" y="126" font-size="18" font-weight="bold">
+                /verify skill
+              </text>
+              <text x="815" y="146" font-size="12" opacity=".7">
+                self-improving
+              </text>
+
+              <text x="500" y="284" font-size="13" opacity=".7">
+                if blocked → fix it → and update the skill ✍️
+              </text>
+            </g>
+          </svg>
+          <aside class="notes">
+            Same shape, different stakes. The bold box is a skill — a written
+            playbook the agent runs to validate the app after a change. Tiered
+            by cost: free checks always, the paid ones only when relevant.
+          </aside>
+        </section>
+
+        <!-- S10 — the self-improving skill -->
+        <section id="self-improving-skill">
+          <h2>📜 The skill rewrites itself</h2>
+          <img src="assets/vana-skill-detail.png" alt="" style="height: auto" />
+          <!-- <div
+            style="
+              border: 2px dashed currentColor;
+              padding: 1em;
+              opacity: 0.75;
+              border-radius: 8px;
+            "
+          >
+            📸 SCREENSHOT: <em>.claude/skills/verify/SKILL.md</em> — the closing
+            line: "If you run into a blocker, find a solution and then
+            <strong>update this skill</strong>."
+          </div> -->
+          <p style="margin-top: 0.6em">
+            The playbook for testing the app ends by telling the agent to
+            <strong>improve the playbook</strong>.
+          </p>
+          <p>The dev loop tightens itself over time. 🔁</p>
+          <aside class="notes">
+            This is the part builders lean in for: the verification skill isn't
+            static. When it hits a wall, the instruction is to solve it AND
+            amend the skill — so next time is smoother. The loop learns.
+          </aside>
+        </section>
+
+        <!-- S11 — symmetry of the two loops -->
+        <section id="loop-symmetry">
+          <h2>Both loops have one checkpoint</h2>
+          <p>🎨 creative loop → the checkpoint is <strong>me</strong> 👤</p>
+          <p>
+            🛠️ dev loop → the checkpoint is
+            <strong>a skill that improves itself</strong> 📜
+          </p>
+          <p class="small" style="font-size: 0.6em">
+            One loop makes <b>the art</b>. The other makes the loop
+            <b>better.</b>
+          </p>
+          <aside class="notes">
+            Put them side by side conceptually. The symmetry is the takeaway:
+            structure + a checkpoint. In one, the checkpoint is human judgement;
+            in the other, a self-revising procedure.
+          </aside>
+        </section>
+
+        <!-- S12 — payoff turn -->
+        <section id="payoff">
+          <h2>But here's the thing…</h2>
+          <p>the art is <strong>about this</strong>.</p>
+          <p>Originals. Copies. Aura. 🖼️</p>
+          <aside class="notes">
+            The pivot from "how" to "why". Everything so far was mechanism; now
+            the mechanism turns out to be the subject.
+          </aside>
+        </section>
+
+        <!-- S13 — The Original / Benjamin -->
+        <section id="the-original">
+          <h2>🖼️ "The Original"</h2>
+          <img
+            src="assets/vana_the_original.png"
+            alt=""
+            style="height: 340px"
+          />
+          <!-- <div
+            style="
+              border: 2px dashed currentColor;
+              padding: 1em;
+              opacity: 0.75;
+              border-radius: 8px;
+            "
+          >
+            📸 SCREENSHOT / LIVE:
+            <em>vana.y-a-v-a.org/2026-06-16-the-original/</em> — click "acquire
+            the original" and show it hands you a
+            <strong>byte-faithful copy of the page itself</strong>.
+          </div> -->
+          <p style="margin-top: 0; font-size: 0.7em">
+            <b>Walter Benjamin</b>, <i>1935</i>: the <em>aura</em> of the
+            original dies in the age of mechanical reproduction.
+          </p>
+          <p style="font-size: 0.7em">
+            This piece's <b>"acquire the original"</b> button gives every
+            visitor an identical copy. <em>Aura: none on record.</em>
+          </p>
+          <aside class="notes">
+            Demo it live if you can: click acquire → it downloads a copy of its
+            own source. The machine made a work whose subject is exactly the
+            thing it is: a copy with no original.
+          </aside>
+        </section>
+
+        <!-- S14 — the machine arguing with itself -->
+        <section id="machine-arguing">
+          <h2>A machine arguing with itself 🤬</h2>
+          <p>
+            Its whole output is a running argument:
+            <strong>can a machine make an original?</strong>
+          </p>
+          <p>Every 3 hours it makes another move in that argument. 🔁</p>
+          <p class="small" style="font-size: 0.6em">
+            <b>Maker</b> and <b>critic</b>, in one system, and I'm the doubt in
+            the middle.
+          </p>
+          <aside class="notes">
+            The thesis, stated plainly. It's not a tool that makes images; it's
+            an artist that doesn't know whether it's an artist, and keeps
+            producing evidence either way.
+          </aside>
+        </section>
+
+        <!-- S15 — the economic joke (optional; cut if short on time) -->
+        <section id="economic-joke">
+          <h2>An economic joke, baked in</h2>
+          <p>⚖️ a jury verdict: <strong>$0.0045</strong></p>
+          <p>🎨 making the work: <strong>~$0.40</strong></p>
+          <p class="small" style="font-size: 0.6em">
+            Opinions are <b>free</b>; creation is <b>expensive</b>; the exact
+            inversion the art market runs on.
+          </p>
+          <aside class="notes">
+            A light beat near the end. The cost asymmetry is funny and on-brand
+            for a project about value and "but is it art?". Cut this slide first
+            if you're over time.
+          </aside>
+        </section>
+
+        <!-- S16 — close -->
+        <section id="close">
+          <h2>vana</h2>
+          <p>🌐 <strong>vana.y-a-v-a.org</strong></p>
+          <img src="assets/vana_y-a-v-a_org.png" alt="" style="height: 200px" />
+          <p>🔁 a new work every 3 hours · 📱 I approve from my phone</p>
+          <p>
+            <em>An autonomous artist that doesn't know if it's an artist.</em>
+          </p>
+
+          <aside class="notes">
+            Land on the live URL — invite them to watch the catalogue grow.
+            Restate the one-liner. Thank you.
+          </aside>
+        </section>
+
+        <!-- ============================ SLIDES END ============================ -->
 
         <!-- CALL FOR SPEAKERS -->
         <section id="call-for-speakers">
           <h2>🎤 Your turn next?</h2>
-          <div class="strategy-card" style="font-size: 0.7em; display: inline-block;">
+          <div
+            class="strategy-card"
+            style="font-size: 0.7em; display: inline-block"
+          >
             <p class="b">Give a talk at the next meetup</p>
             <p>Big or small, demo or story — we want to hear it.</p>
-            <img src="assets/linkedin_vincent_bruijn.png" alt="LinkedIn QR — Vincent Bruijn" style="max-height: 28vh; max-width: 100%; margin-top: 10px;" />
-            <p class="link-footer" style="margin-top: 10px;">Reach out → <a href="https://www.linkedin.com/in/vincentbruijn/">linkedin.com/in/vincentbruijn</a></p>
+            <img
+              src="assets/linkedin_vincent_bruijn.png"
+              alt="LinkedIn QR — Vincent Bruijn"
+              style="max-height: 28vh; max-width: 100%; margin-top: 10px"
+            />
+            <p class="link-footer" style="margin-top: 10px">
+              Reach out →
+              <a href="https://www.linkedin.com/in/vincentbruijn/"
+                >linkedin.com/in/vincentbruijn</a
+              >
+            </p>
           </div>
         </section>
 
         <section id="thanks">
           <h2>🙏 Thanks</h2>
-          <div class="two-col" style="justify-content: center;">
-            <div class="strategy-card" style="font-size: 0.7em; text-align: center;">
+          <div class="two-col" style="justify-content: center">
+            <div
+              class="strategy-card"
+              style="font-size: 0.7em; text-align: center"
+            >
               <p class="b">📦 repo</p>
-              <img src="assets/github_y-a-v-a_repo.png" alt="GitHub QR — y-a-v-a" style="max-height: 26vh; max-width: 100%;" />
+              <img
+                src="assets/github_y-a-v-a_repo.png"
+                alt="GitHub QR — y-a-v-a"
+                style="max-height: 26vh; max-width: 100%"
+              />
               <p class="small">github.com/y-a-v-a</p>
             </div>
-            <div class="strategy-card" style="font-size: 0.7em; text-align: center;">
+            <div
+              class="strategy-card"
+              style="font-size: 0.7em; text-align: center"
+            >
               <p class="b">🌐 site</p>
-              <img src="assets/www_vincentbruijn_nl.png" alt="vincentbruijn.nl QR" style="max-height: 26vh; max-width: 100%;" />
+              <img
+                src="assets/www_vincentbruijn_nl.png"
+                alt="vincentbruijn.nl QR"
+                style="max-height: 26vh; max-width: 100%"
+              />
               <p class="small">vincentbruijn.nl</p>
             </div>
           </div>
-          <p class="small" style="margin-top: 20px;"><span class="b">Vincent Bruijn</span> · Claude Community Ambassador</p>
+          <p class="small" style="margin-top: 20px">
+            <span class="b">Vincent Bruijn</span> · Claude Community Ambassador
+          </p>
         </section>
-
       </div>
     </div>
 
