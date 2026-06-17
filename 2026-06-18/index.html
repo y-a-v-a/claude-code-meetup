@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="data:," />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='14'>🦞</text></svg>" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
@@ -18,7 +18,8 @@
     />
     <style>
       :root {
-        --color-bg: rgb(227, 218, 204);
+        /* --color-bg: rgb(227, 218, 204); */
+        --color-bg: #CC7D5D;
         --color-text: rgb(20, 20, 19);
         --font-main: Georgia, serif;
         --r-heading-text-transform: none;
@@ -156,12 +157,24 @@
 
         <section id="welcome">
           <h1>👋 Welcome!</h1>
-          <h2>Claude Community meetup Amsterdam</h2>
+          <h2>Claude Community meetup <i>Amsterdam</i></h2>
+          <h4>4th edition</h4>
           <p class="date-text">
             📅 Thursday 2026-06-18
           </p>
           <p class="small"><span class="b">Vincent Bruijn</span> Claude Community Ambassador</p>
           <p class="small">Sponsored by <span class="b">Anthropic</span></p>
+        </section>
+
+        <!-- LOGISTICS -->
+        <section id="logistics">
+          <h2>📶 Good to know</h2>
+          <div class="strategy-card" style="font-size: 0.7em;">
+            <ul style="list-style: none; padding: 0;">
+              <li>⏸️ Break halfway</li>
+              <li>🍸 Drinks after the last talk</li>
+            </ul>
+          </div>
         </section>
 
         <!-- MEETUP CONTEXT -->
@@ -170,11 +183,14 @@
           <div class="strategy-card" style="font-size: 0.7em;">
             <ul>
               <li><span class="b">Today</span> — 4th Amsterdam meetup 🎉</li>
-              <li>Upcoming:
+              <li>🔮 Upcoming:
                 <ul>
-                  <li>📅 September 10th — Eindhoven (2nd edition)</li>
+                  <li>☕️ Claude and Coffee, August 22nd — Amsterdam</li>
+                  <li>📅 Meetup, September 10th — Eindhoven (2nd edition)</li>
+                  <li>📅 Meetup, Late September — Amsterdam (5th edition)</li>
                 </ul>
               </li>
+              <li>New ambassadors, more meetups!</li>
             </ul>
           </div>
         </section>
@@ -182,14 +198,18 @@
         <!-- AGENDA -->
         <section id="agenda">
           <h2>🗓️ Agenda</h2>
-          <div class="strategy-card" style="font-size: 0.55em;">
+          <div class="strategy-card" style="font-size: 0.5em;">
             <ul>
-              <li><span class="b">TBD</span><br/>Speaker</li>
+              <li><span class="b">Elie Mietkiewicz</span>&nbsp;&nbsp;Tribumap</li>
+              <li><span class="b">Aike Müller</span>&nbsp;&nbsp;How I Spent 2.5 Hours and Fired a SaaS Vendor</li>
+              <li><span class="b">Anna Sheronova</span>&nbsp;&nbsp;I let Claude run my SEO</li>
               <li>Break ⏸️</li>
-              <li><span class="b">TBD</span><br/>Speaker</li>
+              <li><span class="b">Vincent Bruijn</span>&nbsp;&nbsp;Agents, skills, loops, learnings</li>
+              <li><span class="b">Amit Prusty</span>&nbsp;&nbsp;Every Session Is Groundhog Day For Your AI</li>
               <li>Closing ✌🏾 · Drinks 🍸 🍺</li>
             </ul>
           </div>
+          <p class="small" style="margin-top: 16px;">📸 We're <b>taking photos</b> tonight — tell us if you'd rather not be in them.</p>
         </section>
 
         <!-- ABOUT ME -->
@@ -216,15 +236,32 @@
 
         <!-- TALKS GO HERE -->
 
+        <!-- CALL FOR SPEAKERS -->
+        <section id="call-for-speakers">
+          <h2>🎤 Your turn next?</h2>
+          <div class="strategy-card" style="font-size: 0.7em; display: inline-block;">
+            <p class="b">Give a talk at the next meetup</p>
+            <p>Big or small, demo or story — we want to hear it.</p>
+            <img src="assets/linkedin_vincent_bruijn.png" alt="LinkedIn QR — Vincent Bruijn" style="max-height: 28vh; max-width: 100%; margin-top: 10px;" />
+            <p class="link-footer" style="margin-top: 10px;">Reach out → <a href="https://www.linkedin.com/in/vincentbruijn/">linkedin.com/in/vincentbruijn</a></p>
+          </div>
+        </section>
+
         <section id="thanks">
           <h2>🙏 Thanks</h2>
-          <div class="strategy-card" style="font-size: 0.75em;">
-            <ul style="list-style: none; padding: 0;">
-              <li>📦 repo — <span class="b">https://github.com/y-a-v-a</span></li>
-              <li>🌐 site — <span class="b"><a href="https://www.vincentbruijn.nl/">vincentbruijn.nl</a></span></li>
-            </ul>
+          <div class="two-col" style="justify-content: center;">
+            <div class="strategy-card" style="font-size: 0.7em; text-align: center;">
+              <p class="b">📦 repo</p>
+              <img src="assets/github_y-a-v-a_repo.png" alt="GitHub QR — y-a-v-a" style="max-height: 26vh; max-width: 100%;" />
+              <p class="small">github.com/y-a-v-a</p>
+            </div>
+            <div class="strategy-card" style="font-size: 0.7em; text-align: center;">
+              <p class="b">🌐 site</p>
+              <img src="assets/www_vincentbruijn_nl.png" alt="vincentbruijn.nl QR" style="max-height: 26vh; max-width: 100%;" />
+              <p class="small">vincentbruijn.nl</p>
+            </div>
           </div>
-          <p class="small" style="margin-top: 30px;"><span class="b">Vincent Bruijn</span> · Claude Community Ambassador</p>
+          <p class="small" style="margin-top: 20px;"><span class="b">Vincent Bruijn</span> · Claude Community Ambassador</p>
         </section>
 
       </div>

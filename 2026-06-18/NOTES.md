@@ -1,0 +1,5 @@
+- welcome to 4th edition of Claude Community Meetup Amsterdam
+- Future
+  - Beginning September Eindhoven
+  - End of September Amsterdam, different location
+- 
