@@ -22,8 +22,10 @@
     <style>
       :root {
         /* --color-bg: rgb(227, 218, 204); */
-        --color-bg: #cc7d5d;
+        /* --color-bg: #cc7d5d; */
+        --color-bg: #da7757;
         --color-text: rgb(20, 20, 19);
+        --color-text-white: rgb(255,255,255);
         --font-main: Georgia, serif;
         --r-heading-text-transform: none;
       }
@@ -34,6 +36,10 @@
 
       html head + body.reveal-viewport {
         background-color: var(--color-bg) !important;
+        background-image: url("assets/claude-world.jpg") !important;
+        background-repeat: no-repeat !important;
+        background-position: left bottom !important;
+        background-size: min(34vw, 440px) auto !important;
       }
 
       .reveal {
@@ -162,7 +168,7 @@
         <section id="welcome">
           <h1>👋 Welcome!</h1>
           <h2>
-            Claude Community meetup <i style="font-weight: normal">Amsterdam</i>
+            Claude Community meetup <i style="font-weight: normal; color: var(--color-text-white);">Amsterdam</i>
           </h2>
           <h4>4th edition</h4>
           <p class="date-text">📅 Thursday 2026-06-18</p>

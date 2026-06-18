@@ -1,5 +1,7 @@
 - welcome to 4th edition of Claude Community Meetup Amsterdam
+- THere's a World Cup, it's great wheather, but glad to have you here.
 - Future
+  - End of August small meetup
   - Beginning September Eindhoven
   - End of September Amsterdam, different location
 
@@ -25,5 +27,6 @@
 ## Key takeaways
 
 - Loops are nothing new — they've always been part of the SDLC, so "loops" is a bit of a buzzword right now. What's new with AI is automating as many steps out of the loop as possible, which means trusting the model more with what it delivers.
+- I did not show any code though I built something. Is that relevant? Are we moving into the direction where models take full responsibility for the code? That's also the fear one might have when building loops: can I trust the model enough that I can assume the code is good enough?
 - Tying Vercel + Tailscale + email + GitHub + Claude together shows the tech is all there already; the value is in how you arrange the pieces.
 - But is it art…?
