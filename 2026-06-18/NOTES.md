@@ -21,3 +21,9 @@
 - The thesis, stated plainly. It's not a tool that makes images; it's an artist that doesn't know whether it's an artist, and keeps producing evidence either way.
 - A light beat near the end. The cost asymmetry is funny and on-brand for a project about value and "but is it art?". Cut this slide first if you're over time.
 - Land on the live URL — invite them to watch the catalogue grow. Restate the one-liner. Thank you.
+
+## Key takeaways
+
+- Loops are nothing new — they've always been part of the SDLC, so "loops" is a bit of a buzzword right now. What's new with AI is automating as many steps out of the loop as possible, which means trusting the model more with what it delivers.
+- Tying Vercel + Tailscale + email + GitHub + Claude together shows the tech is all there already; the value is in how you arrange the pieces.
+- But is it art…?
