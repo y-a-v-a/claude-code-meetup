@@ -1,3 +1,6 @@
 .claude
 */.claude
 **/claude-offer.png
+# capture-slides.sh tooling cache
+.capture-slides/
+claude-session*.html
