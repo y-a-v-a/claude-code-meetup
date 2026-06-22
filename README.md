@@ -1,5 +1,7 @@
 # Claude Code Meetup slides
 
+My name is Vincent Bruijn. I have 20 years of experience in IT across full-stack engineering, tech lead, and tech management roles. I'm a Claude Code early adopter and Anthropic's Claude Community Ambassador for Amsterdam since February 2026, regularly organizing Claude Community meetups in the Netherlands. I love advocating for Claude and helping tech teams embrace it.
+
 Slides for Claude Code meetups
 
 ## Sessions
