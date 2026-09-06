@@ -20,6 +20,17 @@
       href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
     />
     <style>
+      @font-face {
+        font-family: "Anthropic Sans Display";
+        font-weight: 600;
+        src: url("../assets/AnthropicSansDisplay-Semibold-Static.otf") format("opentype");
+      }
+      @font-face {
+        font-family: "Anthropic Serif Display";
+        font-weight: 300;
+        src: url("../assets/AnthropicSerifDisplay-Light-Static.otf") format("opentype");
+      }
+
       :root {
         --color-claude-terracotta: #d97757;
         --color-claude-ivory: #faf9f5;
@@ -30,6 +41,8 @@
         --color-text: rgb(20, 20, 19);
         --color-text-white: rgb(255,255,255);
         --font-main: Georgia, serif;
+        --font-anthropic-sans: "Anthropic Sans Display", Arial, Helvetica, sans-serif;
+        --font-anthropic-serif: "Anthropic Serif Display", Georgia, serif;
         --r-heading-text-transform: none;
       }
 
@@ -62,8 +75,67 @@
         font-family: var(--font-main);
       }
 
-      .reveal .title-slide h1 {
-        font-size: 2.5em;
+      .reveal .slides > section:not(.title-layout),
+      .reveal .slides > section:not(.title-layout) > section {
+        padding-left: 160px;
+        padding-right: 160px;
+      }
+
+      .reveal .slides > section.title-layout {
+        height: 100%;
+        padding: 0;
+        text-align: left;
+        color: var(--color-claude-ivory);
+      }
+
+      .reveal .slides section.title-layout > * {
+        position: absolute;
+        margin: 0;
+      }
+
+      .title-layout .spark {
+        left: 4.93%;
+        top: 9.48%;
+        width: 6.64%;
+        aspect-ratio: 1;
+      }
+
+      .title-layout .globe {
+        left: 65.75%;
+        top: 28.34%;
+        width: 26.94%;
+        aspect-ratio: 1;
+      }
+
+      .title-layout .kicker {
+        left: 5.82%;
+        top: 40.41%;
+        width: 27.97%;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .reveal .title-layout h1 {
+        left: 5.21%;
+        top: 49.97%;
+        width: 56.11%;
+        font-family: var(--font-anthropic-serif);
+        font-weight: 300;
+        font-size: 89px;
+        line-height: 1.15;
+        color: var(--color-text);
+      }
+
+      .title-layout .date-line {
+        left: 5.82%;
+        top: 85.85%;
+        width: 59.22%;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 1.2;
       }
 
       .date-text {
@@ -168,17 +240,12 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section id="welcome">
-          <h1>👋 Welcome!</h1>
-          <h2>
-            Claude Community meetup <i style="font-weight: normal; color: var(--color-text-white);">Eindhoven</i>
-          </h2>
-          <h4>2nd edition · Claude 4 Starters</h4>
-          <p class="date-text">📅 Thursday 2026-09-10</p>
-          <p class="small">
-            <span class="b">Vincent Bruijn</span> Claude Community Ambassador
-          </p>
-          <p class="small">Hosted by <span class="b">Pipple</span> · Sponsored by <span class="b">Anthropic</span></p>
+        <section id="welcome" class="title-layout" data-background-color="#d97757">
+          <img class="spark" src="assets/ClaudeSpark-Ivory.png" alt="" />
+          <img class="globe" src="assets/Node-Globe.png" alt="" />
+          <p class="kicker">Claude Community<br />Claude 4 Starters</p>
+          <h1>Eindhoven</h1>
+          <p class="date-line">Thursday 2026-09-10 · Pipple</p>
         </section>
 
         <!-- LOGISTICS -->
@@ -342,6 +409,9 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
     <script>
       Reveal.initialize({
+        width: 1280,
+        height: 720,
+        margin: 0,
         hash: true,
         transition: "slide",
         transitionSpeed: "default",

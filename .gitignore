@@ -4,3 +4,5 @@
 # capture-slides.sh tooling cache
 .capture-slides/
 claude-session*.html
+assets/*.otf
+2026-06-18/assets/artistic-DNA-screencast*.mov

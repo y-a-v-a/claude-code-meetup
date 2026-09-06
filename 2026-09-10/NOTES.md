@@ -1,5 +1,7 @@
 # Claude Meetup Eindhoven 2nd edition — Claude 4 Starters
 
+- claude wallpaper https://www.youtube.com/watch?v=tRsQsTMvPNg
+
 ## Event
 
 Source: https://luma.com/claude-54i8 (fetched 2026-09-06)
