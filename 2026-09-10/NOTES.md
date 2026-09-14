@@ -14,6 +14,8 @@ Source: https://luma.com/claude-54i8 (fetched 2026-09-06)
 - **Format**: in-person only, English, approval required, free
 - **Registrations**: 82 registered, 18 spots remaining
 
+- Ask speakers what music they like, Jeroen will play a song in between.
+
 ### Luma description
 
 > Curious about Claude but not sure where to start?

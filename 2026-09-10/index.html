@@ -235,6 +235,191 @@
         border-radius: 6px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
+
+      /* ---- Vincent's talk: own palette + fonts, no Anthropic branding ---- */
+      :root {
+        --talk-bg: rgb(227, 218, 204);
+        --talk-text: #14213d;
+        --talk-muted: #6b6257;
+        --talk-accent: #8a5200;
+        --talk-ink-06: rgba(20, 33, 61, 0.06);
+        --talk-ink-18: rgba(20, 33, 61, 0.18);
+        --font-talk: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-talk-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      }
+
+      .reveal .slides > section.talk,
+      .reveal .slides > section.talk > section.talk {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .reveal .slides > section.talk:has(> section) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .reveal .slides section.talk,
+      .reveal .slides section.talk h1,
+      .reveal .slides section.talk h2,
+      .reveal .slides section.talk h3 {
+        font-family: var(--font-talk);
+        color: var(--talk-text);
+      }
+
+      .reveal .slides section.talk h1 {
+        font-size: 2.2em;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .reveal .slides section.talk h2 {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .reveal .slides section.talk a {
+        color: var(--talk-accent);
+      }
+
+      .reveal .slides section.talk li {
+        margin: 0.35em 0;
+      }
+
+      .reveal .slides section.talk li::marker {
+        color: var(--talk-accent);
+      }
+
+      .talk .mono {
+        font-family: var(--font-talk-mono);
+        font-size: 0.5em;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--talk-accent);
+        margin: 0 0 0.4em;
+      }
+
+      .talk .mono.plain {
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--talk-muted);
+        margin-top: 0.6em;
+      }
+
+      .talk .sub {
+        font-size: 0.7em;
+        color: var(--talk-muted);
+      }
+
+      .talk .big {
+        font-size: 1.3em;
+        font-weight: 700;
+      }
+
+      .talk img.shot-img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(20, 33, 61, 0.25);
+      }
+
+      .talk .compare {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .talk .compare img {
+        height: 44vh;
+        width: auto;
+        max-width: 48%;
+        object-fit: contain;
+      }
+
+      .talk .shot {
+        display: inline-block;
+        margin-top: 0.6em;
+        padding: 0.5em 0.9em;
+        border: 2px dashed var(--talk-accent);
+        border-radius: 8px;
+        font-family: var(--font-talk-mono);
+        font-size: 0.45em;
+        color: var(--talk-accent);
+        text-align: left;
+      }
+
+      .talk .flow {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 0.6em;
+      }
+
+      .talk .flow .step {
+        flex: 1;
+        background: var(--talk-ink-06);
+        border: 1px solid var(--talk-ink-18);
+        border-radius: 10px;
+        padding: 0.6em 0.7em;
+        font-size: 0.6em;
+        text-align: left;
+      }
+
+      .talk .flow .step .mono {
+        display: block;
+        margin-bottom: 0.3em;
+      }
+
+      .talk .flow .arrow {
+        align-self: center;
+        color: var(--talk-accent);
+        font-size: 1.2em;
+      }
+
+      .reveal .slides section.talk blockquote.prompt {
+        width: 100%;
+        margin: 0.6em 0;
+        padding: 0.6em 0.9em;
+        background: var(--talk-ink-06);
+        border-left: 4px solid var(--talk-accent);
+        border-radius: 6px;
+        font-size: 0.65em;
+        font-style: normal;
+        text-align: left;
+        box-shadow: none;
+      }
+
+      .talk blockquote.prompt::before {
+        content: "› ";
+        color: var(--talk-accent);
+        font-family: var(--font-talk-mono);
+      }
+
+      .reveal .slides section.talk a.btn {
+        display: inline-block;
+        margin-top: 0.4em;
+        padding: 0.25em 0.9em;
+        border: 2px solid var(--talk-accent);
+        border-radius: 999px;
+        font-family: var(--font-talk-mono);
+        font-size: 0.55em;
+        text-decoration: none;
+      }
+
+      .reveal .slides section.talk a.btn:hover {
+        background: var(--talk-accent);
+        color: var(--talk-bg);
+      }
+
+      .reveal.in-talk .controls .controls-arrow:after,
+      .reveal.in-talk .controls .controls-arrow:before {
+        background-color: var(--talk-text);
+      }
+
+      .reveal.in-talk .progress span {
+        background: var(--talk-accent);
+      }
     </style>
   </head>
   <body>
@@ -248,30 +433,12 @@
           <p class="date-line">Thursday 2026-09-10 · Pipple</p>
         </section>
 
-        <!-- LOGISTICS -->
-        <section id="logistics">
-          <h2>📶 Good to know</h2>
-          <div class="strategy-card" style="font-size: 0.7em">
-            <ul style="list-style: none; padding: 0">
-              <li>💦 Hydrate</li>
-              <li>⏸️ Break halfway</li>
-              <li>🍸 Drinks after the last talk</li>
-            </ul>
-          </div>
-        </section>
-
         <!-- MEETUP CONTEXT -->
         <section id="meetups">
           <h2>📍 Meetups</h2>
           <div class="strategy-card" style="font-size: 0.7em">
             <ul>
               <li><span class="b">Today</span> — 2nd Eindhoven meetup 🎉</li>
-              <li>
-                🔮 Upcoming:
-                <ul>
-                  <li>📅 Meetup, Late September — Amsterdam (5th edition) <!-- TODO confirm date + venue --></li>
-                </ul>
-              </li>
               <li>New ambassadors, more meetups!</li>
             </ul>
           </div>
@@ -284,14 +451,16 @@
             <ul>
               <!-- TODO fill from AGENDA.md once speakers are confirmed -->
               <li>
-                <span class="b">Speaker</span>&nbsp;&nbsp;Getting started with Claude
+                <span class="b">Speaker</span>&nbsp;&nbsp;Vincent Bruijn
               </li>
               <li>
-                <span class="b">Speaker</span>&nbsp;&nbsp;Real-world business applications
+                <span class="b">Speaker</span>&nbsp;&nbsp;Wessel Krenn
               </li>
-              <li>Break ⏸️</li>
               <li>
-                <span class="b">Speaker</span>&nbsp;&nbsp;Live demos
+                <span class="b">Speaker</span>&nbsp;&nbsp;Jan Hoorntje
+              </li>
+              <li>
+                <span class="b">Speaker</span>&nbsp;&nbsp;Mir Yousif
               </li>
               <li>Q&amp;A 🙋</li>
               <li>Closing ✌🏾 · Drinks 🍸 🍺</li>
@@ -338,10 +507,513 @@
         <!-- TALKS GO HERE -->
         <!-- ============================ SLIDES START ============================ -->
 
-        <section id="talk-title">
-          <h1>Talk title</h1>
-          <p><em>One-line subtitle</em></p>
-          <!-- TODO replace with the actual talk -->
+        <!-- TALK — Vincent Bruijn: From First Prompt to Skills -->
+        <section id="talk-title" class="talk">
+          <p class="mono">Claude 4 Starters · talk</p>
+          <h1>From First Prompt to Skills</h1>
+          <p class="sub">How I learned Claude Code, and how you can build your own skills</p>
+          <p class="mono plain">Vincent Bruijn</p>
+          <!-- TODO confirm talk title -->
+        </section>
+
+        <!-- N1 — the laugh -->
+        <section class="talk">
+          <section id="the-laugh" class="talk">
+            <p class="mono">March 2025 · weekend breakfast</p>
+            <h2>Why are you laughing?</h2>
+            <ul>
+              <li>Laptop open, on and off</li>
+              <li>"What are you watching on YouTube?"</li>
+              <li>Not YouTube. Claude Code.</li>
+            </ul>
+            <aside class="notes">
+              In March 2025, just a week or two after Claude code was released as research preview, our family was sitting at weekend breakfast and i was looking at my laptop on and off, and at some point i started laughing.
+              My wife asked me: what are you laughing about? What are you watching on YouTube?
+              And though it indeed looked like i was watching a video, i was watching the output of Claude code. And i had to laugh. It was a rich laugh, bittersweet with a little anxiousness, a laugh i seem to laugh when looking at good comedy too. Hence my wife's remark, i suppose.
+            </aside>
+          </section>
+          <section id="trumplang" class="talk">
+            <h2>Building Trumplang</h2>
+            <p class="mono plain">an esoteric programming language</p>
+            <img
+              class="shot-img"
+              src="assets/Trumplang2.png"
+              alt="Trumplang, an esoteric programming language"
+              style="max-height: 58vh"
+            />
+            <aside class="notes">
+              I was playing around with building Trumplang, an esoteric programming language.
+            </aside>
+          </section>
+          <section id="the-laugh-meaning" class="talk">
+            <h2>A bittersweet laugh</h2>
+            <ul>
+              <li>This will drastically change IT</li>
+              <li>And not only IT</li>
+              <li>I started to understand this tool</li>
+            </ul>
+            <aside class="notes">
+              In that laugh i realized that what i saw happening on my laptop screen would drastically change IT, and i had the intuition that these changes would not be limited to IT only.
+              After fiddling and playing around with chatgpt and Claude chat for a few weeks, i had picked up a bigger project i wanted to work on with ai, to see how it would work out.
+              And it was probably in that laugh that i also realized i started understanding how i had to interact with this new tool called Claude code.
+            </aside>
+          </section>
+          <section id="how-did-i-get-here" class="talk">
+            <h2>How did I get here?</h2>
+            <p class="mono plain">from first prompt to that laugh</p>
+            <aside class="notes">
+              What i was building, and how, I'll tell you later but first: how did i get from my first prompt to this stage?
+            </aside>
+          </section>
+        </section>
+
+        <!-- N2 — before Claude Code -->
+        <section class="talk">
+          <section id="before-claude-code" class="talk">
+            <h2>Before Claude Code</h2>
+            <ul>
+              <li>Weeks of ChatGPT and Claude chat</li>
+              <li>Simple prompts, small experiments</li>
+              <li>Then: Aider, my first coding agent</li>
+            </ul>
+            <aside class="notes">
+              Looking back at the weeks before i started using Claude code, i was playing around with simple prompts.
+            </aside>
+          </section>
+          <section id="aider" class="talk">
+            <h2>Aider: hard, but agentic</h2>
+            <ul>
+              <li>A ton of configuration</li>
+              <li>Cost too much time to understand</li>
+              <li>Still: it built me small webpages</li>
+            </ul>
+            <p class="link-footer"><a href="https://aider.chat/">aider.chat</a></p>
+            <aside class="notes">
+              I had been experimenting a few weeks with Aider which I found pretty hard. There was a ton of configuration which cost me too much time to understand, but it was my first touch with ai coding agents. I had it build some small webpages.
+            </aside>
+          </section>
+          <section id="aider-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/aider.png"
+              alt="Aider documentation with a terminal session example"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">aider.chat</p>
+          </section>
+        </section>
+
+        <!-- N3 — research preview -->
+        <section class="talk">
+          <section id="research-preview" class="talk">
+            <p class="mono">end of February 2025</p>
+            <h2>Claude Code, research preview</h2>
+            <ul>
+              <li>I started right after release</li>
+              <li>"Research preview"</li>
+              <li>Basically no limits</li>
+            </ul>
+            <aside class="notes">
+              I started using Claude Code right after its first release at the end of February 2025. At the time it was called "research preview" and basically had no limits.
+            </aside>
+          </section>
+          <section id="research-preview-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/claude-code.png"
+              alt="A Claude Code terminal session"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">Claude Code today</p>
+          </section>
+        </section>
+
+        <!-- N4 — find an isolated problem -->
+        <section class="talk">
+          <section id="isolated-problem" class="talk">
+            <h2>Find an isolated problem</h2>
+            <p class="big fragment">…and fix it with AI</p>
+          </section>
+          <section id="antipode" class="talk">
+            <h2>A nail through Earth</h2>
+            <ul>
+              <li>My son: "where would I end up?"</li>
+              <li>A nice, small AI coding challenge</li>
+              <li>Worked out pretty well</li>
+            </ul>
+            <p class="link-footer">
+              <a href="https://vibes.vincentbruijn.nl/antipode/">vibes.vincentbruijn.nl/antipode</a>
+            </p>
+            <aside class="notes">
+              My son once asked: what would happen when i stick a nail straight through earth, where will i end up? I thought that would be a nice small ai coding challenge which worked out pretty well.
+            </aside>
+          </section>
+          <section id="antipode-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/antipode.png"
+              alt="Antipode map webapp"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">vibes.vincentbruijn.nl/antipode</p>
+          </section>
+          <section id="ideas" class="talk">
+            <h2>Ideas are my driver</h2>
+            <ul>
+              <li>Apps, sites, programs, tools…</li>
+              <li>Each one a reason to start building</li>
+            </ul>
+            <aside class="notes">
+              I think my "drivers" to pick up and learn easily are my ideas: I tend to have a lot of ideas for apps, sites, computer programs, etc.
+            </aside>
+          </section>
+        </section>
+
+        <!-- N5 — scaling up: three challenges -->
+        <section class="talk">
+          <section id="adapt" class="talk">
+            <p class="mono">core thought</p>
+            <h2>Adapt your thinking while doing</h2>
+            <p class="sub fragment">Three challenges along the way</p>
+            <aside class="notes">
+              The AI coding tool is so powerful, that you have to change your thinking about how you build software while you are learning how this new tool works. There are several challenges that I had to cope with along the way.
+            </aside>
+          </section>
+          <section id="parallel" class="talk">
+            <p class="mono">challenge 1 · parallelization</p>
+            <h2>Ten projects in parallel</h2>
+            <ul>
+              <li>At some point I ran ten at once</li>
+              <li>Exhausting</li>
+            </ul>
+          </section>
+          <section id="parallel-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/Peter-Steinberger.jpeg"
+              alt="Peter Steinberger's desk: many screens running coding agents"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">Peter Steinberger's desk</p>
+          </section>
+          <section id="trust" class="talk">
+            <p class="mono">challenge 2 · trust</p>
+            <h2>When do you let go?</h2>
+            <ul>
+              <li>When do you accept the output?</li>
+              <li>That is how CTOs must feel</li>
+              <li>Learn some of their skills</li>
+            </ul>
+            <aside class="notes">
+              Trust issue: when do you accept or do you feel confident enough to let the AI coding tool just do its work? Yes, that's what CTO's must feel like too! You need to learn some of their skills.
+            </aside>
+          </section>
+          <section id="sdlc" class="talk">
+            <p class="mono">challenge 3 · SDLC</p>
+            <h2>Too much, too fast</h2>
+            <ul>
+              <li>It delivers faster than you can oversee</li>
+              <li>Fix: HTML support files</li>
+              <li>Ask your analyst for detailed tickets</li>
+            </ul>
+            <p class="sub fragment" style="font-size: 0.55em">AI can write those tickets, given a clear business goal</p>
+            <aside class="notes">
+              Lack of overview because it delivers so much so quickly. Solution: html support files. Ask for detailed ticket descriptions by your business analyst. Could be made with AI, as long as the business process or value is expressed as a clear goal.
+            </aside>
+          </section>
+          <section id="sdlc-shot" class="talk">
+            <h2>HTML support files</h2>
+            <img
+              class="shot-img"
+              src="assets/explainer.png"
+              alt="A generated HTML explainer file"
+              style="max-height: 62vh"
+            />
+          </section>
+        </section>
+
+        <!-- N6 — show -->
+        <section class="talk">
+          <section id="twain" class="talk">
+            <p class="mono">show</p>
+            <h2>Twain, a Markdown reader</h2>
+            <ul>
+              <li>Models love Markdown</li>
+              <li>Unformatted, it is hard to read</li>
+              <li>So I built a reader</li>
+            </ul>
+            <aside class="notes">
+              I noticed the AI models like MarkDown very much, but it is hard to read them un-formatted.
+            </aside>
+          </section>
+          <section id="twain-compare" class="talk">
+            <h2>Plain vs rendered</h2>
+            <div class="compare">
+              <img class="shot-img" src="assets/Markdown-plain.png" alt="Plain Markdown" />
+              <img class="shot-img" src="assets/Markdown-rendered.png" alt="Markdown rendered in Twain" />
+            </div>
+          </section>
+          <section id="quicklook" class="talk">
+            <h2>Quicklook plugins</h2>
+            <img
+              class="shot-img"
+              src="assets/Quicklook.png"
+              alt="Quicklook plugin"
+              style="max-height: 64vh"
+            />
+          </section>
+        </section>
+
+        <!-- N7 — what failed -->
+        <section id="what-failed" class="talk">
+          <h2>What failed</h2>
+          <ul>
+            <li>My inbox: still not fixed</li>
+            <li>Team dashboards: still not built</li>
+          </ul>
+        </section>
+
+        <!-- N8 — bridge to skills -->
+        <section class="talk">
+          <section id="session-export" class="talk">
+            <h2>Learning from my own sessions</h2>
+            <ul>
+              <li>How do I actually prompt?</li>
+              <li>Old sessions were hard to revisit</li>
+              <li>So I built a session export</li>
+            </ul>
+            <aside class="notes">
+              I wanted to learn from how I do prompting, but it was hard to get insights in old sessions, so I built a session export skill.
+            </aside>
+          </section>
+          <section id="session-export-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/session-export.png"
+              alt="HTML export of a Claude session"
+              style="max-height: 72vh"
+            />
+            <p>
+              <!-- file:// links only work when the deck itself is opened via file://, not over http -->
+              <a
+                class="btn"
+                target="_blank"
+                rel="noopener"
+                href="file:///Users/nlbruiv/Projects/vincent/session-exports-html/claude-session-2026-07-05T10-51-35-496Z_7ffb337d-4114-4bf9-abe0-8f19a44af603.html"
+                >↗ open the live export</a
+              >
+            </p>
+          </section>
+          <section id="what-is-a-skill" class="talk">
+            <p class="mono">that export is a skill</p>
+            <h2>So… what is a skill?</h2>
+          </section>
+        </section>
+
+        <!-- S1 — skills deep dive: definition -->
+        <section class="talk">
+          <section id="skill-definition" class="talk">
+            <p class="mono">skills deep dive</p>
+            <h2>A skill is…</h2>
+            <ul>
+              <li>An extension of the AI agent</li>
+              <li>A distilled set of capabilities</li>
+              <li>A group of related operations</li>
+            </ul>
+          </section>
+          <section id="progressive" class="talk">
+            <h2>Discovered little by little</h2>
+            <div class="flow">
+              <div class="step fragment">
+                <span class="mono">1 · idle</span>
+                Only the description is loaded
+              </div>
+              <div class="arrow fragment">→</div>
+              <div class="step fragment">
+                <span class="mono">2 · trigger</span>
+                Your message matches, or you type /skill
+              </div>
+              <div class="arrow fragment">→</div>
+              <div class="step fragment">
+                <span class="mono">3 · act</span>
+                Agent reads the rest, then acts
+              </div>
+            </div>
+            <aside class="notes">
+              Skills are discovered progressively, so "little by little". Initially only a description of what the skill can do or what it is used for. When the agent is triggered by a user message on the skill's description, or when called explicitly with a slash-command, then the agent will start to discover the skill further and take actions where needed.
+            </aside>
+          </section>
+          <section id="benefits" class="talk">
+            <h2>Why bother?</h2>
+            <ul>
+              <li>No more retyping instructions</li>
+              <li>Isolated, focused topics</li>
+              <li>Can include scripts, even Office files</li>
+            </ul>
+            <aside class="notes">
+              Benefits: reduce retyping of instructions, reduction of repetitive work. Operate on isolated topics. Can be enriched with scripting/coding capabilities. Can operate on office software file types too.
+            </aside>
+          </section>
+        </section>
+
+        <!-- S2 — examples -->
+        <section class="talk">
+          <section id="examples" class="talk">
+            <p class="mono">examples</p>
+            <h2>Four skills I use</h2>
+            <p class="mono plain" style="font-size: 0.7em">/attribution · /grill-me · /session-export · /mand</p>
+          </section>
+          <section id="ex-attribution" class="talk">
+            <h2>/attribution</h2>
+            <ul>
+              <li>Adds "Vincent Bruijn, (c) YYYY" to a file</li>
+            </ul>
+            <img
+              class="shot-img"
+              src="assets/attribution.png"
+              alt="README footer with copyright line added by the attribution skill"
+              style="max-height: 42vh; margin-top: 0.4em"
+            />
+          </section>
+          <section id="ex-grill-me" class="talk">
+            <h2>/grill-me</h2>
+            <ul>
+              <li>Questions you relentlessly about scope</li>
+              <li>A classic among coders</li>
+              <li>Also great for vague-to-concrete ideation</li>
+            </ul>
+          </section>
+          <section id="ex-grill-me-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/grill-me.png"
+              alt="The grill-me SKILL.md: name, description and instructions"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">grill-me SKILL.md · name, description, instructions</p>
+          </section>
+          <section id="ex-session-export" class="talk">
+            <h2>/session-export</h2>
+            <ul>
+              <li>HTML export of a Claude session</li>
+              <li>Basically a shareable asset</li>
+              <li>Built to learn from my own sessions</li>
+            </ul>
+          </section>
+          <section id="ex-mand" class="talk">
+            <h2>/mand</h2>
+            <ul>
+              <li>Makes the answer shorter</li>
+              <li>A gimmick, but it works</li>
+              <li>Inspired by Maxim Hartman and Ben Strik</li>
+            </ul>
+            <p class="link-footer">
+              <a href="https://www.youtube.com/watch?v=ypSKDY4Jp3g">youtube.com/watch?v=ypSKDY4Jp3g</a>
+            </p>
+          </section>
+          <section id="ex-mand-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/mand.png"
+              alt="Mand: Maxim Hartman and Ben Strik"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">"Mand." · Maxim Hartman &amp; Ben Strik</p>
+          </section>
+        </section>
+
+        <!-- S3 — example detail: building /mand -->
+        <section class="talk">
+          <section id="build-mand" class="talk">
+            <p class="mono">example detail</p>
+            <h2>Building /mand</h2>
+            <p class="sub">three prompts</p>
+          </section>
+          <section id="build-mand-1" class="talk">
+            <h2>Prompt 1: the idea</h2>
+            <blockquote class="prompt">
+              I want to make a "mand" skill, which makes your output shorter, a summary of your initial response, inspired by the Maxim Hartman clip of him interviewing a guy selling a nice china bowl asking the man to respond with a shorter answer. Can you guide me build that skill for you?
+            </blockquote>
+          </section>
+          <section id="build-mand-2" class="talk">
+            <h2>Prompts 2 and 3</h2>
+            <blockquote class="prompt fragment">
+              Maybe extend it with an English counterpart "shorter"
+            </blockquote>
+            <blockquote class="prompt fragment">
+              OK let's wrap it up into a downloadable markdown file.
+            </blockquote>
+            <div class="shot fragment">📸 Screenshot to add: the resulting SKILL.md of /mand</div>
+          </section>
+          <section id="why-this-way" class="talk">
+            <h2>Huh? Why this way?</h2>
+            <p class="big fragment" data-fragment-index="1">The Claude desktop app has a skill-builder skill!</p>
+            <img
+              class="shot-img fragment"
+              data-fragment-index="1"
+              src="assets/skill-builder.png"
+              alt="Claude desktop app prompt asking to create a skill with the skill-creator skill"
+              style="max-height: 40vh; margin-top: 0.3em"
+            />
+          </section>
+        </section>
+
+        <!-- T1 — key takeaways -->
+        <section class="talk">
+          <section id="takeaways" class="talk">
+            <p class="mono">key takeaways</p>
+            <h2>Three things to take home</h2>
+            <ol>
+              <li>Adapt your thinking while doing</li>
+              <li>Find a problem, build a solution</li>
+              <li>Start small, let trust grow</li>
+            </ol>
+          </section>
+          <section id="takeaway-1" class="talk">
+            <p class="mono">1</p>
+            <h2>Adapt your thinking while doing</h2>
+            <ul>
+              <li>The tool is that powerful</li>
+              <li>Change how you build software</li>
+              <li>…while learning how the tool works</li>
+            </ul>
+            <aside class="notes">
+              The AI coding tool is so powerful, that you have to change your thinking about how you build software while you are learning how this new tool works.
+            </aside>
+          </section>
+          <section id="takeaway-2" class="talk">
+            <p class="mono">2 · Peter Steinberger · OpenClaw</p>
+            <h2>Find a problem, build it</h2>
+            <ul>
+              <li>He wanted proper Google tooling access</li>
+              <li>So he built gogcli</li>
+              <li>Me: the session export skill</li>
+            </ul>
+            <p class="link-footer"><a href="https://gogcli.sh/">gogcli.sh</a></p>
+          </section>
+          <section id="takeaway-2-shot" class="talk">
+            <img
+              class="shot-img"
+              src="assets/gogcli.png"
+              alt="gogcli.sh homepage: Google Workspace in your terminal"
+              style="max-height: 72vh"
+            />
+            <p class="mono plain">gogcli.sh</p>
+          </section>
+          <section id="takeaway-3" class="talk">
+            <p class="mono">3</p>
+            <h2>Start small, let trust grow</h2>
+            <ul>
+              <li>Isolated problems first</li>
+              <li>Distill anything you repeat into a skill</li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- T2 — close -->
+        <section id="talk-close" class="talk">
+          <h2>Your turn: build a skill</h2>
+          <p class="mono plain">vincentbruijn.nl · github.com/y-a-v-a</p>
         </section>
 
         <!-- ============================ SLIDES END ============================ -->
@@ -407,7 +1079,12 @@
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
     <script>
+      document.querySelectorAll("section.talk").forEach((s) => {
+        s.dataset.backgroundColor = "rgb(227, 218, 204)";
+      });
+
       Reveal.initialize({
         width: 1280,
         height: 720,
@@ -415,9 +1092,16 @@
         hash: true,
         transition: "slide",
         transitionSpeed: "default",
-        plugins: [RevealMarkdown, RevealHighlight],
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
         autoPlayMedia: true,
       });
+
+      const syncTalkChrome = (slide) =>
+        document
+          .querySelector(".reveal")
+          .classList.toggle("in-talk", slide.classList.contains("talk"));
+      Reveal.on("ready", (e) => syncTalkChrome(e.currentSlide));
+      Reveal.on("slidechanged", (e) => syncTalkChrome(e.currentSlide));
     </script>
   </body>
 </html>
