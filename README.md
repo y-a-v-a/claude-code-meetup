@@ -6,6 +6,12 @@ Slides for Claude Code meetups
 
 ## Sessions
 
+### [2026-09-10 — Claude 4 Starters · 2nd Eindhoven](2026-09-10/index.html)
+
+![2026-09-10 slide](2026-09-10-slide.png)
+
+Presented at Pipple, Eindhoven (2nd edition), hosted with [Jeroen de Haas](https://www.linkedin.com/in/jeroendehaas/). My talk "From First Prompt to Skills" covers the journey from Aider and the Claude Code research preview to isolated side projects, running ten projects in parallel, and learning when to let the agent go.
+
 ### [2026-06-18 — Community Talks · 4th Amsterdam](2026-06-18/index.html)
 
 ![2026-06-18 slide](2026-06-18-slide.png)
