@@ -1,9 +1,38 @@
 - **The Hidden AI Vanguards - Stay on the lookout for that accelerating coworker, and foster them!**
 
+
+- I'm an AI enthusiast, and an optimist
+  - that's why I'm standing here!
+  - I love Claude Code, use it since it's inception and started spreading the word.
+  - I'm one of the AI goto persons within our company, together with my CTO
+  - Our CEO sees the opportunities of AI and gave us licenses for both Claude and ChatGPT.
+  - I have good view on AI adoption at G-STAR and I align often with colleagues to understand how they're using AI tools, what they're using it for and I give advice, suggestions and share knowledge.
+
+
+- Who are the hidden ai vanguards?
+  - they show a combination of the following
+    - run out of tokens on a standard seat
+    - they complain about this, and by talking about how or under which conditions they run into these issues, I come to understand how they apply AI tools.
+      - heavy use is not necessarily good use
+        - we had a coworker who tried to translate an Excel sheet of 10,000 rows and 8 columns be translated into 6 languages in one go in a web chat session. That didn't work out.
+          - the intention was good, the understanding that AI should be capable of doing this was right, but the tool use was wrong...
+          - we challenged the colleague to ask Claude for ways to make this process more token-efficient.
+          - now they use Cowork with a set of prompts for this
+        - we had a colleague who wanted to build an operational planning tool for multiple physical stores into an excelsheet.
+          - this sounds like a good idea
+          - but it almost ended up being a full fledged Saas application built into excel.
+          - again: right thinking, wrong tool use.
+          - we suggested to slim down the business case
+          - and don't in it through regular chat, but rather through Cowork.
+        - others found out themselves that a certain workflow was inefficient and researched for solutions by themselves.
+          - how did we know? since we do openly discuss in a cross-department chat group.
+
+
+
 - Monitor usage
 	- Filter out the ones who embrace it best
 	- Use their knowledge and especially their attitude for knowledge sharing
-- Allow people to experiment
+- Allow people to experiment within their license seat
 - Start with standard seats first only then consider to move people to premium
 - Allow for different vendors it's pretty good to combine and ChatGPT alongside claude
 	- Their desktop apps are of similar quality and capabilities
