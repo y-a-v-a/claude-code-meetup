@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='14'>🌱</text></svg>"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      @font-face {
+        font-family: "Anthropic Sans Display";
+        font-weight: 600;
+        src: url("assets/AnthropicSansDisplay-Semibold-Static.otf") format("opentype");
+      }
+      @font-face {
+        font-family: "Anthropic Serif Display";
+        font-weight: 300;
+        src: url("assets/AnthropicSerifDisplay-Light-Static.otf") format("opentype");
+      }
+      @font-face {
+        font-family: "Gotham Bold";
+        src: url("assets/GothamBold_normal_normal_subset1.woff2");
+      }
+      @font-face {
+        font-family: "Gotham Book";
+        src: url("assets/GothamBook_normal_normal_subset1.woff2");
+      }
+
+      :root {
+        --color-claude-terracotta: #d97757;
+        --color-claude-ivory: #faf9f5;
+        --color-claude-cream: #e8e6dc;
+        --color-claude-warm-gray: #b0aea5;
+        --color-claude-coral: #e46962;
+        --color-bg: var(--color-claude-terracotta);
+        --color-text: rgb(20, 20, 19);
+        --color-text-white: rgb(255,255,255);
+        --font-anthropic-sans: "Anthropic Sans Display", Arial, Helvetica, sans-serif;
+        --font-anthropic-serif: "Anthropic Serif Display", Georgia, serif;
+        --font-main: "Anthropic Serif Display", Georgia, serif;
+        --r-heading-text-transform: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-color: var(--color-bg) !important;
+        background-image: url("assets/claude-world.jpg") !important;
+        background-repeat: no-repeat !important;
+        background-position: left bottom !important;
+        background-size: min(34vw, 440px) auto !important;
+      }
+
+      .reveal {
+        font-family: var(--font-main);
+        color: var(--color-text);
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        color: var(--color-text);
+        font-family: var(--font-main);
+      }
+
+      .reveal .slides > section:not(.title-layout),
+      .reveal .slides > section:not(.title-layout) > section {
+        padding-left: 160px;
+        padding-right: 160px;
+      }
+
+      .reveal .slides > section.title-layout {
+        height: 100%;
+        padding: 0;
+        text-align: left;
+        color: var(--color-claude-ivory);
+      }
+
+      .reveal .slides section.title-layout > * {
+        position: absolute;
+        margin: 0;
+      }
+
+      .title-layout .spark {
+        left: 4.93%;
+        top: 9.48%;
+        width: 6.64%;
+        aspect-ratio: 1;
+      }
+
+      .title-layout .globe {
+        left: 65.75%;
+        top: 28.34%;
+        width: 26.94%;
+        aspect-ratio: 1;
+      }
+
+      .title-layout .kicker {
+        left: 5.82%;
+        top: 40.41%;
+        width: 27.97%;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .reveal .title-layout h1 {
+        left: 5.21%;
+        top: 49.97%;
+        width: 56.11%;
+        font-family: var(--font-anthropic-serif);
+        font-weight: 300;
+        font-size: 89px;
+        line-height: 1.15;
+        color: var(--color-text);
+      }
+
+      .title-layout .date-line {
+        left: 5.82%;
+        top: 85.85%;
+        width: 59.22%;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 1.2;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: var(--color-text);
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 24px 10px;
+        margin: 10px;
+        border-radius: 8px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid var(--color-text);
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(20, 20, 19, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: var(--color-text);
+        font-weight: bold;
+      }
+
+      .claude {
+        color: var(--color-text);
+      }
+
+      .small {
+        font-size: 0.4em;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .link-footer {
+        font-size: 0.45em;
+        margin-top: 30px;
+        opacity: 0.8;
+      }
+
+      .link-footer a {
+        color: var(--color-text);
+      }
+
+      .two-col {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .two-col > * {
+        flex: 1;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        padding: 15px 20px;
+        font-size: 0.65em;
+        text-align: left;
+        font-family: var(--font-main);
+      }
+
+      .reveal .controls .controls-arrow:after,
+      .reveal .controls .controls-arrow:before {
+        background-color: rgb(20, 20, 19);
+      }
+
+      .b {
+        font-weight: 700;
+        font-family: var(--font-anthropic-sans), Arial, Helvetica, sans-serif;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      video {
+        max-height: 50vh;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      /* ---- Vincent's talk: own palette + fonts, no Anthropic branding ---- */
+      :root {
+        --talk-bg: rgb(227, 218, 204);
+        --talk-text: #212529;
+        --talk-muted: #4b555e;
+        --talk-accent: #000000;
+        --talk-ink-06: rgba(20, 33, 61, 0.06);
+        --talk-ink-18: rgba(20, 33, 61, 0.18);
+        --font-talk: "Gotham Bold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-talk-sub: "Gotham Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-talk-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      }
+
+      .reveal .slides > section.talk,
+      .reveal .slides > section.talk > section.talk {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .reveal .slides > section.talk:has(> section) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .reveal .slides section.talk h2,
+      .reveal .slides section.talk h1 {
+        font-family: var(--font-talk);
+        color: var(--talk-text);
+      }
+
+      .reveal .slides section.talk,
+      .reveal .slides section.talk h3 {
+        font-family: var(--font-talk-sub);
+        color: var(--talk-text);
+      }
+
+      .reveal .slides section.talk h1 {
+        font-size: 2.2em;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .reveal .slides section.talk h2 {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .reveal .slides section.talk a {
+        color: var(--talk-accent);
+      }
+
+      .reveal .slides section.talk li {
+        margin: 0.35em 0;
+      }
+
+      .reveal .slides section.talk li::marker {
+        color: var(--talk-accent);
+      }
+
+      .talk .mono {
+        font-family: var(--font-talk-mono);
+        font-size: 0.5em;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--talk-accent);
+        margin: 0 0 0.4em;
+      }
+
+      .talk .mono.plain {
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--talk-muted);
+        margin-top: 0.6em;
+      }
+
+      .talk .sub {
+        font-size: 0.7em;
+        color: var(--talk-muted);
+      }
+
+      .talk .big {
+        font-size: 1.3em;
+        font-weight: 700;
+      }
+
+      .talk img.shot-img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(20, 33, 61, 0.25);
+      }
+
+      .talk .compare {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .talk .compare img {
+        height: 44vh;
+        width: auto;
+        max-width: 48%;
+        object-fit: contain;
+      }
+
+      .talk .shot {
+        display: inline-block;
+        margin-top: 0.6em;
+        padding: 0.5em 0.9em;
+        border: 2px dashed var(--talk-accent);
+        border-radius: 8px;
+        font-family: var(--font-talk-mono);
+        font-size: 0.45em;
+        color: var(--talk-accent);
+        text-align: left;
+      }
+
+      .talk .flow {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 0.6em;
+      }
+
+      .talk .flow .step {
+        flex: 1;
+        background: var(--talk-ink-06);
+        border: 1px solid var(--talk-ink-18);
+        border-radius: 10px;
+        padding: 0.6em 0.7em;
+        font-size: 0.6em;
+        text-align: left;
+      }
+
+      .talk .flow .step .mono {
+        display: block;
+        margin-bottom: 0.3em;
+      }
+
+      .talk .flow .arrow {
+        align-self: center;
+        color: var(--talk-accent);
+        font-size: 1.2em;
+      }
+
+      .reveal .slides section.talk blockquote.prompt {
+        width: 100%;
+        margin: 0.6em 0;
+        padding: 0.6em 0.9em;
+        background: var(--talk-ink-06);
+        border-left: 4px solid var(--talk-accent);
+        border-radius: 6px;
+        font-size: 0.65em;
+        font-style: normal;
+        text-align: left;
+        box-shadow: none;
+      }
+
+      .talk blockquote.prompt::before {
+        content: "› ";
+        color: var(--talk-accent);
+        font-family: var(--font-talk-mono);
+      }
+
+      .reveal .slides section.talk a.btn {
+        display: inline-block;
+        margin-top: 0.4em;
+        padding: 0.25em 0.9em;
+        border: 2px solid var(--talk-accent);
+        border-radius: 999px;
+        font-family: var(--font-talk-mono);
+        font-size: 0.55em;
+        text-decoration: none;
+      }
+
+      .reveal .slides section.talk a.btn:hover {
+        background: var(--talk-accent);
+        color: var(--talk-bg);
+      }
+
+      .reveal.in-talk .controls .controls-arrow:after,
+      .reveal.in-talk .controls .controls-arrow:before {
+        background-color: var(--talk-text);
+      }
+
+      .reveal.in-talk .progress span {
+        background: var(--talk-accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section id="welcome" class="title-layout" data-background-color="#d97757">
+          <img class="spark" src="assets/ClaudeSpark-Ivory.png" alt="" />
+          <img class="globe" src="assets/Node-Globe.png" alt="" />
+          <!-- TODO event name and location -->
+          <p class="kicker">Claude Community</p>
+          <h1>The Hidden AI Vanguards</h1>
+          <p class="date-line">Friday 2026-10-09</p>
+        </section>
+
+        <!-- ABOUT ME -->
+        <section>
+          <section id="about-me">
+            <h2>Vincent Bruijn</h2>
+            <ul>
+              <li>Tech Manager at <span class="b">G-STAR</span></li>
+              <li>Self taught software developer / engineer</li>
+              <li>Educated as Visual Artist</li>
+              <li>Digital Artist</li>
+              <li>Claude enthusiast since Nov 2024</li>
+              <li>Claude Community Ambassador
+                <ul>
+                  <li>since Feb 2026</li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+
+          <section id="ambassador">
+            <h2>Claude Community Ambassador</h2>
+            <img
+              src="assets/Anthropic-ambassador.png"
+              alt="Anthropic ambassadors"
+              style="max-height: 45vh"
+            />
+            <p class="link-footer">
+              <a href="https://claude.com/community/ambassadors"
+                >claude.com/community/ambassadors</a
+              >
+            </p>
+          </section>
+        </section>
+
+        <!-- ============================ SLIDES START ============================ -->
+
+        <section id="talk-title" class="talk">
+          <p class="mono">talk</p>
+          <h1>The Hidden AI Vanguards</h1>
+          <p class="sub">Stay on the lookout for that accelerating coworker, and foster them!</p>
+          <p class="mono plain">Vincent Bruijn</p>
+        </section>
+
+        <!-- 1 — who am I -->
+        <section class="talk">
+          <section id="who-am-i" class="talk">
+            <p class="mono">1 · who am I</p>
+            <h2>An AI optimist</h2>
+            <ul>
+              <li>That is why I am standing here</li>
+              <li>Using Claude Code since its first release</li>
+              <li>Spreading the word ever since</li>
+              <li>One of the AI go-to people at G-STAR, together with our CTO</li>
+            </ul>
+          </section>
+          <section id="who-am-i-view" class="talk">
+            <h2>A view on adoption</h2>
+            <ul>
+              <li>Our CEO saw the opportunity: licenses for Claude and ChatGPT</li>
+              <li>I regularly align with colleagues on how and why they use AI</li>
+              <li>I give advice and suggestions, and share knowledge</li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- 2 — the situation after a rollout -->
+        <section class="talk">
+          <section id="after-rollout" class="talk">
+            <p class="mono">2 · after the rollout</p>
+            <h2>A replacement for Google</h2>
+            <ul>
+              <li>Hard to get AI tools beyond search</li>
+              <li>People just don't think about what they could ask Claude</li>
+              <li>But some people are always more tool-curious</li>
+            </ul>
+          </section>
+          <section id="after-rollout-freedom" class="talk">
+            <h2>Freedom to experiment</h2>
+            <ul>
+              <li>A few power users accelerate: they feel free to experiment</li>
+              <li>Others don't feel that freedom, or don't get it</li>
+              <li>They work to expectations, task by task</li>
+              <li>Most have structure, projects and routines</li>
+            </ul>
+            <p class="big" style="font-size: 0.9em">Convince people to give them time to experiment</p>
+          </section>
+        </section>
+
+        <!-- 3 — who might be the hidden AI vanguard -->
+        <section class="talk">
+          <section id="vanguard-signs" class="talk">
+            <p class="mono">3 · spot them</p>
+            <h2>Who might be the hidden AI vanguard?</h2>
+            <p class="sub">A combination of these signs</p>
+            <ul>
+              <li>They run out of tokens on a standard seat</li>
+              <li>They ask for connectors: "how can I reach this data?"</li>
+              <li>They ask how to enable a tool for more colleagues</li>
+              <li>They suddenly bring good slide decks to meetings</li>
+              <li>They move beyond their role</li>
+            </ul>
+          </section>
+          <section id="vanguard-heavy-use" class="talk">
+            <h2>Heavy use is not good use</h2>
+            <p class="sub">They complain about limits. Ask how they hit them.</p>
+            <div class="flow">
+              <div class="step">
+                <span class="mono">case · translation</span>
+                A sheet of 10,000 rows by 8 columns, into 6 languages, in one web chat.
+                Right idea, wrong tool. We asked them to ask Claude for a token-efficient way.
+                Now: Cowork with a set of prompts.
+              </div>
+              <div class="step">
+                <span class="mono">case · store planning</span>
+                An operational planning tool for multiple stores, built in Excel.
+                It almost became a full SaaS app inside a spreadsheet.
+                We slimmed down the business case and moved it to Cowork.
+              </div>
+            </div>
+            <!-- IMAGE 1 -->
+            <div class="shot">Image 1: Cowork with the translation prompts</div>
+          </section>
+          <section id="vanguard-beyond-role" class="talk">
+            <h2>Beyond their role</h2>
+            <ul>
+              <li>They start coding</li>
+              <li>They deliver mockups in the company style guide</li>
+              <li>They deliver reports with new insights on existing data</li>
+              <li>They spot inefficient workflows and find solutions themselves</li>
+            </ul>
+            <p class="sub">We see it because we discuss openly in a cross-department chat group</p>
+            <!-- IMAGE 2 -->
+            <div class="shot">Image 2: a mockup made by a non-designer</div>
+          </section>
+          <section id="vanguard-monitor" class="talk">
+            <h2>Monitor usage</h2>
+            <ul>
+              <li>Find the ones who embrace it best</li>
+              <li>Use their knowledge</li>
+              <li>And especially their attitude, for knowledge sharing</li>
+            </ul>
+            <!-- IMAGE 3 -->
+            <div class="shot">Image 3: anonymized usage dashboard</div>
+          </section>
+        </section>
+
+        <!-- 4 — how to foster them -->
+        <section class="talk">
+          <section id="foster" class="talk">
+            <p class="mono">4 · foster them</p>
+            <h2>What do we do with the vanguards?</h2>
+            <ul>
+              <li>Feed their curiosity with new tools</li>
+              <li>Discuss their current workflows</li>
+              <li>Discuss their wishes: "I wish I could X, then Y, and even Z"</li>
+              <li>Share how we think about applying AI</li>
+            </ul>
+            <p class="sub">They usually have a vision</p>
+          </section>
+          <section id="foster-licenses" class="talk">
+            <h2>Licenses</h2>
+            <ul>
+              <li>Start with standard seats, only then consider premium</li>
+              <li>Be willing to upgrade a vanguard's seat</li>
+              <li>So they not only speed up, but also explore more</li>
+              <li>Let people experiment within their seat</li>
+            </ul>
+          </section>
+          <section id="foster-room" class="talk">
+            <h2>Room to explore</h2>
+            <ul>
+              <li>Allow different vendors: ChatGPT alongside Claude</li>
+              <li>Their desktop apps are of similar quality</li>
+              <li>Give interns and trainees licenses too</li>
+              <li>They are the new generation, and may use AI a lot already</li>
+            </ul>
+            <p class="big" style="font-size: 0.9em">Learn from them</p>
+          </section>
+        </section>
+
+        <!-- 5 — put the vanguards to work -->
+        <section class="talk">
+          <section id="spread" class="talk">
+            <p class="mono">5 · spread adoption</p>
+            <h2>Put the vanguards to work</h2>
+            <ul>
+              <li>Give them an extra role: visit other departments</li>
+              <li>Let them be the drivers and the challengers</li>
+              <li>Creative people who dare to experiment, and tell it well</li>
+              <li>The techie who explains in plain words why token efficiency matters</li>
+            </ul>
+            <p class="sub">A head of tech with 100 staff hired 3 to 4 people just to walk around, nudge and explain what AI could automate</p>
+          </section>
+          <section id="spread-small-groups" class="talk">
+            <h2>Small groups over plenary</h2>
+            <ul>
+              <li>People feel overwhelmed in big group sessions</li>
+              <li>Showcase to managers, so they spread it within their team</li>
+              <li>Let managers point out where their team can improve</li>
+              <li>Focus on one person's tasks</li>
+            </ul>
+            <p class="big" style="font-size: 0.9em">Serve the food on the plate, not in the mouth</p>
+          </section>
+          <section id="spread-ask-claude" class="talk">
+            <h2>Don't ask me, ask Claude</h2>
+            <ul>
+              <li>A question comes up in a meeting? Check it with Claude, right now</li>
+              <li>Not "let's review after the meeting"</li>
+              <li>A live demo on your own company data</li>
+              <li>No fear of "technical": instruct Claude like a coworker</li>
+              <li>Share routines: a weekly mail on accessibility court cases, a weekly CVE check</li>
+            </ul>
+          </section>
+          <section id="spread-fraiday" class="talk">
+            <h2>FrAIday</h2>
+            <blockquote class="prompt">
+              What task did I do this week that I could have done with AI?
+            </blockquote>
+            <ul>
+              <li>Every Friday, everyone in the office, in a shared chat group</li>
+              <li>Start with people who hate their manual tasks</li>
+              <li>But people may not imagine what AI can automate: show them</li>
+            </ul>
+            <!-- IMAGE 4 -->
+            <div class="shot">Image 4: the FrAIday chat group (anonymized)</div>
+          </section>
+        </section>
+
+        <!-- 6 — guardrails -->
+        <section class="talk">
+          <section id="guardrails" class="talk">
+            <p class="mono">6 · guardrails</p>
+            <h2>The vanguards know the limits</h2>
+            <ul>
+              <li>Our job is to show where the limits and risks are</li>
+              <li>We have a sense of what AI can and can't do</li>
+              <li>And of the risks of applying it to certain systems and data</li>
+            </ul>
+          </section>
+          <section id="guardrails-bigquery" class="talk">
+            <h2>"Can I get access to BigQuery?"</h2>
+            <ul>
+              <li>At first sight: the solution. It is not.</li>
+              <li>We need the real business case</li>
+              <li>The information is often already available elsewhere</li>
+              <li>Querying it freely can become very expensive</li>
+              <li>Access to everything is not always the answer</li>
+            </ul>
+            <!-- IMAGE 5 -->
+            <div class="shot">Image 5: query cost of a heavy BigQuery request</div>
+          </section>
+          <section id="guardrails-playing-fields" class="talk">
+            <h2>Enable playing fields</h2>
+            <ul>
+              <li>Safe spaces to experiment</li>
+              <li>Make people aware of the consequences of heavy queries</li>
+            </ul>
+          </section>
+        </section>
+
+        <!-- 7 — takeaway -->
+        <section id="takeaway" class="talk">
+          <p class="mono">7 · takeaway</p>
+          <h2>A few weeks after a rollout</h2>
+          <ol>
+            <li>Identify the vanguards</li>
+            <li>Foster them</li>
+            <li>Use their experience for the next step</li>
+          </ol>
+        </section>
+
+        <!-- ============================ SLIDES END ============================ -->
+
+        <section id="thanks">
+          <h2>Thanks</h2>
+          <div class="two-col" style="justify-content: center">
+            <div
+              class="strategy-card"
+              style="font-size: 0.7em; text-align: center"
+            >
+              <p class="b">repo</p>
+              <img
+                src="assets/github_y-a-v-a_repo.png"
+                alt="GitHub QR — y-a-v-a"
+                style="max-height: 26vh; max-width: 100%"
+              />
+              <p class="small">github.com/y-a-v-a</p>
+            </div>
+            <div
+              class="strategy-card"
+              style="font-size: 0.7em; text-align: center"
+            >
+              <p class="b">site</p>
+              <img
+                src="assets/www_vincentbruijn_nl.png"
+                alt="vincentbruijn.nl QR"
+                style="max-height: 26vh; max-width: 100%"
+              />
+              <p class="small">vincentbruijn.nl</p>
+            </div>
+          </div>
+          <p class="small" style="margin-top: 20px">
+            <span class="b">Vincent Bruijn</span> · Claude Community Ambassador
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script>
+      document.querySelectorAll("section.talk").forEach((s) => {
+        s.dataset.backgroundColor = "#e4e6e7";
+      });
+
+      Reveal.initialize({
+        width: 1280,
+        height: 720,
+        margin: 0,
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+
+      const syncTalkChrome = (slide) =>
+        document
+          .querySelector(".reveal")
+          .classList.toggle("in-talk", slide.classList.contains("talk"));
+      Reveal.on("ready", (e) => syncTalkChrome(e.currentSlide));
+      Reveal.on("slidechanged", (e) => syncTalkChrome(e.currentSlide));
+    </script>
+  </body>
+</html>
