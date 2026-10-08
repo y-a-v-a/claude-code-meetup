@@ -361,8 +361,8 @@
       }
 
       .talk .shot {
-        display: inline-block;
-        margin-top: 0.6em;
+        display: table;
+        margin: 0.6em auto 0;
         padding: 0.5em 0.9em;
         border: 2px dashed var(--talk-accent);
         border-radius: 8px;
@@ -518,6 +518,26 @@
         fill: var(--talk-muted);
       }
 
+      .doodle .typing {
+        opacity: 0;
+      }
+
+      .doodle .sweep {
+        transform-box: view-box;
+        transform-origin: 130px 130px;
+      }
+
+      .doodle .ping {
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
+      .doodle .hop-shadow {
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+
       .doodle text.label {
         font-family: var(--font-talk);
         fill: #fff;
@@ -534,6 +554,27 @@
           animation: doodle-fade 0.6s ease-out both;
           animation-delay: calc(0.3s + var(--i, 0) * 0.05s);
         }
+
+        .reveal .slides section.present > .doodle .typing {
+          animation: doodle-typing 1.2s ease-in-out both;
+          animation-delay: calc(1.8s + var(--d, 0s));
+        }
+
+        .reveal .slides section.present > .doodle .sweep {
+          animation: doodle-sweep 1.8s cubic-bezier(0.45, 0, 0.25, 1) 1s both;
+        }
+
+        .reveal .slides section.present > .doodle .ping {
+          animation: doodle-ping 0.9s ease-out 2.8s 2 forwards;
+        }
+
+        .reveal .slides section.present > .doodle .hop {
+          animation: doodle-hop 0.5s ease-in-out 3s 2;
+        }
+
+        .reveal .slides section.present > .doodle .hop-shadow {
+          animation: doodle-hop-shadow 0.5s ease-in-out 3s 2;
+        }
       }
 
       @keyframes doodle-draw {
@@ -547,6 +588,65 @@
         to {
           stroke-dashoffset: 0;
           fill-opacity: 1;
+        }
+      }
+
+      @keyframes doodle-typing {
+        0% {
+          opacity: 0;
+          transform: translateY(0);
+        }
+        12% {
+          opacity: 1;
+        }
+        30% {
+          transform: translateY(-4px);
+        }
+        50% {
+          transform: translateY(0);
+        }
+        70% {
+          transform: translateY(-4px);
+        }
+        88% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes doodle-sweep {
+        from {
+          transform: rotate(-360deg);
+        }
+        to {
+          transform: rotate(0deg);
+        }
+      }
+
+      @keyframes doodle-ping {
+        from {
+          opacity: 0.9;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 0;
+          transform: scale(1.9);
+        }
+      }
+
+      @keyframes doodle-hop {
+        50% {
+          transform: translateY(-14px);
+        }
+      }
+
+      @keyframes doodle-hop-shadow {
+        50% {
+          transform: scale(0.75);
+          opacity: 0.6;
         }
       }
 
@@ -679,12 +779,14 @@
             </svg>
           </section>
           <section id="who-am-i-view" class="talk">
-            <h2>A view on adoption</h2>
+            <h2>A view on adoption at G-STAR</h2>
             <ul>
+              <li>My story on what we learned; and we're still learning</li>
               <li>Our CEO saw the opportunity: licenses for Claude and ChatGPT</li>
               <li>I regularly align with colleagues on how and why they use AI</li>
               <li>I give advice and suggestions, and share knowledge</li>
             </ul>
+            <img style="width: 200px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMT0dPIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDE1MDAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxNTAwIDI1MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLnN0MHtmaWxsOiMwMDA7fQo8L3N0eWxlPgo8Zz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDE1Ljk5LDE2NC40YzI3LjkzLTEwLjQ0LDQ3LjgxLTM3LjUyLDQ3LjUxLTY5LjEyYy0wLjM5LTQwLjE5LTMzLjc0LTcyLjI4LTczLjkzLTcyLjI4SDEyMzAuNSAgIGMtMy4zMSwwLTYsMi42OS02LDZ2MTkyYzAsMy4zMSwyLjY5LDYsNiw2aDM0YzMuMzEsMCw2LTIuNjksNi02di01Mmg5MS40Mmw0MS40NSw1NC44MmMxLjUxLDIsMy44NywzLjE4LDYuMzgsMy4xOGg0NS41NSAgIGMzLjMsMCw1LjE4LTMuNzgsMy4xOS02LjQxTDE0MTUuOTksMTY0LjR6IE0xMjcwLjUsNjloMTIwYzE0Ljg5LDAsMjcsMTIuMTEsMjcsMjdzLTEyLjExLDI3LTI3LDI3aC0xMjBWNjl6Ii8+Cgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMjg2LjUsMTAyaC0xMzJjLTMuMzEsMC02LDIuNjktNiw2djM0YzAsMy4zMSwyLjY5LDYsNiw2aDkydjE2LjVjMCw5LjExLTcuMzksMTYuNS0xNi41LDE2LjVIMTEwLjUgICBjLTE1LjQ2LDAtMjgtMTIuNTQtMjgtMjhWOTdjMC0xNS40NiwxMi41NC0yOCwyOC0yOGgxNjdjMy4zMSwwLDYtMi42OSw2LTZWMjljMC0zLjMxLTIuNjktNi02LTZoLTE2N2MtNDAuODcsMC03NCwzMy4xMy03NCw3NHY1NiAgIGMwLDQwLjg3LDMzLjEzLDc0LDc0LDc0SDIzMGMzNC41MiwwLDYyLjUtMjcuOTgsNjIuNS02Mi41VjEwOEMyOTIuNSwxMDQuNjksMjg5LjgxLDEwMiwyODYuNSwxMDJ6Ii8+Cgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTExMi41LDIzaC05N2MtNDAuODcsMC03NCwzMy4xMy03NCw3NHYxMjRjMCwzLjMxLDIuNjksNiw2LDZoMzRjMy4zMSwwLDYtMi42OSw2LTZ2LTUyaDE1M3Y1MiAgIGMwLDMuMzEsMi42OSw2LDYsNmgzNGMzLjMxLDAsNi0yLjY5LDYtNlY5N0MxMTg2LjUsNTYuMTMsMTE1My4zNywyMywxMTEyLjUsMjN6IE05ODcuNSwxMjNWOTdjMC0xNS40NiwxMi41NC0yOCwyOC0yOGg5NyAgIGMxNS40NiwwLDI4LDEyLjU0LDI4LDI4djI2SDk4Ny41eiIvPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTYxNCwxMDJINDk4LjcxYy05LDAtMTYuMzUtNy4yNS0xNi41LTE2LjIyQzQ4Mi4wNSw3Ni41NSw0ODkuOTEsNjksNDk5LjE0LDY5SDY0OS41YzMuMzEsMCw2LTIuNjksNi02VjI5ICAgYzAtMy4zMS0yLjY5LTYtNi02SDQ5Ni43MWMtMzQuNzksMC02My4wMiwyOC41Ny02Mi40OSw2My40N2MwLjUyLDM0LjI5LDI5LjE0LDYxLjUzLDYzLjQ0LDYxLjUzSDYxM2M5LDAsMTYuMzUsNy4yNSwxNi41LDE2LjIyICAgYzAuMTUsOS4yMy03LjcxLDE2Ljc4LTE2LjkzLDE2Ljc4SDQ0OS41Yy0zLjMxLDAtNiwyLjY5LTYsNnYzNGMwLDMuMzEsMi42OSw2LDYsNmgxNjMuNTVjMzQuMywwLDYyLjkyLTI3LjI0LDYzLjQ0LTYxLjUzICAgQzY3Ny4wMywxMzAuNTcsNjQ4Ljc5LDEwMiw2MTQsMTAyeiIvPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTkxMi41LDIzaC0yMTZjLTMuMzEsMC02LDIuNjktNiw2djM0YzAsMy4zMSwyLjY5LDYsNiw2aDg1djE1MmMwLDMuMzEsMi42OSw2LDYsNmgzNGMzLjMxLDAsNi0yLjY5LDYtNlY2OWg4NSAgIGMzLjMxLDAsNi0yLjY5LDYtNlYyOUM5MTguNSwyNS42OSw5MTUuODEsMjMsOTEyLjUsMjN6Ii8+Cgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzQwLjUsMTQ4aDUxYzMuMzEsMCw2LTIuNjksNi02di0zNGMwLTMuMzEtMi42OS02LTYtNmgtNTFjLTMuMzEsMC02LDIuNjktNiw2djM0ICAgQzMzNC41LDE0NS4zMSwzMzcuMTksMTQ4LDM0MC41LDE0OHoiLz4KPC9nPgo8L3N2Zz4=" alt="G-STAR logo">
           </section>
         </section>
 
@@ -694,9 +796,9 @@
             <p class="mono">2 · after the initial rollout</p>
             <h2>AI a replacement for Google...?</h2>
             <ul>
-              <li>Hard to get AI tools used beyond search++</li>
-              <li>People just don't think about what they could ask Claude</li>
-              <li>But some people are always more tool-curious</li>
+              <li>How can we progress AI use beyond search++</li>
+              <li>Some people just don't think about what they could ask Claude</li>
+              <li>But luckily some people are always more tool-curious</li>
             </ul>
             <svg class="doodle inline" viewBox="0 0 520 130" width="520" height="130" aria-hidden="true">
               <g class="rough">
@@ -718,13 +820,14 @@
           <section id="after-rollout-freedom" class="talk">
             <h2>Freedom to experiment</h2>
             <ul>
-              <li>A few power users accelerate: they feel free to experiment</li>
+              <li>A few power users accelerate: they take the freedom to experiment</li>
+              <li>They understand the time invested will pay off<br><br></li>
               <li>Others don't feel that freedom, or don't get it</li>
               <li>They work to expectations, task by task</li>
-              <li>Most have structure, projects and routines</li>
+              <li>Their role exists in projects, routines and structure</li>
             </ul>
-            <p class="big" style="font-size: 0.9em">Convince people to give them time to experiment</p>
-            <svg class="doodle float" viewBox="0 0 240 215" width="240" height="215" style="right: 40px; bottom: -190px" aria-hidden="true">
+            <p class="big" style="font-size: 1.1em">Convince managers<br>to give people<br>time to experiment</p>
+            <svg class="doodle float" viewBox="0 0 240 215" width="240" height="215" style="right: 140px; bottom: -40px" aria-hidden="true">
               <g class="rough">
                 <path class="ink paper" d="M 30 190 V 90 C 30 40 170 40 170 90 V 190 Z" style="fill-opacity: 0.45" />
                 <path class="ink thin" d="M 55 61 V 190 M 80 54 V 125 M 120 54 V 125 M 145 61 V 190 M 80 125 H 120 M 80 125 V 190 M 120 125 V 190" />
@@ -756,13 +859,13 @@
           <section id="vanguard-signs" class="talk">
             <p class="mono">3 · spot them</p>
             <h2>Who might be the hidden AI vanguard?</h2>
-            <p class="sub">A combination of these signs</p>
+            <p class="sub">A combination of these signs. The vanguard:</p>
             <ul>
-              <li>They run out of tokens on a standard seat</li>
-              <li>They ask for connectors: "how can I reach this data?"</li>
-              <li>They ask how to enable a tool for more colleagues</li>
-              <li>They suddenly bring good slide decks to meetings</li>
-              <li>They move beyond their role</li>
+              <li>Runs out of tokens on a standard seat</li>
+              <li>Asks for Connectors: "how can I reach this data?"</li>
+              <li>Asks how to enable a self built tool for other colleagues</li>
+              <li>Suddenly brings awesome slide decks to meetings</li>
+              <li>Moves beyond their role</li>
             </ul>
             <svg class="doodle float" viewBox="0 0 280 170" width="280" height="170" style="right: 50px; bottom: -120px" aria-hidden="true">
               <g class="rough">
@@ -781,7 +884,7 @@
           </section>
           <section id="vanguard-heavy-use" class="talk">
             <h2>Heavy use is not always good use</h2>
-            <p class="sub">They complain about limits. Ask how they hit them.</p>
+            <p class="sub">Be careful with complaints about limits. Ask how they hit them.</p>
             <div class="flow">
               <div class="step">
                 <span class="mono">case · translation</span>
@@ -797,29 +900,99 @@
               </div>
             </div>
             <!-- IMAGE 1 -->
-            <div class="shot">Image 1: Cowork with the translation prompts</div>
+            <!-- <div class="shot">Image 1: Cowork with the translation prompts</div> -->
           </section>
           <section id="vanguard-beyond-role" class="talk">
-            <h2>Beyond their role</h2>
+            <h2>A vanguard moves beyond their role (1)</h2>
             <ul>
-              <li>They start coding</li>
-              <li>They deliver mockups in the company style guide</li>
-              <li>They deliver reports with new insights on existing data</li>
-              <li>They spot inefficient workflows and find solutions themselves</li>
+              <li>She starts coding
+                <ul>
+                  <li>"Never done before, but I think I'm getting there"</li>
+                  <li>"I wanted better oversight, so I built this"</li>
+                </ul>
+              </li>
+              <li>They Deliver mockups in the company style guide
+                <ul><li>"I couldn't find the style guide,<br>
+                  so pointed Claude to our site"</li></ul>
+              </li>
             </ul>
-            <p class="sub">We see it because we discuss openly in a cross-department chat group</p>
+            <!-- <p class="sub">We see this because we discuss openly in cross-department groups</p> -->
             <!-- IMAGE 2 -->
-            <div class="shot">Image 2: a mockup made by a non-designer</div>
+            <!-- <div class="shot">Image 2: a mockup made by a non-designer</div> -->
+          </section>
+          <section id="vanguard-beyond-role-2" class="talk">
+            <h2>A vanguard moves beyond their role (2)</h2>
+            <ul>
+              <li>He delivers reports with new insights on existing data
+                <ul>
+                  <li>"I found old reports in my archive, and tought..."</li>
+                  <li>"I had a long wish for analyzing XYZ"</li>
+                </ul>
+              </li>
+              <li>They spot inefficient workflows and finds solutions on their own
+                <ul>
+                  <li>"I was fed up with doing X, so I built skill Y to solve it"</li>
+                  <li>"We saved $$$ by comparing last year's contract with current proposal"</li>
+                </ul>
+              </li>
+            </ul>
+            <!-- <p class="sub">We see this because we discuss openly in cross-department groups</p> -->
+            <!-- IMAGE 2 -->
+            <!-- <div class="shot">Image 2: a mockup made by a non-designer</div> -->
           </section>
           <section id="vanguard-monitor" class="talk">
-            <h2>Monitor usage</h2>
+            <h2>Find the vanguards!</h2>
             <ul>
-              <li>Find the ones who embrace it best</li>
-              <li>Use their knowledge</li>
-              <li>And especially their attitude, for knowledge sharing</li>
+              <li>The ones who embrace AI in novel ways</li>
+              <li>The ones where AI's capabilities landed</li>
+              <li>The ones that surprise themselves</li>
+              <li>Let's use their knowledge</li>
+              <li>Let's learn from their attitudes</li>
             </ul>
-            <!-- IMAGE 3 -->
-            <div class="shot">Image 3: anonymized usage dashboard</div>
+            <svg class="doodle float" viewBox="0 0 260 260" width="260" height="260" style="left: 40px; top: 40px" aria-hidden="true">
+              <g class="rough">
+                <circle class="ink paper" cx="130" cy="130" r="104" style="stroke-width: 6" />
+                <circle class="ink thin soft" cx="130" cy="130" r="66" />
+                <circle class="ink thin soft" cx="130" cy="130" r="33" />
+                <path class="ink thin soft" d="M 30 130 H 230 M 130 30 V 230" />
+                <path class="ink thin" d="M 130 18 V 26 M 242 130 H 234 M 130 242 V 234 M 18 130 H 26 M 209.2 50.8 L 203.5 56.5 M 209.2 209.2 L 203.5 203.5 M 50.8 209.2 L 56.5 203.5 M 50.8 50.8 L 56.5 56.5" />
+                <circle class="solid" cx="92" cy="104" r="3" style="opacity: 0.35" />
+                <circle class="solid" cx="168" cy="176" r="3" style="opacity: 0.35" />
+                <circle class="solid" cx="82" cy="170" r="3" style="opacity: 0.35" />
+                <circle class="solid" cx="196" cy="128" r="3" style="opacity: 0.35" />
+                <circle class="solid" cx="118" cy="196" r="3" style="opacity: 0.35" />
+                <g class="sweep">
+                  <path class="shade" d="M 130 130 L 132.1 30 A 100 100 0 0 1 195.9 54.8 Z" />
+                  <path class="ink" d="M 130 130 L 195.9 54.8" />
+                </g>
+                <circle class="ink paper" cx="172" cy="78" r="5" data-i="44" />
+                <path class="ink thin paper" d="M 163 93 Q 163 85 172 85 Q 181 85 181 93 Z" data-i="45" />
+                <circle class="ink" cx="172" cy="85" r="16" data-i="50" />
+                <circle class="ink thin ping" cx="172" cy="85" r="16" />
+                <circle class="solid" cx="130" cy="130" r="5" />
+              </g>
+            </svg>
+            <svg class="doodle float" viewBox="0 0 230 292" width="230" height="292" style="right: 40px; top: 22px" aria-hidden="true">
+              <g class="rough">
+                <ellipse class="shade hop-shadow" cx="115" cy="282" rx="42" ry="6" />
+                <path class="ink thin soft" d="M 100 254 V 266 M 115 258 V 272 M 130 254 V 266" />
+                <g class="hop">
+                  <path class="ink thick" d="M 102 194 L 92 228 L 78 244 M 128 194 L 140 226 L 154 238" />
+                  <path class="ink paper" d="M 90 132 Q 115 119 140 132 L 134 190 Q 115 198 96 190 Z" />
+                  <circle class="ink paper" cx="115" cy="96" r="18" />
+                  <path class="ink thick" d="M 97 134 Q 74 112 64 74 M 133 134 Q 156 112 166 74" />
+                  <rect class="ink paper" x="64" y="8" width="102" height="58" rx="5" />
+                  <path class="ink paper" d="M 56 66 H 174 L 168 74 H 62 Z" />
+                  <circle class="ink paper" cx="62" cy="72" r="6" />
+                  <circle class="ink paper" cx="168" cy="72" r="6" />
+                  <path class="ink thin paper" d="M 115 22 Q 117 35 130 37 Q 117 39 115 52 Q 113 39 100 37 Q 113 35 115 22 Z" />
+                </g>
+                <path class="ink thin paper" d="M 30 118 Q 32 128 42 130 Q 32 132 30 142 Q 28 132 18 130 Q 28 128 30 118 Z" />
+                <path class="ink thin paper" d="M 202 130 Q 204 138 212 140 Q 204 142 202 150 Q 200 142 192 140 Q 200 138 202 130 Z" />
+                <path class="ink thin paper" d="M 206 18 Q 207 24 213 25 Q 207 26 206 32 Q 205 26 199 25 Q 205 24 206 18 Z" />
+                <path class="ink thin soft" d="M 22 40 L 28 46 M 30 34 L 30 26 M 196 64 L 204 60 M 186 196 L 194 200" />
+              </g>
+            </svg>
           </section>
         </section>
 
@@ -862,7 +1035,7 @@
               <li>Start with standard seats, only then consider premium</li>
               <li>Be willing to upgrade a vanguard's seat</li>
               <li>So they not only speed up, but also explore more</li>
-              <li>Let people experiment within their seat</li>
+              <!-- <li>Let people experiment within their seat</li> -->
             </ul>
             <svg class="doodle inline" viewBox="0 0 340 190" width="340" height="190" aria-hidden="true">
               <g class="rough">
@@ -886,12 +1059,24 @@
           <section id="foster-room" class="talk">
             <h2>Room to explore</h2>
             <ul>
-              <li>Allow different vendors: ChatGPT alongside Claude</li>
-              <li>Their desktop apps are of similar quality</li>
-              <li>Give interns and trainees licenses too</li>
-              <li>They are the new generation, and may use AI a lot already</li>
+              <li>Allow different vendors: ChatGPT alongside Claude
+                <ul>
+                  <li>Their models and desktop apps are of similar quality</li>
+                  <li></li>
+                </ul>
+              </li>
+              <li>Challenge them:
+                <ul>
+                  <li>"What does your Claude do during lunch?"</li>
+                  <li>"Fix these ticket with as much AI as possible"</li>
+                  <li>"Find a way to security check your app"</li>
+                </ul>
+              </li>
+
+              <!-- <li>Give interns and trainees licenses too</li>
+              <li>They are the new generation, and may use AI a lot already</li> -->
             </ul>
-            <p class="big" style="font-size: 0.9em">Learn from them</p>
+            <!-- <p class="big" style="font-size: 0.9em">Learn from them</p> -->
             <svg class="doodle float" viewBox="0 0 260 175" width="260" height="175" style="right: 50px; bottom: -150px" aria-hidden="true">
               <g class="rough">
                 <path class="ink paper" d="M 20 40 L 80 25 L 80 145 L 20 160 Z" />
@@ -919,8 +1104,12 @@
             <ul>
               <li>Give them an extra role: visit other departments</li>
               <li>Let them be the drivers and the challengers</li>
-              <li>Creative people who dare to experiment, and tell it well</li>
-              <li>The techie who explains in plain words why token efficiency matters</li>
+              <li>Put their attitude to work
+                <ul>
+                  <li>Creative people who dare to experiment, and tell it well</li>
+                  <li>The techie who explains in plain words why token efficiency matters</li>
+                </ul>
+              </li>
             </ul>
             <p class="sub">A head of tech with 100 staff hired 3 to 4 people just to walk around, nudge and explain what AI could automate</p>
             <svg class="doodle inline" viewBox="0 0 520 112" width="520" height="112" aria-hidden="true">
@@ -974,12 +1163,57 @@
           <section id="spread-ask-claude" class="talk">
             <h2>Don't ask me, ask Claude</h2>
             <ul>
-              <li>A question comes up in a meeting? Check it with Claude, right now</li>
-              <li>Not "let's review after the meeting"</li>
-              <li>A live demo on your own company data</li>
-              <li>No fear of "technical": instruct Claude like a coworker</li>
-              <li>Share routines: a weekly mail on accessibility court cases, a weekly CVE check</li>
+              <li>A question comes up in a meeting?<ul>
+                <li>
+                  Check it with Claude, right now
+                </li>
+                <li>Not "let's review after the meeting"</li>
+              </ul>
+              </li>
+              <li>Show a live demo on your own company data</li>
+              <li>No fear of "technical": challenge your colleague to instruct Claude like a coworker</li>
+              <li>Share "Routines"
+                <ul>
+                  <li> 
+                    <b>Legal:</b> a weekly mail on accessibility court cases
+                  </li>
+                  <li>
+                    <b>Tech:</b> a weekly CVE check
+                  </li>
+                  <li><b>Trade:</b> weekly online competitor compare</li>
+                </ul>
+              </li>
             </ul>
+            <svg class="doodle float" viewBox="0 0 520 170" width="440" height="144" style="right: 40px; top: 110px" aria-hidden="true">
+              <g class="rough">
+                <circle class="ink thin soft" cx="48" cy="96" r="15" />
+                <path class="ink thin soft" d="M 20 160 Q 20 118 48 118 Q 76 118 76 160" />
+                <path class="ink thin paper" d="M 70 34 H 110 Q 118 34 118 42 V 64 Q 118 72 110 72 H 90 L 79 83 L 82 72 H 70 Q 62 72 62 64 V 42 Q 62 34 70 34 Z" />
+                <circle class="ink paper" cx="206" cy="92" r="16" />
+                <path class="ink paper" d="M 176 160 Q 176 114 206 114 Q 236 114 236 160" />
+                <path class="ink" d="M 228 126 L 265 108" />
+                <circle class="ink paper" cx="270" cy="106" r="5" />
+                <rect class="ink paper" x="4" y="146" width="512" height="12" rx="3" />
+                <path class="ink thin paper" d="M 122 128 H 142 V 144 Q 142 146 140 146 H 124 Q 122 146 122 144 Z" />
+                <path class="ink thin" d="M 142 132 Q 150 132 150 138 Q 150 143 142 142" />
+                <path class="ink thin soft" d="M 128 122 q -4 -5 0 -10 M 136 122 q -4 -5 0 -10" />
+                <path class="ink thin soft dots" d="M 122 40 C 168 0 290 0 336 40" />
+                <path class="ink thin" d="M 324 37 L 336 40 L 332 29" />
+                <rect class="ink paper" x="344" y="30" width="156" height="100" rx="7" />
+                <path class="ink paper" d="M 328 130 H 516 L 504 146 H 340 Z" />
+                <path class="ink thin soft" d="M 405 138 H 440" />
+                <rect class="ink thin shade" x="432" y="44" width="54" height="20" rx="10" />
+                <path class="ink thin paper" d="M 364 73 Q 365 81 373 82 Q 365 83 364 91 Q 363 83 355 82 Q 363 81 364 73 Z" />
+                <circle class="solid typing" cx="384" cy="82" r="3" />
+                <circle class="solid typing" cx="394" cy="82" r="3" style="--d: 0.15s" />
+                <circle class="solid typing" cx="404" cy="82" r="3" style="--d: 0.3s" />
+                <path class="ink thin" d="M 382 78 H 476" data-i="58" />
+                <path class="ink thin" d="M 382 90 H 462" data-i="59" />
+                <path class="ink thin" d="M 382 102 H 470" data-i="60" />
+              </g>
+              <text x="90" y="64" font-size="28" text-anchor="middle" style="font-family: var(--font-talk); fill: var(--talk-text)" data-i="5">?</text>
+              <text x="459" y="59" font-size="14" text-anchor="middle" style="font-family: var(--font-talk); fill: var(--talk-text)" data-i="19">?</text>
+            </svg>
           </section>
           <section id="spread-fraiday" class="talk">
             <h2>FrAIday</h2>
@@ -987,12 +1221,14 @@
               What task did I do this week that I could have done with AI?
             </blockquote>
             <ul>
-              <li>Every Friday, everyone in the office, in a shared chat group</li>
-              <li>Start with people who hate their manual tasks</li>
-              <li>But people may not imagine what AI can automate: show them</li>
+              <li>Share knowledge every Friday in a shared chat group</li>
+              <li>Let vanguards help with people who dislike manual tasks</li>
+              <li>Learn so people start to imagine what AI can automate
+                <ul><li><b>show, don't tell</b></li></ul>
+              </li>
             </ul>
             <!-- IMAGE 4 -->
-            <div class="shot">Image 4: the FrAIday chat group (anonymized)</div>
+            <!-- <div class="shot">Image 4: the FrAIday chat group (anonymized)</div> -->
             <svg class="doodle float" viewBox="0 0 170 180" width="170" height="180" style="right: 70px; top: -170px; transform: rotate(6deg)" aria-hidden="true">
               <g class="rough">
                 <path class="ink paper" d="M 25 25 H 140 Q 150 25 150 35 V 140 L 125 165 H 25 Q 15 165 15 155 V 35 Q 15 25 25 25 Z" />
@@ -1020,9 +1256,9 @@
             <p class="mono">6 · guardrails</p>
             <h2>The vanguards know the limits</h2>
             <ul>
-              <li>Our job is to show where the limits and risks are</li>
-              <li>We have a sense of what AI can and can't do</li>
-              <li>And of the risks of applying it to certain systems and data</li>
+              <li>Their job is to show where the limits and risks are</li>
+              <li>They have a sense of what AI can and can't do</li>
+              <li>And a sense of the risks of applying AI to certain systems and data</li>
             </ul>
             <svg class="doodle inline" viewBox="0 -14 480 164" width="480" height="164" aria-hidden="true">
               <g class="rough">
@@ -1044,22 +1280,36 @@
             </svg>
           </section>
           <section id="guardrails-bigquery" class="talk">
-            <h2>"Can I get access to BigQuery?"</h2>
+            <h2>"Can I get access to Google BigQuery?"</h2>
             <ul>
               <li>At first sight: the solution. It is not.</li>
-              <li>We need the real business case</li>
-              <li>The information is often already available elsewhere</li>
-              <li>Querying it freely can become very expensive</li>
-              <li>Access to everything is not always the answer</li>
+              <li>Better get to understand the real business case</li>
+              <li>As the information is often already available elsewhere</li>
+              <li>And querying it freely can become very expensive</li>
+              <li>Beside, access to everything is not always the answer</li>
             </ul>
             <!-- IMAGE 5 -->
-            <div class="shot">Image 5: query cost of a heavy BigQuery request</div>
+            <!-- <div class="shot">Image 5: query cost of a heavy BigQuery request</div> -->
           </section>
           <section id="guardrails-playing-fields" class="talk">
             <h2>Enable playing fields</h2>
             <ul>
-              <li>Safe spaces to experiment</li>
-              <li>Make people aware of the consequences of heavy queries</li>
+              <li>Safe spaces to experiment
+                <ul><li>Enable Claude features progressively</li></ul>
+              </li>
+              <li>Make people aware of the consequences of
+                <ul>
+                  <li>
+                    heavy queries
+                  </li>
+                  <li>
+                    token consuming prompts
+                  </li>
+                  <li>
+                    model selection (Haiku vs. Sonnet vs. Opus)
+                  </li>
+                </ul>
+              </li>
             </ul>
             <svg class="doodle inline" viewBox="0 0 460 170" width="460" height="170" aria-hidden="true">
               <g class="rough">
@@ -1089,7 +1339,7 @@
           <h2>A few weeks after a rollout</h2>
           <ol>
             <li>Identify the vanguards</li>
-            <li>Foster them</li>
+            <li>Foster (and challenge!) them generously</li>
             <li>Use their experience for the next step</li>
           </ol>
           <svg class="doodle inline" viewBox="0 0 560 130" width="560" height="130" aria-hidden="true">
