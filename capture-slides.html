@@ -38,10 +38,12 @@
 <p class="lead">Export a Reveal.js deck in this repo to per-slide PNG screenshots.</p>
 
 <h2>Usage</h2>
-<pre><code>./capture-slides.sh &lt;folder&gt; [options]</code></pre>
-<p>Pass a deck folder that contains an <code>index.html</code>:</p>
+<pre><code>./capture-slides.sh &lt;deck-dir&gt; [options]</code></pre>
+<p>Pass a directory that contains an <code>index.html</code>. Either a folder name in this repo:</p>
 <pre><code>./capture-slides.sh 2026-06-18</code></pre>
-<p>Writes <code>./2026-06-18/slides/slide-01.png</code>, <code>slide-02.png</code>, &hellip;</p>
+<p>or any path, absolute or relative to the current directory:</p>
+<pre><code>./capture-slides.sh ~/talks/my-deck</code></pre>
+<p>Writes <code>&lt;deck-dir&gt;/slides/slide-01.png</code>, <code>slide-02.png</code>, &hellip;</p>
 
 <h2>Options</h2>
 <table>
@@ -50,15 +52,17 @@
   <tr><td><code>--height N</code></td><td>720</td><td>Viewport height in px</td></tr>
   <tr><td><code>--scale N</code></td><td>2</td><td>Device scale factor (2 = retina-sharp)</td></tr>
   <tr><td><code>--format png|jpeg</code></td><td>png</td><td>Output image format</td></tr>
+  <tr><td><code>-h, --help</code></td><td></td><td>Show usage and exit</td></tr>
 </table>
 <pre><code>./capture-slides.sh 2026-06-18 --width 1920 --height 1080</code></pre>
 
 <h2>How it works</h2>
 <ul>
-  <li>Serves the repo over a temporary local HTTP server &mdash; the Reveal markdown plugin <code>fetch</code>es files, so <code>file://</code> won't work.</li>
+  <li>Serves the deck's parent directory over a temporary HTTP server on <code>127.0.0.1</code> &mdash; the Reveal markdown plugin <code>fetch</code>es files, so <code>file://</code> won't work. Serving the parent lets a deck load shared files such as <code>../assets/</code>.</li>
   <li>Drives the deck through <strong>Reveal's own navigation API</strong> via Playwright, so every horizontal and vertical slide is captured in order, stopping at the last one.</li>
   <li>Disables slide transitions, so a screenshot can never catch an animation sub-frame.</li>
   <li>Flattens fragments (shows all at once), so each section is one image.</li>
+  <li>Fast-forwards CSS animations and transitions (e.g. animated SVG doodles) to their end state before each shot, so nothing is captured half-drawn.</li>
   <li>Waits for webfonts and slide images before each shot.</li>
 </ul>
 

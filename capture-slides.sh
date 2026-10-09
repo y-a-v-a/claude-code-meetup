@@ -1,22 +1,17 @@
 #!/usr/bin/env bash
 #
 # capture-slides.sh — Export a Reveal.js deck to per-slide PNG screenshots.
-#
-# Usage:
-#   ./capture-slides.sh <folder> [options]
-#
-# Example:
-#   ./capture-slides.sh 2026-06-18
-#   ./capture-slides.sh 2026-06-18 --width 1920 --height 1080
-#
-# Result:
-#   ./2026-06-18/slides/slide-01.png, slide-02.png, ...
+# Run with --help for usage.
 #
 # The deck is served over a local HTTP server (the Reveal markdown plugin
 # fetches files, so file:// does not work) and driven through Reveal's own
 # navigation API via Playwright, so every horizontal and vertical slide is
 # captured in order. Fragments are flattened (shown all at once) so each
-# section yields a single image.
+# section yields a single image. CSS animations are fast-forwarded to their
+# end state before each screenshot.
+#
+# The server is rooted at the deck's parent directory, so a deck may reference
+# shared files one level up (e.g. ../assets/font.otf).
 #
 set -euo pipefail
 
@@ -26,34 +21,81 @@ HEIGHT=720
 SCALE=2          # deviceScaleFactor — 2 = retina-sharp PNGs
 FORMAT=png
 
-# --- args ---------------------------------------------------------------------
-if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <folder> [--width N] [--height N] [--scale N] [--format png|jpeg]" >&2
-  exit 1
-fi
+usage() {
+  local name
+  name="$(basename "$0")"
+  cat <<EOF
+Export a Reveal.js deck to per-slide screenshots.
 
-FOLDER="${1%/}"   # strip a trailing slash if present
-shift
+Usage:
+  $name <deck-dir> [options]
+
+Arguments:
+  <deck-dir>        Directory that contains the deck's index.html. Either a
+                    path (absolute or relative to the current directory), or
+                    a folder name in this repo, e.g. 2026-06-18.
+
+Options:
+  --width N         Viewport width in px (default: 1280)
+  --height N        Viewport height in px (default: 720)
+  --scale N         Device scale factor, 2 = retina-sharp (default: 2)
+  --format FMT      Image format: png or jpeg (default: png)
+  -h, --help        Show this help and exit
+
+Examples:
+  $name 2026-06-18
+  $name 2026-06-18 --width 1920 --height 1080
+  $name ~/talks/my-deck --format jpeg
+
+Screenshots are written to <deck-dir>/slides/slide-01.png, slide-02.png, ...
+EOF
+}
+
+# --- args ---------------------------------------------------------------------
+DECK_ARG=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
+    -h|--help) usage; exit 0 ;;
     --width)  WIDTH="$2";  shift 2 ;;
     --height) HEIGHT="$2"; shift 2 ;;
     --scale)  SCALE="$2";  shift 2 ;;
     --format) FORMAT="$2"; shift 2 ;;
-    *) echo "Unknown option: $1" >&2; exit 1 ;;
+    -*) echo "Unknown option: $1" >&2; echo "Run with --help for usage." >&2; exit 1 ;;
+    *)
+      if [[ -n "$DECK_ARG" ]]; then
+        echo "Unexpected argument: $1 (only one deck directory is allowed)" >&2
+        exit 1
+      fi
+      DECK_ARG="$1"; shift ;;
   esac
 done
 
+if [[ -z "$DECK_ARG" ]]; then
+  usage >&2
+  exit 1
+fi
+
 # --- resolve paths ------------------------------------------------------------
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-DECK_DIR="$SCRIPT_DIR/$FOLDER"
+
+if [[ -d "$DECK_ARG" ]]; then
+  DECK_DIR="$(cd "$DECK_ARG" && pwd)"
+elif [[ -d "$SCRIPT_DIR/$DECK_ARG" ]]; then
+  DECK_DIR="$(cd "$SCRIPT_DIR/$DECK_ARG" && pwd)"
+else
+  echo "Error: directory '$DECK_ARG' not found (looked in $PWD and $SCRIPT_DIR)." >&2
+  exit 1
+fi
+
 INDEX="$DECK_DIR/index.html"
 OUT_DIR="$DECK_DIR/slides"
+SERVE_ROOT="$(dirname "$DECK_DIR")"
+DECK_NAME="$(basename "$DECK_DIR")"
 
 if [[ ! -f "$INDEX" ]]; then
   echo "Error: $INDEX not found." >&2
-  echo "Pass a folder in this repo that contains an index.html, e.g. 2026-06-18" >&2
+  echo "Point to a directory that contains an index.html, e.g. 2026-06-18" >&2
   exit 1
 fi
 
@@ -80,7 +122,7 @@ fi
 
 mkdir -p "$OUT_DIR"
 
-# --- start a static file server rooted at the repo ----------------------------
+# --- start a static file server rooted at the deck's parent directory ---------
 PORT=$(node -e 'const s=require("net").createServer();s.listen(0,()=>{console.log(s.address().port);s.close()})')
 node -e '
   const http = require("http");
@@ -98,15 +140,15 @@ node -e '
   http.createServer((req, res) => {
     let p = decodeURIComponent(req.url.split("?")[0]);
     let fp = path.join(root, p);
-    if (!fp.startsWith(root)) { res.writeHead(403); return res.end(); }
+    if (fp !== root && !fp.startsWith(root + path.sep)) { res.writeHead(403); return res.end(); }
     if (fs.existsSync(fp) && fs.statSync(fp).isDirectory()) fp = path.join(fp, "index.html");
     fs.readFile(fp, (err, data) => {
       if (err) { res.writeHead(404); return res.end("Not found"); }
       res.writeHead(200, {"Content-Type": types[path.extname(fp)] || "application/octet-stream"});
       res.end(data);
     });
-  }).listen(port, () => console.error("server up on " + port));
-' "$SCRIPT_DIR" "$PORT" &
+  }).listen(port, "127.0.0.1", () => console.error("server up on " + port));
+' "$SERVE_ROOT" "$PORT" &
 SERVER_PID=$!
 
 cleanup() {
@@ -125,8 +167,8 @@ for _ in $(seq 1 50); do
   sleep 0.1
 done
 
-URL="http://127.0.0.1:$PORT/$FOLDER/index.html"
-echo "Capturing $FOLDER -> $OUT_DIR (${WIDTH}x${HEIGHT} @${SCALE}x)"
+URL="http://127.0.0.1:$PORT/$DECK_NAME/index.html"
+echo "Capturing $DECK_DIR -> $OUT_DIR (${WIDTH}x${HEIGHT} @${SCALE}x)"
 
 # --- drive Reveal with Playwright ---------------------------------------------
 # Written inside TOOL_DIR so Node's node_modules resolution finds `playwright`
@@ -197,6 +239,7 @@ while (true) {
   await page.screenshot({
     path: `${outDir}/${name}`,
     type: format,
+    animations: 'disabled',
     ...(format === 'jpeg' ? { quality: 92 } : {}),
   });
   process.stderr.write(`  ${name}\n`);
