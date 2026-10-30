@@ -6,6 +6,12 @@ Slides for Claude Code meetups
 
 ## Sessions
 
+### [2026-10-29 — Community Talks · 5th Amsterdam](2026-10-29/Claude%20Community%20Amsterdam.pptx)
+
+![2026-10-29 slide](2026-10-29-slide.png)
+
+Presented in Amsterdam (5th edition), hosted with Roman Pronskiy. Community talks by Lotte Nederhorst (ML6), Nicolas Griffioen, Yehor Dolynskyi, and Ricardo López & José Lomelí, followed by Q&A and drinks at Het Tuinfeest.
+
 ### [2026-09-10 — Claude 4 Starters · 2nd Eindhoven](2026-09-10/index.html)
 
 ![2026-09-10 slide](2026-09-10-slide.png)
