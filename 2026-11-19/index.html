@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/white.css"
+      id="theme"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      @font-face {
+        font-family: "Anthropic Sans Display";
+        font-weight: 600;
+        src: url("../assets/AnthropicSansDisplay-Semibold-Static.otf") format("opentype");
+      }
+      @font-face {
+        font-family: "Anthropic Serif Display";
+        font-weight: 300;
+        src: url("../assets/AnthropicSerifDisplay-Light-Static.otf") format("opentype");
+      }
+
+      :root {
+        --color-claude-terracotta: #d97757;
+        --color-claude-ivory: #faf9f5;
+        --color-claude-cream: #e8e6dc;
+        --color-claude-warm-gray: #b0aea5;
+        --color-claude-coral: #e46962;
+        --color-bg: var(--color-claude-terracotta);
+        --color-text: rgb(14, 14, 14);
+        --color-text-white: rgb(255,255,255);
+        --font-main: Georgia, serif;
+        --font-anthropic-sans: "Anthropic Sans Display", Arial, Helvetica, sans-serif;
+        --font-anthropic-serif: "Anthropic Serif Display", Georgia, serif;
+        --r-heading-text-transform: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html head + body.reveal-viewport {
+        background-color: var(--color-bg) !important;
+      }
+
+      .reveal {
+        font-family: var(--font-main);
+        color: var(--color-text);
+      }
+
+      .reveal .slides section {
+        background: transparent;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        color: var(--color-text);
+        font-family: var(--font-main);
+      }
+
+      .reveal .slides > section:not(.title-layout),
+      .reveal .slides > section:not(.title-layout) > section {
+        padding-left: 160px;
+        padding-right: 160px;
+      }
+
+      .reveal .slides > section.title-layout {
+        height: 100%;
+        padding: 0;
+        text-align: left;
+        color: var(--color-text);
+      }
+
+      .reveal .slides section.title-layout > * {
+        position: absolute;
+        margin: 0;
+      }
+
+      .title-layout .spark {
+        left: 4.93%;
+        top: 9.48%;
+        width: 6.64%;
+        aspect-ratio: 1;
+      }
+
+      .title-layout .globe {
+        left: 65.75%;
+        top: 28.34%;
+        width: 26.94%;
+        aspect-ratio: 1;
+      }
+
+      .title-layout .kicker {
+        left: 5.82%;
+        top: 40.41%;
+        width: 27.97%;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .reveal .title-layout h1 {
+        left: 5.21%;
+        top: 49.97%;
+        width: 56.11%;
+        font-family: var(--font-anthropic-serif);
+        font-weight: 300;
+        font-size: 89px;
+        line-height: 1.15;
+        color: var(--color-text);
+      }
+
+      .title-layout .date-line {
+        left: 5.82%;
+        top: 85.85%;
+        width: 59.22%;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 25px;
+        line-height: 1.2;
+      }
+
+      .date-text {
+        font-size: 0.6em;
+        color: var(--color-text);
+        margin-top: 10px;
+      }
+
+      .reveal .slides section .fragment {
+        opacity: 0.3;
+      }
+
+      .reveal .slides section .fragment.visible {
+        opacity: 1;
+      }
+
+      .strategy-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 24px 10px;
+        margin: 10px;
+        border-radius: 32px;
+        backdrop-filter: blur(5px);
+        font-size: 0.8em;
+      }
+
+      .quote {
+        font-style: italic;
+        border-left: 3px solid var(--color-text);
+        padding-left: 20px;
+        margin: 20px 0;
+        background: rgba(20, 20, 19, 0.05);
+        border-radius: 5px;
+        padding: 15px 20px;
+        font-size: 0.8em;
+      }
+
+      .highlight {
+        color: var(--color-text);
+        font-weight: bold;
+      }
+
+      .claude {
+        color: var(--color-text);
+      }
+
+      .small {
+        font-size: 0.4em;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .link-footer {
+        font-size: 0.45em;
+        margin-top: 30px;
+        opacity: 0.8;
+      }
+
+      .link-footer a {
+        color: var(--color-text);
+      }
+
+      .two-col {
+        display: flex;
+        gap: 30px;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .two-col > * {
+        flex: 1;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 8px;
+        padding: 15px 20px;
+        font-size: 0.65em;
+        text-align: left;
+        font-family: var(--font-main);
+      }
+
+      .reveal .controls .controls-arrow:after,
+      .reveal .controls .controls-arrow:before {
+        background-color: rgb(20, 20, 19);
+      }
+
+      .b {
+        font-weight: 700;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      li {
+        margin: 8px 0;
+      }
+
+      video {
+        max-height: 50vh;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      /* ---- Vincent's talk: own palette + fonts, no Anthropic branding ---- */
+      :root {
+        --talk-bg: rgb(227, 218, 204);
+        --talk-text: rgb(14, 14, 14);
+        --talk-muted: rgb(14, 14, 14);
+        --talk-accent: #8a5200;
+        --talk-ink-06: rgba(20, 33, 61, 0.06);
+        --talk-ink-18: rgba(20, 33, 61, 0.18);
+        --font-talk: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        --font-talk-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      }
+
+      .reveal .slides > section.talk,
+      .reveal .slides > section.talk > section.talk {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .reveal .slides > section.talk:has(> section) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .reveal .slides section.talk,
+      .reveal .slides section.talk h1,
+      .reveal .slides section.talk h2,
+      .reveal .slides section.talk h3 {
+        font-family: var(--font-talk);
+        color: var(--talk-text);
+      }
+
+      .reveal .slides section.talk h1 {
+        font-size: 2.2em;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .reveal .slides section.talk h2 {
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .reveal .slides section.talk a {
+        color: var(--color-text);
+      }
+
+      .reveal .slides section.talk li {
+        margin: 0.35em 0;
+      }
+
+      .reveal .slides section.talk li::marker {
+        color: var(--color-text);
+      }
+
+      .talk .mono {
+        font-family: var(--font-talk-mono);
+        font-size: 0.5em;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text);
+        margin: 0 0 0.4em;
+      }
+
+      .talk .mono.plain {
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--talk-muted);
+        margin-top: 0.6em;
+      }
+
+      .talk .sub {
+        font-size: 0.7em;
+        color: var(--talk-muted);
+      }
+
+      .talk .big {
+        font-size: 1.3em;
+        font-weight: 700;
+      }
+
+      .talk img.shot-img {
+        max-width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(20, 33, 61, 0.25);
+      }
+
+      .talk .compare {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        align-items: flex-start;
+      }
+
+      .talk .compare img {
+        height: 44vh;
+        width: auto;
+        max-width: 48%;
+        object-fit: contain;
+      }
+
+      .talk .shot {
+        display: inline-block;
+        margin-top: 0.6em;
+        padding: 0.5em 0.9em;
+        border: 2px dashed var(--talk-accent);
+        border-radius: 8px;
+        font-family: var(--font-talk-mono);
+        font-size: 0.45em;
+        color: var(--color-text);
+        text-align: left;
+      }
+
+      .talk .flow {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 0.6em;
+      }
+
+      .talk .flow .step {
+        flex: 1;
+        background: var(--talk-ink-06);
+        border: 1px solid var(--talk-ink-18);
+        border-radius: 10px;
+        padding: 0.6em 0.7em;
+        font-size: 0.6em;
+        text-align: left;
+      }
+
+      .talk .flow .step .mono {
+        display: block;
+        margin-bottom: 0.3em;
+      }
+
+      .talk .flow .arrow {
+        align-self: center;
+        color: var(--color-text);
+        font-size: 1.2em;
+      }
+
+      .reveal .slides section.talk blockquote.prompt {
+        width: 100%;
+        margin: 0.6em 0;
+        padding: 0.6em 0.9em;
+        background: var(--talk-ink-06);
+        border-left: 4px solid var(--talk-accent);
+        border-radius: 6px;
+        font-size: 0.65em;
+        font-style: normal;
+        text-align: left;
+        box-shadow: none;
+      }
+
+      .talk blockquote.prompt::before {
+        content: "› ";
+        color: var(--color-text);
+        font-family: var(--font-talk-mono);
+      }
+
+      .reveal .slides section.talk a.btn {
+        display: inline-block;
+        margin-top: 0.4em;
+        padding: 0.25em 0.9em;
+        border: 2px solid var(--talk-accent);
+        border-radius: 999px;
+        font-family: var(--font-talk-mono);
+        font-size: 0.55em;
+        text-decoration: none;
+      }
+
+      .reveal .slides section.talk a.btn:hover {
+        background: var(--talk-accent);
+        color: var(--talk-bg);
+      }
+
+      .reveal.in-talk .controls .controls-arrow:after,
+      .reveal.in-talk .controls .controls-arrow:before {
+        background-color: var(--talk-text);
+      }
+
+      .reveal .progress span,
+      .reveal.in-talk .progress span {
+        background: var(--color-text);
+      }
+
+      .reveal .slides > section.speaker {
+        height: 720px;
+        padding: 0;
+        text-align: left;
+      }
+
+      .speaker-card {
+        display: flex;
+        flex-direction: column;
+        height: 720px;
+        padding: 56px 80px 48px;
+        color: var(--color-text);
+      }
+
+      .speaker-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 22px;
+        letter-spacing: 0.12em;
+      }
+
+      .speaker-head span {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .reveal .speaker-head img.speaker-spark {
+        width: 32px;
+        height: 32px;
+        margin: 0;
+      }
+
+      .speaker-body {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 72px;
+      }
+
+      .reveal .speaker-body img.speaker-photo {
+        flex: none;
+        width: 340px;
+        height: 340px;
+        margin: 0;
+        border-radius: 50%;
+        box-shadow: 0 0 0 6px var(--color-claude-ivory);
+        object-fit: cover;
+      }
+
+      .speaker-text {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .reveal .slides section.speaker h2.speaker-name {
+        margin: 0;
+        font-family: var(--font-anthropic-serif);
+        font-weight: 300;
+        font-size: 96px;
+        line-height: 0.95;
+        letter-spacing: -0.01em;
+        text-transform: none;
+        color: var(--color-text);
+      }
+
+      .reveal .speaker-text p {
+        margin: 0;
+        color: var(--color-text);
+      }
+
+      .reveal .speaker-text p.speaker-role {
+        margin-top: 28px;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 18px;
+        letter-spacing: 0.1em;
+      }
+
+      .reveal .speaker-text p.speaker-talk {
+        margin-top: 18px;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 1.3;
+      }
+
+      .reveal .speaker-text p.speaker-blurb {
+        margin-top: 14px;
+        font-family: var(--font-anthropic-serif);
+        font-weight: 300;
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      .speaker-foot {
+        align-self: flex-end;
+        margin-bottom: 44px;
+        text-align: right;
+      }
+
+      .reveal .speaker-foot p {
+        margin: 0;
+        color: var(--color-text);
+      }
+
+      .reveal .speaker-foot p.speaker-date {
+        font-family: var(--font-anthropic-serif);
+        font-weight: 300;
+        font-size: 32px;
+      }
+
+      .reveal .speaker-foot p.speaker-venue {
+        margin-top: 6px;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: 16px;
+        letter-spacing: 0.08em;
+      }
+
+      .reveal .slides > section:has(> section#about-me) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .reveal .slides > section > section#about-me {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .about-me-body {
+        justify-content: center;
+        gap: 64px;
+      }
+
+      .reveal .about-me-body img.speaker-photo {
+        width: 300px;
+        height: 300px;
+      }
+
+      .about-me-text {
+        text-align: left;
+      }
+
+      .reveal .about-me-text h2 {
+        margin-bottom: 0.4em;
+      }
+
+      .reveal .about-me-text ul {
+        font-size: 0.75em;
+      }
+
+      .reveal .about-me-text li {
+        white-space: nowrap;
+      }
+
+      .reveal .slides > section#meetups {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+
+      .meetups-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+      }
+
+      .reveal .meetups-body img.meetups-image {
+        flex: none;
+        height: 560px;
+        width: auto;
+        max-height: none;
+        margin: 0;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(14, 14, 14, 0.3);
+      }
+
+      .meetups-text {
+        text-align: left;
+      }
+
+      .community-label {
+        position: fixed;
+        left: 2.5vw;
+        bottom: 2.5vw;
+        z-index: 30;
+        font-family: var(--font-anthropic-sans);
+        font-weight: 600;
+        font-size: max(16px, 1.4vw);
+        letter-spacing: 0.08em;
+        color: var(--color-text);
+        pointer-events: none;
+      }
+
+      .reveal.on-first .community-label {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="community-label">CLAUDE COMMUNITY</div>
+      <div class="slides">
+        <section id="welcome" class="title-layout" data-background-color="#d97757">
+          <img class="spark" src="assets/ClaudeSpark-Ivory.png" alt="" />
+          <img class="globe" src="assets/Node-Globe.png" alt="" />
+          <p class="kicker">Claude Community</p>
+          <h1>Eindhoven</h1>
+          <p class="date-line">Thursday 2026-11-19 · Pipple</p>
+        </section>
+
+        <!-- MEETUP CONTEXT -->
+        <section id="meetups">
+          <div class="meetups-body">
+            <img class="meetups-image" src="assets/Image.jpeg" alt="Illustrated poster: Claude Community Eindhoven, Today" />
+            <div class="meetups-text">
+              <h2>Welcome</h2>
+              <div class="strategy-card" style="font-size: 0.7em">
+                <ul>
+                  <li><span class="b">Today</span> — 3rd Eindhoven meetup</li>
+                  <li>New ambassadors, more meetups!</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AGENDA -->
+        <section id="agenda">
+          <h2>Agenda</h2>
+          <div class="strategy-card" style="font-size: 0.5em">
+            <ul>
+              <!-- TODO fill from AGENDA.md once speakers are confirmed -->
+              <li>
+                <span class="b">Keynote</span>&nbsp;&nbsp;Ruud van Elk
+              </li>
+              <li>
+                <span class="b">Speaker</span>&nbsp;&nbsp;Alisha Hidayat
+              </li>
+              <li>
+                <span class="b">Speaker</span>&nbsp;&nbsp;Bart van der Linden
+              </li>
+              <li>
+                <span class="b">Speaker</span>&nbsp;&nbsp;Stefan Cloudt
+              </li>
+              <li>Q&amp;A</li>
+              <li>Closing · Drinks</li>
+            </ul>
+          </div>
+          <p class="small" style="margin-top: 16px">
+            We're <b>taking photos</b> tonight. Tell us if you'd rather not
+            be in them.
+          </p>
+        </section>
+
+        <!-- ABOUT ME -->
+        <section>
+          <section id="about-me">
+            <div class="speaker-body about-me-body">
+              <img class="speaker-photo" src="assets/vincent-bruijn-gray.jpg" alt="Vincent Bruijn" />
+              <div class="about-me-text">
+                <h2>Vincent Bruijn</h2>
+                <ul>
+                  <li>Educated as Visual Artist</li>
+                  <li>Self taught software developer / engineer</li>
+                  <li>Tech Manager at <span class="b">G-STAR</span></li>
+                  <li>Digital Artist</li>
+                  <li>Claude enthusiast since Nov 2024</li>
+                  <li>Claude Community Ambassador since Feb 2026</li>
+                  <li style="font-size: 0.7em">
+                    Graphic novels, museums, philosophy, literature, language
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="github">
+            <img
+              src="assets/github-profile-y-a-v-a.png"
+              alt="GitHub profile page of y-a-v-a (Vincent Bruijn)"
+              style="max-height: 80vh; max-width: 100%; margin: 0; border-radius: 12px; box-shadow: 0 10px 30px rgba(14, 14, 14, 0.3)"
+            />
+            <p class="link-footer" style="margin-top: 16px">
+              <a href="https://github.com/y-a-v-a">github.com/y-a-v-a</a>
+            </p>
+          </section>
+
+          <section id="ambassador">
+            <h2>Claude Community Ambassador</h2>
+            <img
+              src="assets/Anthropic-ambassador.png"
+              alt="Anthropic ambassadors"
+              style="max-height: 45vh"
+            />
+            <p class="link-footer">
+              <a href="https://claude.com/community/ambassadors"
+                >claude.com/community/ambassadors</a
+              >
+            </p>
+          </section>
+        </section>
+
+        <!-- TALKS GO HERE -->
+        <!-- ============================ SLIDES START ============================ -->
+
+        <!-- SPEAKER 01 — Ruud van Elk (keynote) -->
+        <section id="speaker-ruud-van-elk" class="speaker" data-background-color="#d97757">
+          <div class="speaker-card">
+            <header class="speaker-head">
+              <span><img class="speaker-spark" src="assets/ClaudeSpark-Ivory.png" alt="" />SPEAKER 01</span>
+              <span>EINDHOVEN #3</span>
+            </header>
+            <div class="speaker-body">
+              <img class="speaker-photo" src="assets/speakers/ruud-van-elk.jpg" alt="Ruud van Elk" />
+              <div class="speaker-text">
+                <h2 class="speaker-name">Ruud<br />van Elk</h2>
+                <p class="speaker-role">HEAD OF SPORT SCIENCE &amp; ANALYTICS · PSV</p>
+                <p class="speaker-talk">A platform built with Claude that brings together movement analysis, match data and training design</p>
+                <p class="speaker-blurb">How it works in daily practice at one of Europe's top football clubs, with a live demo.</p>
+              </div>
+            </div>
+            <footer class="speaker-foot">
+              <p class="speaker-date">Thursday 19 November</p>
+              <p class="speaker-venue">PIPPLE · GASHOUDER 36B, EINDHOVEN</p>
+            </footer>
+          </div>
+          <aside class="notes">
+            Our next speaker has spent almost fifteen years at PSV, starting as an intern in 2012 and now leading Sport Science &amp; Analytics. He has explained football data at Harvard, FC Barcelona, and to the KNVB's top coaches. He says about a third of a football season is luck, and his job is the rest. Earlier this year he set out to build a small form to fix missing data, and a few days later he had a full web application, built with Claude Code. Please welcome Ruud van Elk.
+          </aside>
+        </section>
+
+        <!-- SPEAKER 02 — Alisha Hidayat -->
+        <section id="speaker-alisha-hidayat" class="speaker" data-background-color="#d97757">
+          <div class="speaker-card">
+            <header class="speaker-head">
+              <span><img class="speaker-spark" src="assets/ClaudeSpark-Ivory.png" alt="" />SPEAKER 02</span>
+              <span>EINDHOVEN #3</span>
+            </header>
+            <div class="speaker-body">
+              <img class="speaker-photo" src="assets/speakers/alisha-hidayat.jpg" alt="Alisha Hidayat" />
+              <div class="speaker-text">
+                <h2 class="speaker-name">Alisha<br />Hidayat</h2>
+                <p class="speaker-role">AI ENGINEER (UX) · HOLLAND INNOVATIVE</p>
+                <p class="speaker-blurb">Two-time AI hackathon winner. Focused on tech, systems thinking and user-centered design.</p>
+              </div>
+            </div>
+            <footer class="speaker-foot">
+              <p class="speaker-date">Thursday 19 November</p>
+              <p class="speaker-venue">PIPPLE · GASHOUDER 36B, EINDHOVEN</p>
+            </footer>
+          </div>
+        </section>
+
+        <!-- SPEAKER 03 — Bart van der Linden -->
+        <section id="speaker-bart-van-der-linden" class="speaker" data-background-color="#d97757">
+          <div class="speaker-card">
+            <header class="speaker-head">
+              <span><img class="speaker-spark" src="assets/ClaudeSpark-Ivory.png" alt="" />SPEAKER 03</span>
+              <span>EINDHOVEN #3</span>
+            </header>
+            <div class="speaker-body">
+              <img class="speaker-photo" src="assets/speakers/bart-van-der-linden.jpg" alt="Bart van der Linden" />
+              <div class="speaker-text">
+                <h2 class="speaker-name">Bart<br />van der Linden</h2>
+                <p class="speaker-role">FREELANCE SOFTWARE SPECIALIST</p>
+                <p class="speaker-blurb">Passionate about IoT, AI, product development and prototyping.</p>
+              </div>
+            </div>
+            <footer class="speaker-foot">
+              <p class="speaker-date">Thursday 19 November</p>
+              <p class="speaker-venue">PIPPLE · GASHOUDER 36B, EINDHOVEN</p>
+            </footer>
+          </div>
+        </section>
+
+        <!-- SPEAKER 04 — Stefan Cloudt -->
+        <section id="speaker-stefan-cloudt" class="speaker" data-background-color="#d97757">
+          <div class="speaker-card">
+            <header class="speaker-head">
+              <span><img class="speaker-spark" src="assets/ClaudeSpark-Ivory.png" alt="" />SPEAKER 04</span>
+              <span>EINDHOVEN #3</span>
+            </header>
+            <div class="speaker-body">
+              <img class="speaker-photo" src="assets/speakers/stefan-cloudt.jpg" alt="Stefan Cloudt" />
+              <div class="speaker-text">
+                <h2 class="speaker-name">Stefan<br />Cloudt</h2>
+                <p class="speaker-role">SENIOR SOFTWARE ENGINEER · PROMEXX</p>
+                <p class="speaker-blurb">AI-first development. Vibe-code cleaning specialist.</p>
+              </div>
+            </div>
+            <footer class="speaker-foot">
+              <p class="speaker-date">Thursday 19 November</p>
+              <p class="speaker-venue">PIPPLE · GASHOUDER 36B, EINDHOVEN</p>
+            </footer>
+          </div>
+        </section>
+
+        <!-- ============================ SLIDES END ============================ -->
+
+        <!-- CALL FOR SPEAKERS -->
+        <section id="call-for-speakers">
+          <h2>Your turn next?</h2>
+          <div
+            class="strategy-card"
+            style="font-size: 0.7em; display: inline-block"
+          >
+            <p class="b">Give a talk at the next meetup</p>
+            <p>Big or small, demo or story — we want to hear it.</p>
+            <img
+              src="assets/linkedin_vincent_bruijn.png"
+              alt="LinkedIn QR — Vincent Bruijn"
+              style="max-height: 28vh; max-width: 100%; margin-top: 10px"
+            />
+            <p class="link-footer" style="margin-top: 10px">
+              Reach out →
+              <a href="https://www.linkedin.com/in/vincentbruijn/"
+                >linkedin.com/in/vincentbruijn</a
+              >
+            </p>
+          </div>
+        </section>
+
+        <section id="thanks">
+          <h2>Thank you, Eindhoven</h2>
+          <div class="two-col" style="justify-content: center">
+            <div
+              class="strategy-card"
+              style="font-size: 0.7em; text-align: center"
+            >
+              <p class="b">repo</p>
+              <img
+                src="assets/github_y-a-v-a_repo.png"
+                alt="GitHub QR — y-a-v-a"
+                style="max-height: 26vh; max-width: 100%"
+              />
+              <p class="small">github.com/y-a-v-a</p>
+            </div>
+            <div
+              class="strategy-card"
+              style="font-size: 0.7em; text-align: center"
+            >
+              <p class="b">site</p>
+              <img
+                src="assets/www_vincentbruijn_nl.png"
+                alt="vincentbruijn.nl QR"
+                style="max-height: 26vh; max-width: 100%"
+              />
+              <p class="small">vincentbruijn.nl</p>
+            </div>
+          </div>
+          <p class="small" style="margin-top: 20px">
+            <span class="b">Vincent Bruijn</span> · Claude Community Ambassador
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/notes/notes.js"></script>
+    <script>
+      document.querySelectorAll("section.talk").forEach((s) => {
+        s.dataset.backgroundColor = "rgb(227, 218, 204)";
+      });
+
+      Reveal.initialize({
+        width: 1280,
+        height: 720,
+        margin: 0,
+        hash: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        autoPlayMedia: true,
+      });
+
+      const syncTalkChrome = (slide) => {
+        const reveal = document.querySelector(".reveal");
+        reveal.classList.toggle("in-talk", slide.classList.contains("talk"));
+        reveal.classList.toggle("on-first", Reveal.isFirstSlide());
+      };
+      Reveal.on("ready", (e) => syncTalkChrome(e.currentSlide));
+      Reveal.on("slidechanged", (e) => syncTalkChrome(e.currentSlide));
+    </script>
+  </body>
+</html>

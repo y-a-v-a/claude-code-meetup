@@ -6,3 +6,5 @@
 claude-session*.html
 assets/*.otf
 2026-06-18/assets/artistic-DNA-screencast*.mov
+*.zip
+**/slides/**
