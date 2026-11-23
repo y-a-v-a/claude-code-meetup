@@ -6,6 +6,12 @@ Slides for Claude Code meetups
 
 ## Sessions
 
+### [2026-11-19 — Community Talks · 3rd Eindhoven](2026-11-19/index.html)
+
+![2026-11-19 slide](2026-11-19-slide.png)
+
+Presented at Pipple, Eindhoven (3rd edition). Keynote by Ruud van Elk (PSV) on a platform built with Claude that brings together movement analysis, match data and training design, followed by community talks by Alisha Hidayat (Holland Innovative), Bart van der Linden, and Stefan Cloudt (Promexx), then Q&A and drinks.
+
 ### [2026-10-29 — Community Talks · 5th Amsterdam](2026-10-29/Claude%20Community%20Amsterdam.pptx)
 
 ![2026-10-29 slide](2026-10-29-slide.png)
